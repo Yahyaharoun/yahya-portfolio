@@ -40,7 +40,7 @@ async function requestVerification() {
   requestError.value = ''
   
   try {
-    const response = await axios.post('/cv/request-code', {
+    const response = await axios.post('/api/otp/send', {
       name: form.name,
       phone: form.phone,
       email: form.email,
@@ -63,8 +63,8 @@ async function verifyAndDownload() {
   otpError.value = ''
   
   try {
-    const response = await axios.post('/cv/verify-code', {
-      email: form.email,
+    const response = await axios.post('/api/otp/verify', {
+      identifier: form.email || form.phone,
       code: otpCode.value
     })
     
