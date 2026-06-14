@@ -24,17 +24,11 @@ COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 # Configurer le répertoire de travail
 WORKDIR /var/www/html
 
-# Autoriser Composer à utiliser toute la mémoire disponible pendant l'installation
-ENV COMPOSER_MEMORY_LIMIT=-1
-
 # Copier les fichiers du projet
 COPY . .
 
 # Copier la configuration Nginx
 COPY docker/nginx.conf /etc/nginx/sites-available/default
-
-# Installer les dépendances PHP
-RUN composer install --no-interaction --no-progress --no-dev --optimize-autoloader --no-scripts
 
 # Ajuster les permissions
 RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
