@@ -27,6 +27,9 @@ RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash - \
 # Configurer le répertoire de travail
 WORKDIR /var/www/html
 
+# Autoriser Composer à utiliser toute la mémoire disponible pendant l'installation
+ENV COMPOSER_MEMORY_LIMIT=-1
+
 # Copier les fichiers du projet
 COPY . .
 
@@ -34,7 +37,7 @@ COPY . .
 COPY docker/nginx.conf /etc/nginx/sites-available/default
 
 # Installer les dépendances PHP et Node
-RUN composer install --no-dev --optimize-autoloader
+RUN composer install --no-interaction --no-progress --no-dev --optimize-autoloader
 RUN npm install
 RUN npm run build
 
