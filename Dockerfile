@@ -38,7 +38,7 @@ COPY . .
 COPY docker/nginx.conf /etc/nginx/sites-available/default
 
 # Installer les dépendances PHP et Node
-RUN composer install --no-interaction --no-progress --no-dev --optimize-autoloader
+RUN composer install --no-interaction --no-progress --no-dev --optimize-autoloader --no-scripts
 RUN npm install
 RUN npm run build
 
