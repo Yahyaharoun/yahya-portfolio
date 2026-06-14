@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Cookie;
+use App\Services\TwilioSmsService;
 
 class OtpVerificationController extends Controller
 {
@@ -32,8 +33,10 @@ class OtpVerificationController extends Controller
         if (filter_var($identifier, FILTER_VALIDATE_EMAIL)) {
             \Illuminate\Support\Facades\Mail::to($identifier)->send(new \App\Mail\OtpMail($code));
         } else {
-            // Si c'est un numéro de téléphone (à implémenter plus tard avec Twilio par ex)
-            \Log::info("Code OTP SMS simulé pour {$identifier} : {$code}");
+            // Si c'est un numéro de téléphone, on utilise Twilio
+            $smsService = new TwilioSmsService();
+            $smsService->sendOtp($identifier, $code);
+            \Log::info("Code OTP SMS envoyé (ou tenté) via Twilio pour {$identifier}");
         }
 
         return response()->json([
