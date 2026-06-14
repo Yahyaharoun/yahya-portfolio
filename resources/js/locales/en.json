@@ -1,0 +1,187 @@
+{
+  "nav": {
+    "about": "About",
+    "skills": "Skills",
+    "experience": "Journey",
+    "projects": "Projects",
+    "certifications": "Certifications",
+    "gallery": "Gallery",
+    "contact": "Contract",
+    "contact_sub": "Reserved for contracts & partnerships…",
+    "get_in_touch": "Get in touch"
+  },
+  "hero": {
+    "title": "Yahya Haroun",
+    "tagline": "Tech & Business",
+    "slogan": "Building digital products at the intersection of technology and business.",
+    "bio": "Passionate about technological innovation and the business world, I develop high-performance solutions and engage in entrepreneurship with absolute rigor, guided by a strict respect for my ethical principles, religious values, and moral standards.",
+    "subtitle": "Student_Tech & Tech Entrepreneur",
+    "cta_cv": "Download CV",
+    "cta_contact": "Let's Collaborate",
+    "scroll_hint": "Scroll to explore"
+  },
+  "sections": {
+    "experience": "Professional Journey",
+    "skills": "Skills Matrix",
+    "certifications": "Certifications & Diplomas",
+    "projects": "Projects",
+    "gallery": "Media Gallery",
+    "contact": "Contract & Partnerships"
+  },
+  "skills": {
+    "filter_all": "All",
+    "categories": {
+      "web": "Web Development",
+      "ai": "AI & Consulting",
+      "business": "Business",
+      "pm": "Project Management",
+      "entrepreneurship": "Entrepreneurship"
+    },
+    "avg_proficiency": "Avg. proficiency",
+    "skills_count": "skills",
+    "stat_avg": "Average",
+    "stat_skills": "Skills",
+    "stat_categories": "Domains"
+  },
+  "timeline": {
+    "present": "Present",
+    "empty": "No journey entries to display yet.",
+    "type": {
+      "work": "Work",
+      "education": "Education",
+      "project": "Project"
+    }
+  },
+  "certifications": {
+    "issued_by": "Issued by",
+    "issued_on": "Issued on",
+    "expires_on": "Expires on",
+    "verify": "Verify certificate",
+    "badge_expired": "Expired",
+    "badge_active": "Active",
+    "no_expiry": "No expiry"
+  },
+  "projects": {
+    "tab_realized": "Realized",
+    "tab_future": "Vision Board",
+    "view_demo": "Live Demo",
+    "view_code": "View Code",
+    "tech_stack": "Tech Stack",
+    "status": {
+      "realized": "Realized",
+      "future": "Future"
+    }
+  },
+  "gallery": {
+    "filter_all": "All",
+    "filter_photo": "Photos",
+    "filter_video": "Videos",
+    "view_full": "View fullscreen",
+    "location": "Location"
+  },
+  "cv_tunnel": {
+    "title": "Download CV",
+    "subtitle": "A few details to personalize your access.",
+    "step": "Step {current} of {total}",
+    "fields": {
+      "full_name": "Full Name",
+      "phone": "Phone Number",
+      "email": "Email Address",
+      "organization": "Organization",
+      "motive": "Reason for Request"
+    },
+    "placeholders": {
+      "full_name": "e.g. Jane Smith",
+      "phone": "e.g. +237 6 00 00 00 00",
+      "email": "e.g. contact@company.cm",
+      "organization": "e.g. TechCorp Cameroon",
+      "motive": "Recruitment, partnership, collaboration…"
+    },
+    "validation": {
+      "required": "This field is required.",
+      "phone_invalid": "Invalid phone number.",
+      "email_invalid": "Invalid email address."
+    },
+    "actions": {
+      "continue": "Continue",
+      "cancel": "Cancel",
+      "close": "Close"
+    },
+    "preparing": "Preparing your document…",
+    "success": "Your download will begin shortly.",
+    "fallback_link": "Click here if the download does not start.",
+    "motives": {
+      "placeholder": "Select a reason...",
+      "recruitment": "Recruitment",
+      "partnership": "Partnership",
+      "academic": "Academic",
+      "personal": "Personal",
+      "other": "Other"
+    },
+    "submit_btn": "Submit and Download"
+  },
+  "partnership": {
+    "title": "Propose a Partnership",
+    "subtitle": "Describe your project or collaboration proposal.",
+    "fields": {
+      "email": "Professional Email",
+      "phone": "Phone Number",
+      "company_placeholder": "Your company",
+      "email_placeholder": "contact{'@'}company.com",
+      "phone_placeholder": "+237 600 000 000",
+      "message_placeholder": "Describe your project or partnership proposal...",
+      "type_placeholder": "Select a type",
+      "company": "Entreprise / Company",
+      "type": "Type",
+      "message": "Message"
+    },
+    "types": {
+      "partnership": "🤝 Partnership",
+      "investment": "📈 Investment",
+      "contract": "📝 Contract",
+      "consulting": "💡 Consulting"
+    },
+    "actions": {
+      "submit": "Submit Proposal",
+      "cancel": "Cancel"
+    },
+    "success": "Your proposal has been received. We will get back to you within 48 hours.",
+    "error": "An error occurred. Please try again.",
+    "info_title": "Information & Partners",
+    "info_text": "Whether you are looking for an expert developer, an AI consultant, or a partner for your startup, leave me a message detailing your needs.",
+    "email_title": "Direct Email",
+    "location_title": "Location",
+    "location_text": "Cameroon (Available Worldwide)",
+    "availability_title": "Availability",
+    "availability_text": "Open to new opportunities",
+    "partners_title": "They trust me"
+  },
+  "contact": {
+    "email": "Yahyaharoun.657{'@'}gmail.com",
+    "phone": "+237 690 722 465",
+    "location": "Cameroon"
+  },
+  "theme": {
+    "dark": "Dark mode",
+    "light": "Light mode"
+  },
+  "footer": {
+    "navigation": "Navigation",
+    "contact": "Contact",
+    "rights": "©️ {year} Yahya Haroun~ Tech & Buss",
+    "location": "Cameroon"
+  },
+  "offline": {
+    "title": "Offline Mode Active",
+    "body": "Displaying cached, read-only snapshots. Your connection was interrupted.",
+    "cache_notice": "Navigating locally cached routes",
+    "queue_notice": "Forms will sync when connection is restored"
+  },
+  "a11y": {
+    "close_menu": "Close menu",
+    "open_menu": "Open menu",
+    "scroll_progress": "Page scroll progress",
+    "lang_switch": "Switch language",
+    "theme_toggle": "Toggle theme"
+  }
+}

@@ -1,0 +1,187 @@
+{
+  "nav": {
+    "about": "À propos",
+    "skills": "Compétences",
+    "experience": "Parcours",
+    "projects": "Projets",
+    "certifications": "Certifications",
+    "gallery": "Galerie",
+    "contact": "Contrat",
+    "contact_sub": "Réservé pour les contrats, partenariats…",
+    "get_in_touch": "Me contacter"
+  },
+  "hero": {
+    "title": "Yahya Haroun",
+    "tagline": "Tech & Business",
+    "slogan": "Bâtisseur de produits numériques à l'intersection de la technologie et des affaires.",
+    "bio": "Passionné par l'innovation technologique et l'univers du business, je développe des solutions performantes et m'engage dans l'entrepreneuriat avec une rigueur absolue, guidé par le respect strict de mes principes éthiques, de mes valeurs religieuses et des règles morales.",
+    "subtitle": "Etudiant_Tech & Entrepreneur Tech",
+    "cta_cv": "Télécharger le CV",
+    "cta_contact": "Collaborer ensemble",
+    "scroll_hint": "Défiler pour explorer"
+  },
+  "sections": {
+    "experience": "Parcours Professionnel",
+    "skills": "Matrice des Compétences",
+    "certifications": "Certifications & Diplômes",
+    "projects": "Projets",
+    "gallery": "Galerie Média",
+    "contact": "Contrat & Partenariats"
+  },
+  "skills": {
+    "filter_all": "Toutes",
+    "categories": {
+      "web": "Développement Web",
+      "ai": "IA & Conseil",
+      "business": "Business",
+      "pm": "Gestion de Projet",
+      "entrepreneurship": "Entrepreneuriat"
+    },
+    "avg_proficiency": "Maîtrise moy.",
+    "skills_count": "compétences",
+    "stat_avg": "Moyenne",
+    "stat_skills": "Compétences",
+    "stat_categories": "Domaines"
+  },
+  "timeline": {
+    "present": "Présent",
+    "empty": "Aucun parcours à afficher pour le moment.",
+    "type": {
+      "work": "Emploi",
+      "education": "Formation",
+      "project": "Projet"
+    }
+  },
+  "certifications": {
+    "issued_by": "Délivré par",
+    "issued_on": "Émis le",
+    "expires_on": "Expire le",
+    "verify": "Vérifier le certificat",
+    "badge_expired": "Expiré",
+    "badge_active": "Valide",
+    "no_expiry": "Sans expiration"
+  },
+  "projects": {
+    "tab_realized": "Réalisés",
+    "tab_future": "En vision",
+    "view_demo": "Voir la démo",
+    "view_code": "Voir le code",
+    "tech_stack": "Stack technique",
+    "status": {
+      "realized": "Réalisé",
+      "future": "Futur"
+    }
+  },
+  "gallery": {
+    "filter_all": "Tout",
+    "filter_photo": "Photos",
+    "filter_video": "Vidéos",
+    "view_full": "Voir en plein écran",
+    "location": "Lieu"
+  },
+  "cv_tunnel": {
+    "title": "Télécharger le CV",
+    "subtitle": "Quelques informations pour personnaliser votre accès.",
+    "step": "Étape {current} sur {total}",
+    "fields": {
+      "full_name": "Nom complet",
+      "phone": "Téléphone",
+      "email": "Adresse e-mail",
+      "organization": "Organisation",
+      "motive": "Motif de la demande"
+    },
+    "placeholders": {
+      "full_name": "ex. Jean Dupont",
+      "phone": "ex. +237 6 00 00 00 00",
+      "email": "ex. contact{'@'}entreprise.cm",
+      "organization": "ex. TechCorp Cameroun",
+      "motive": "Recrutement, partenariat, collaboration…"
+    },
+    "validation": {
+      "required": "Ce champ est obligatoire.",
+      "phone_invalid": "Numéro de téléphone invalide.",
+      "email_invalid": "Adresse e-mail invalide."
+    },
+    "actions": {
+      "continue": "Continuer",
+      "cancel": "Annuler",
+      "close": "Fermer"
+    },
+    "preparing": "Préparation du document…",
+    "success": "Votre téléchargement démarrera dans un instant.",
+    "fallback_link": "Cliquer ici si le téléchargement ne démarre pas.",
+    "motives": {
+      "placeholder": "Sélectionnez un motif...",
+      "recruitment": "Recrutement",
+      "partnership": "Partenariat",
+      "academic": "Académique",
+      "personal": "Personnel",
+      "other": "Autre"
+    },
+    "submit_btn": "Valider et Télécharger"
+  },
+  "partnership": {
+    "title": "Proposer un Partenariat",
+    "subtitle": "Décrivez votre projet ou votre proposition de collaboration.",
+    "fields": {
+      "email": "Email Pro",
+      "phone": "Téléphone",
+      "company_placeholder": "Votre entreprise",
+      "email_placeholder": "contact{'@'}entreprise.com",
+      "phone_placeholder": "+237 600 000 000",
+      "message_placeholder": "Décrivez votre projet ou proposition de partenariat...",
+      "type_placeholder": "Sélectionnez un type",
+      "company": "Entreprise / Company",
+      "type": "Type",
+      "message": "Message"
+    },
+    "types": {
+      "partnership": "🤝 Partenariat",
+      "investment": "📈 Investissement",
+      "contract": "📝 Contrat",
+      "consulting": "💡 Conseil / Consulting"
+    },
+    "actions": {
+      "submit": "Envoyer la proposition",
+      "cancel": "Annuler"
+    },
+    "success": "Votre proposition a été envoyée. Nous reviendrons vers vous sous 48 h.",
+    "error": "Une erreur est survenue. Veuillez réessayer.",
+    "info_title": "Informations & Partenaires",
+    "info_text": "Que vous cherchiez un développeur expert, un consultant IA ou un partenaire pour votre startup, laissez-moi un message détaillant votre besoin.",
+    "email_title": "Email Direct",
+    "location_title": "Localisation",
+    "location_text": "Cameroun (Available Worldwide)",
+    "availability_title": "Disponibilité",
+    "availability_text": "Ouvert aux nouvelles opportunités",
+    "partners_title": "Ils me font confiance"
+  },
+  "contact": {
+    "email": "Yahyaharoun.657{'@'}gmail.com",
+    "phone": "+237 690 722 465",
+    "location": "Cameroun"
+  },
+  "theme": {
+    "dark": "Mode sombre",
+    "light": "Mode clair"
+  },
+  "footer": {
+    "navigation": "Navigation",
+    "contact": "Contact",
+    "rights": "©️ {year} Yahya Haroun~ Tech & Buss",
+    "location": "Cameroun"
+  },
+  "offline": {
+    "title": "Mode Hors Ligne",
+    "body": "Vous consultez des données en cache. La connexion a été interrompue.",
+    "cache_notice": "Navigation sur les routes sauvegardées localement",
+    "queue_notice": "Les formulaires seront synchronisés à la reconnexion"
+  },
+  "a11y": {
+    "close_menu": "Fermer le menu",
+    "open_menu": "Ouvrir le menu",
+    "scroll_progress": "Progression du défilement",
+    "lang_switch": "Changer la langue",
+    "theme_toggle": "Changer le thème"
+  }
+}
