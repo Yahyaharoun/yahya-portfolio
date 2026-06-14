@@ -28,9 +28,13 @@ class OtpVerificationController extends Controller
         // Stocker en cache pour 10 minutes
         Cache::put("otp_{$identifier}", $code, now()->addMinutes(10));
 
-        // TODO: Intégrer un vrai service SMS (Twilio) ou Email (Mailtrap/Resend) ici.
-        // Exemple (Log) : 
-        \Log::info("Code OTP pour {$identifier} : {$code}");
+        // Envoi de l'email avec la classe Mailable
+        if (filter_var($identifier, FILTER_VALIDATE_EMAIL)) {
+            \Illuminate\Support\Facades\Mail::to($identifier)->send(new \App\Mail\OtpMail($code));
+        } else {
+            // Si c'est un numéro de téléphone (à implémenter plus tard avec Twilio par ex)
+            \Log::info("Code OTP SMS simulé pour {$identifier} : {$code}");
+        }
 
         return response()->json([
             'message' => 'Code envoyé avec succès. (Checkez les logs en mode local)',
