@@ -21,10 +21,6 @@ RUN docker-php-ext-install pdo pdo_pgsql pgsql exif pcntl bcmath gd zip
 # Installer Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
-# Installer Node.js (pour build Vite/Inertia)
-RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash - \
-    && apt-get install -y nodejs
-
 # Configurer le répertoire de travail
 WORKDIR /var/www/html
 
@@ -37,10 +33,8 @@ COPY . .
 # Copier la configuration Nginx
 COPY docker/nginx.conf /etc/nginx/sites-available/default
 
-# Installer les dépendances PHP et Node
+# Installer les dépendances PHP
 RUN composer install --no-interaction --no-progress --no-dev --optimize-autoloader --no-scripts
-RUN npm install
-RUN npm run build
 
 # Ajuster les permissions
 RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
