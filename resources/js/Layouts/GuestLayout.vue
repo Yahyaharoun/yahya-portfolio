@@ -11,6 +11,7 @@ import {
   MoonIcon,
 } from '@heroicons/vue/24/outline'
 import SocialLinks from '@/Components/SocialLinks.vue'
+import OfflineIndicator from '@/Components/OfflineIndicator.vue'
 import { useI18n } from 'vue-i18n'
 import { setLocale, SUPPORTED_LOCALES, type SupportedLocale } from '@/i18n'
 
@@ -119,6 +120,7 @@ onUnmounted(() => {
 
 <template>
   <div class="min-h-screen bg-slate-50 dark:bg-[#09090f] text-slate-900 dark:text-slate-100 antialiased overflow-x-hidden transition-colors duration-300">
+    <OfflineIndicator />
 
     <!-- ── Scroll progress bar ─────────────────────────────────────────── -->
     <div

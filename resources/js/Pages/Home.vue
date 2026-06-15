@@ -16,6 +16,7 @@ import { VueTelInput } from 'vue-tel-input'
 import 'vue-tel-input/vue-tel-input.css'
 import axios from 'axios'
 import { playSuccessSound } from '../utils/audio'
+import { addRequestToQueue } from '@/utils/offlineQueue'
 
 const { t } = useI18n()
 const cvModal = ref<InstanceType<typeof CvModal> | null>(null)
@@ -34,6 +35,25 @@ const otpError = ref('')
 const isOtpLoading = ref(false)
 
 const submitPartnership = async () => {
+  if (!navigator.onLine) {
+    try {
+      await addRequestToQueue('/partnerships', 'POST', {
+        company: form.company,
+        email: form.email,
+        phone: form.phone,
+        type: form.type,
+        message: form.message,
+      }, {
+        'X-Requested-With': 'XMLHttpRequest'
+      });
+      form.reset();
+      showAlert(t('offline.saved_partnership', 'Mode hors-ligne : Votre proposition a été sauvegardée et sera envoyée dès votre reconnexion.'));
+    } catch (e) {
+      showAlert('Erreur lors de la sauvegarde hors-ligne.');
+    }
+    return;
+  }
+
   // 1. Send OTP
   isOtpLoading.value = true
   try {

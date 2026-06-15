@@ -15,6 +15,7 @@ import {
   UserCircleIcon,
   ArrowRightOnRectangleIcon,
   XMarkIcon,
+  SignalIcon,
 } from '@heroicons/vue/24/outline'
 import {
   HomeIcon as HomeSolid,
@@ -25,6 +26,8 @@ import {
   ArrowDownTrayIcon as DownloadSolid,
   ChartBarIcon as ChartSolid,
 } from '@heroicons/vue/24/solid'
+import OfflineIndicator from '@/Components/OfflineIndicator.vue'
+import axios from 'axios'
 
 interface NavItem {
   label: string
@@ -110,10 +113,48 @@ function toggleSidebar(): void {
 function closeMobileSidebar(): void {
   mobileSidebarOpen.value = false
 }
+
+// ── Web Push Notifications ──────────────────────────────────────────────────
+const pushEnabled = ref<boolean>(false)
+const pushLoading = ref<boolean>(false)
+
+async function subscribeToPush() {
+    pushLoading.value = true;
+    try {
+        const registration = await navigator.serviceWorker.ready;
+        let subscription = await registration.pushManager.getSubscription();
+        if (!subscription) {
+            subscription = await registration.pushManager.subscribe({
+                userVisibleOnly: true,
+                applicationServerKey: urlBase64ToUint8Array(import.meta.env.VITE_VAPID_PUBLIC_KEY)
+            });
+        }
+        await axios.post('/admin/push-subscriptions', subscription);
+        pushEnabled.value = true;
+        alert('Notifications Web Push activées avec succès !');
+    } catch (error) {
+        console.error('Erreur Web Push:', error);
+        alert('Impossible d\'activer les notifications Push. Vérifiez vos permissions de navigateur.');
+    } finally {
+        pushLoading.value = false;
+    }
+}
+
+function urlBase64ToUint8Array(base64String: string) {
+    const padding = '='.repeat((4 - base64String.length % 4) % 4);
+    const base64 = (base64String + padding).replace(/\-/g, '+').replace(/_/g, '/');
+    const rawData = window.atob(base64);
+    const outputArray = new Uint8Array(rawData.length);
+    for (let i = 0; i < rawData.length; ++i) {
+        outputArray[i] = rawData.charCodeAt(i);
+    }
+    return outputArray;
+}
 </script>
 
 <template>
   <div class="min-h-screen bg-slate-950 text-slate-100 antialiased">
+    <OfflineIndicator />
 
     <!-- Mobile overlay -->
     <Transition enter-active-class="transition-opacity duration-300" enter-from-class="opacity-0" enter-to-class="opacity-100" leave-active-class="transition-opacity duration-300" leave-from-class="opacity-100" leave-to-class="opacity-0">
@@ -256,6 +297,19 @@ function closeMobileSidebar(): void {
               </div>
             </Transition>
           </div>
+
+          <!-- Push Notification toggle -->
+          <button
+            @click="subscribeToPush"
+            :disabled="pushLoading || pushEnabled"
+            class="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-lg text-sm font-medium transition-all focus:outline-none"
+            :class="pushEnabled ? 'bg-emerald-500/20 text-emerald-400' : 'bg-slate-800 text-slate-300 hover:bg-slate-700'"
+            title="Activer les notifications push sur cet appareil"
+          >
+            <SignalIcon class="w-4 h-4" :class="{'animate-pulse': pushLoading}" />
+            <span v-if="!pushEnabled">{{ pushLoading ? 'Activation...' : 'Push Alerts' }}</span>
+            <span v-else>Push Actif</span>
+          </button>
 
           <!-- User avatar -->
           <div class="flex items-center gap-2 px-2 py-1.5 rounded-lg bg-slate-800/50 text-slate-300">

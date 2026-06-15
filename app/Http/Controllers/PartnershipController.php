@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\Partnership;
 use App\Rules\NotDisposableEmail;
 use App\Rules\ValidPhoneRegex;
+use App\Models\User;
+use App\Notifications\NewPartnershipProposal;
 
 class PartnershipController
 {
@@ -19,7 +21,7 @@ class PartnershipController
             'message' => 'required|string|max:2000',
         ]);
 
-        Partnership::create([
+        $partnership = Partnership::create([
             'company' => $validated['company'],
             'contact_email' => $validated['email'],
             'contact_phone' => $validated['phone'],
@@ -28,6 +30,11 @@ class PartnershipController
             'ip_address' => $request->ip(),
             'status' => 'new'
         ]);
+
+        $admin = User::where('role', 'admin')->first();
+        if ($admin) {
+            $admin->notify(new NewPartnershipProposal($partnership));
+        }
 
         return back()->with('success', 'Proposition envoyée avec succès.');
     }

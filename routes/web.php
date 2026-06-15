@@ -76,8 +76,11 @@ Route::middleware('auth')->group(function () {
     Route::get('/admin/analytics', [\App\Http\Controllers\Admin\AnalyticsController::class, 'index'])->name('admin.analytics.index');
     // Alias: /admin/partnerships -> ContractController (Partnerships = Contracts)
     Route::get('/admin/partnerships', [\App\Http\Controllers\Admin\ContractController::class, 'index'])->name('admin.partnerships.index');
-    // Alias: /admin/media -> GalleryController
     Route::get('/admin/media', [\App\Http\Controllers\Admin\GalleryController::class, 'index'])->name('admin.media.index');
+    
+    // Web Push Subscriptions
+    Route::post('/admin/push-subscriptions', [\App\Http\Controllers\Admin\PushSubscriptionController::class, 'store']);
+    Route::delete('/admin/push-subscriptions', [\App\Http\Controllers\Admin\PushSubscriptionController::class, 'destroy']);
 });
 
 // ── Fallback : toutes les routes SPA renvoient vers Home ─────────────────────

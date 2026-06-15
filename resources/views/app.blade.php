@@ -6,13 +6,13 @@
     <title inertia>{{ config('app.name', 'Portfolio Yahya Haroun') }}</title>
 
     {{-- PWA --}}
-    <link rel="manifest" href="/build/manifest.webmanifest">
+    <link rel="manifest" href="/manifest.json">
     <meta name="theme-color" content="#6b21a8">
-    <link rel="apple-touch-icon" href="/icons/icon-192x192.png">
+    <link rel="apple-touch-icon" href="/favicon.ico">
     <script>
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
-                navigator.serviceWorker.register('/build/sw.js');
+                navigator.serviceWorker.register('/sw.js');
             });
         }
     </script>

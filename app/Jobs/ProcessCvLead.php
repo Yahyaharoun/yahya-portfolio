@@ -4,7 +4,7 @@ declare(strict_types=1);
 namespace App\Jobs;
 
 use App\Models\CvDownload;
-use App\Notifications\CvLeadNotification;
+use App\Notifications\NewCvDownload;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
@@ -56,10 +56,10 @@ class ProcessCvLead implements ShouldQueue
 
             // Dispatch a notification (e.g., to Slack or email).
             // Assuming a notifiable admin user exists.
-            $admin = \App\Models\User::where('is_admin', true)->first();
+            $admin = \App\Models\User::where('role', 'admin')->first();
             if ($admin) {
-                $admin->notify(new CvLeadNotification([
-                    'full_name' => $this->fullName,
+                $admin->notify(new NewCvDownload([
+                    'name' => $this->fullName,
                     'phone' => $this->phone,
                     'email' => $this->email,
                     'organization' => $this->organization,

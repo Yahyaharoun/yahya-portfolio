@@ -1,22 +1,22 @@
 {
-  "_AuthenticatedLayout-DcsoDZOw.js": {
-    "file": "assets/AuthenticatedLayout-DcsoDZOw.js",
+  "_AuthenticatedLayout-BCiZXYtM.js": {
+    "file": "assets/AuthenticatedLayout-BCiZXYtM.js",
     "name": "AuthenticatedLayout",
     "imports": [
       "resources/js/app.ts",
-      "_BriefcaseIcon-_VhfCIVA.js"
+      "_OfflineIndicator-Bq00YaxK.js"
     ]
   },
-  "_BriefcaseIcon-_VhfCIVA.js": {
-    "file": "assets/BriefcaseIcon-_VhfCIVA.js",
-    "name": "BriefcaseIcon",
+  "_ConfirmModal-Bckr0eIq.js": {
+    "file": "assets/ConfirmModal-Bckr0eIq.js",
+    "name": "ConfirmModal",
     "imports": [
       "resources/js/app.ts"
     ]
   },
-  "_ConfirmModal-B50UgBsX.js": {
-    "file": "assets/ConfirmModal-B50UgBsX.js",
-    "name": "ConfirmModal",
+  "_OfflineIndicator-Bq00YaxK.js": {
+    "file": "assets/OfflineIndicator-Bq00YaxK.js",
+    "name": "OfflineIndicator",
     "imports": [
       "resources/js/app.ts"
     ]
@@ -28,7 +28,7 @@
     "isDynamicEntry": true
   },
   "resources/css/app.css": {
-    "file": "assets/app-BMK6RIR2.css",
+    "file": "assets/app-DTDgclZV.css",
     "name": "app",
     "names": [
       "app.css"
@@ -37,82 +37,82 @@
     "isEntry": true
   },
   "resources/js/Pages/Admin/Analytics/Index.vue": {
-    "file": "assets/Index-BV8xQu6j.js",
+    "file": "assets/Index-5OICVhEB.js",
     "name": "Index",
     "src": "resources/js/Pages/Admin/Analytics/Index.vue",
     "isDynamicEntry": true,
     "imports": [
       "resources/js/app.ts",
-      "_AuthenticatedLayout-DcsoDZOw.js"
+      "_AuthenticatedLayout-BCiZXYtM.js"
     ]
   },
   "resources/js/Pages/Admin/Certifications/Index.vue": {
-    "file": "assets/Index-Cm9xr6Ph.js",
+    "file": "assets/Index-C2_0ldDx.js",
     "name": "Index",
     "src": "resources/js/Pages/Admin/Certifications/Index.vue",
     "isDynamicEntry": true,
     "imports": [
       "resources/js/app.ts",
-      "_AuthenticatedLayout-DcsoDZOw.js",
-      "_ConfirmModal-B50UgBsX.js"
+      "_AuthenticatedLayout-BCiZXYtM.js",
+      "_ConfirmModal-Bckr0eIq.js"
     ]
   },
   "resources/js/Pages/Admin/Contracts/Index.vue": {
-    "file": "assets/Index-DMFS5mh4.js",
+    "file": "assets/Index-BUgIzi5t.js",
     "name": "Index",
     "src": "resources/js/Pages/Admin/Contracts/Index.vue",
     "isDynamicEntry": true,
     "imports": [
       "resources/js/app.ts",
-      "_AuthenticatedLayout-DcsoDZOw.js",
-      "_ConfirmModal-B50UgBsX.js"
+      "_AuthenticatedLayout-BCiZXYtM.js",
+      "_ConfirmModal-Bckr0eIq.js"
     ]
   },
   "resources/js/Pages/Admin/CvDownloads/Index.vue": {
-    "file": "assets/Index-Dg3r9WAb.js",
+    "file": "assets/Index-DcwbCXUE.js",
     "name": "Index",
     "src": "resources/js/Pages/Admin/CvDownloads/Index.vue",
     "isDynamicEntry": true,
     "imports": [
       "resources/js/app.ts",
-      "_AuthenticatedLayout-DcsoDZOw.js",
-      "_ConfirmModal-B50UgBsX.js"
+      "_AuthenticatedLayout-BCiZXYtM.js",
+      "_ConfirmModal-Bckr0eIq.js"
     ]
   },
   "resources/js/Pages/Admin/Dashboard.vue": {
-    "file": "assets/Dashboard-CFFwzmeM.js",
+    "file": "assets/Dashboard-CAMu94gm.js",
     "name": "Dashboard",
     "src": "resources/js/Pages/Admin/Dashboard.vue",
     "isDynamicEntry": true,
     "imports": [
       "resources/js/app.ts",
-      "_AuthenticatedLayout-DcsoDZOw.js"
+      "_AuthenticatedLayout-BCiZXYtM.js"
     ]
   },
   "resources/js/Pages/Admin/Diplomas/Index.vue": {
-    "file": "assets/Index-DyriGzhx.js",
+    "file": "assets/Index-BpLv4Gw6.js",
     "name": "Index",
     "src": "resources/js/Pages/Admin/Diplomas/Index.vue",
     "isDynamicEntry": true,
     "imports": [
       "resources/js/app.ts",
-      "_AuthenticatedLayout-DcsoDZOw.js",
-      "_ConfirmModal-B50UgBsX.js"
+      "_AuthenticatedLayout-BCiZXYtM.js",
+      "_ConfirmModal-Bckr0eIq.js"
     ]
   },
   "resources/js/Pages/Admin/Gallery/Index.vue": {
-    "file": "assets/Index-ByAY64kD.js",
+    "file": "assets/Index-CFwQU1e_.js",
     "name": "Index",
     "src": "resources/js/Pages/Admin/Gallery/Index.vue",
     "isDynamicEntry": true,
     "imports": [
       "resources/js/app.ts",
-      "_AuthenticatedLayout-DcsoDZOw.js",
-      "_ConfirmModal-B50UgBsX.js"
+      "_AuthenticatedLayout-BCiZXYtM.js",
+      "_ConfirmModal-Bckr0eIq.js"
     ]
   },
   "resources/js/Pages/Admin/Login.vue": {
-    "file": "assets/Login-BEBJH5NF.js",
+    "file": "assets/Login-BTspq4t2.js",
     "name": "Login",
     "src": "resources/js/Pages/Admin/Login.vue",
     "isDynamicEntry": true,
@@ -121,53 +121,53 @@
     ]
   },
   "resources/js/Pages/Admin/Projects/Index.vue": {
-    "file": "assets/Index-Bp4lrlZp.js",
+    "file": "assets/Index-QtN3nbQ5.js",
     "name": "Index",
     "src": "resources/js/Pages/Admin/Projects/Index.vue",
     "isDynamicEntry": true,
     "imports": [
       "resources/js/app.ts",
-      "_AuthenticatedLayout-DcsoDZOw.js",
-      "_ConfirmModal-B50UgBsX.js"
+      "_AuthenticatedLayout-BCiZXYtM.js",
+      "_ConfirmModal-Bckr0eIq.js"
     ]
   },
   "resources/js/Pages/Admin/Skills/Index.vue": {
-    "file": "assets/Index-xRUrcx9K.js",
+    "file": "assets/Index-BzKSVYn3.js",
     "name": "Index",
     "src": "resources/js/Pages/Admin/Skills/Index.vue",
     "isDynamicEntry": true,
     "imports": [
       "resources/js/app.ts",
-      "_AuthenticatedLayout-DcsoDZOw.js",
-      "_ConfirmModal-B50UgBsX.js"
+      "_AuthenticatedLayout-BCiZXYtM.js",
+      "_ConfirmModal-Bckr0eIq.js"
     ]
   },
   "resources/js/Pages/Admin/Timeline/Index.vue": {
-    "file": "assets/Index-B8dnQ4AH.js",
+    "file": "assets/Index-30iVVnA2.js",
     "name": "Index",
     "src": "resources/js/Pages/Admin/Timeline/Index.vue",
     "isDynamicEntry": true,
     "imports": [
       "resources/js/app.ts",
-      "_AuthenticatedLayout-DcsoDZOw.js",
-      "_ConfirmModal-B50UgBsX.js"
+      "_AuthenticatedLayout-BCiZXYtM.js",
+      "_ConfirmModal-Bckr0eIq.js"
     ]
   },
   "resources/js/Pages/Home.vue": {
-    "file": "assets/Home-DIS_iiPK.js",
+    "file": "assets/Home-B39pnBkE.js",
     "name": "Home",
     "src": "resources/js/Pages/Home.vue",
     "isDynamicEntry": true,
     "imports": [
       "resources/js/app.ts",
-      "_BriefcaseIcon-_VhfCIVA.js"
+      "_OfflineIndicator-Bq00YaxK.js"
     ],
     "css": [
       "assets/Home-B9BM3iHA.css"
     ]
   },
   "resources/js/app.ts": {
-    "file": "assets/app-UYsgD1Bm.js",
+    "file": "assets/app-D3O8WShP.js",
     "name": "app",
     "src": "resources/js/app.ts",
     "isEntry": true,

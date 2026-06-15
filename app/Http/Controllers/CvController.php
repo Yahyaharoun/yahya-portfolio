@@ -11,7 +11,10 @@ use App\Models\Skill;
 use App\Models\Certification;
 use App\Models\Diploma;
 use App\Models\TimelineItem;
+use App\Models\SkillCategory;
+use App\Models\User;
 use Barryvdh\DomPDF\Facade\Pdf;
+use App\Jobs\ProcessCvLead;
 
 class CvController
 {
@@ -72,31 +75,28 @@ class CvController
             'motive' => 'required|string',
         ]);
 
-        // Le middleware otp.validated a déjà validé l'accès.
-        CvDownload::create([
-            'name' => $validated['name'],
-            'phone' => $validated['phone'],
-            'email' => $validated['email'],
-            'motive' => $validated['motive'],
-            'ip_address' => $request->ip(),
-            'user_agent' => $request->userAgent(),
-        ]);
+        // Dispatch the background job to persist the lead and fire notifications.
+        ProcessCvLead::dispatch($validated)->onQueue('cv-leads');
 
-        // Données dynamiques
-        $profil = [ 
-            'nom' => 'YAHYA HAROUN', 
-            'email' => 'Yahyaharoun.657@gmail.com', 
-            'telephone' => '+237 690722465', 
-            'titre' => 'Etudiant_Tech & Entrepreneur Tech' 
-        ];
-        $competences = Skill::all();
-        $parcours = TimelineItem::orderBy('date_start', 'desc')->get();
-        $certifications = Certification::all();
-        $diplomes = Diploma::orderBy('year', 'desc')->get();
+        // Récupérer l'administrateur
+        $admin = User::where('role', 'admin')->first();
+
+        // Récupérer les expériences (timeline)
+        $experiences = TimelineItem::orderBy('date_start', 'desc')->get();
+
+        // Récupérer les compétences groupées
+        $skillCategories = SkillCategory::with(['skills' => function($q) {
+            $q->orderBy('sort_order', 'asc')->orderBy('proficiency', 'desc');
+        }])->orderBy('sort_order', 'asc')->get();
+
+        $certifications = Certification::orderBy('issued_at', 'desc')->get();
+        $diplomas = Diploma::orderBy('year', 'desc')->get();
 
         // Génération du PDF
-        $pdf = Pdf::loadView('pdf.cv', compact('profil', 'competences', 'parcours', 'certifications', 'diplomes'));
+        $pdf = Pdf::loadView('pdf.cv', compact('admin', 'skillCategories', 'experiences', 'certifications', 'diplomas'))
+                  ->setPaper('a4', 'portrait')
+                  ->setOptions(['isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true]);
         
-        return $pdf->download('CV_YAHYA_HAROUN.pdf');
+        return $pdf->download('CV_' . strtoupper(str_replace(' ', '_', $admin ? $admin->name : 'YAHYA_HAROUN')) . '.pdf');
     }
 }

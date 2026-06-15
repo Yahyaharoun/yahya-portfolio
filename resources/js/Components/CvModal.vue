@@ -4,6 +4,7 @@ import { useForm } from '@inertiajs/vue3'
 import { useI18n } from 'vue-i18n'
 import axios from 'axios'
 import { playSuccessSound } from '../utils/audio'
+import { addRequestToQueue } from '@/utils/offlineQueue'
 
 const isOpen = ref(false)
 const { t } = useI18n()
@@ -37,6 +38,24 @@ function closeModal() {
 }
 
 async function requestVerification() {
+  if (!navigator.onLine) {
+    try {
+      await addRequestToQueue('/download-cv', 'POST', {
+        name: form.name,
+        phone: form.phone,
+        email: form.email,
+        motive: form.motive
+      }, {
+        'X-Requested-With': 'XMLHttpRequest'
+      });
+      closeModal();
+      alert('Mode hors-ligne : Votre demande a été sauvegardée. Le CV sera envoyé ou synchronisé dès votre reconnexion.');
+    } catch (e) {
+      alert('Erreur lors de la sauvegarde hors-ligne.');
+    }
+    return;
+  }
+
   isLoading.value = true
   requestError.value = ''
   
