@@ -1,69 +1,74 @@
-# Utiliser l'image PHP 8.3 FPM
 FROM php:8.3-fpm
 
-# Installer Nginx et TOUTES les dépendances système nécessaires
-RUN apt-get update && apt-get install -y \
+# ─── 1. Dépendances système ───────────────────────────────────────────────────
+RUN apt-get update && apt-get install -y --no-install-recommends \
     nginx \
     git \
     curl \
+    zip \
+    unzip \
     libpng-dev \
     libonig-dev \
     libxml2-dev \
+    libzip-dev \
+    libpq-dev \
     libgmp-dev \
     libsodium-dev \
-    zip \
-    unzip \
-    libpq-dev \
-    libzip-dev \
     supervisor \
-    && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
-# Installer TOUTES les extensions PHP requises (dont sodium pour web-push/JWT)
+# ─── 2. Extensions PHP ───────────────────────────────────────────────────────
 RUN docker-php-ext-install \
     pdo \
     pdo_pgsql \
     pgsql \
+    zip \
+    gd \
+    bcmath \
+    xml \
     exif \
     pcntl \
-    bcmath \
-    gd \
-    zip \
     sodium
 
-# Configurer les limites PHP pour l'upload de vidéos
+# ─── 3. Limites PHP (upload vidéo) ───────────────────────────────────────────
 COPY php.ini /usr/local/etc/php/conf.d/uploads.ini
 
-# Installer Composer depuis l'image officielle
+# ─── 4. Composer ─────────────────────────────────────────────────────────────
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
-# Configurer le répertoire de travail
+# ─── 5. Répertoire de travail ────────────────────────────────────────────────
 WORKDIR /var/www/html
 
-# Copier UNIQUEMENT les fichiers composer en premier (cache Docker optimal)
+# ─── 6. Copie composer.json en premier (cache Docker optimal) ────────────────
 COPY composer.json composer.lock ./
 
-# Installer les dépendances PHP SANS copier tout le projet (pour le cache Docker)
+# ─── 7. Installation des dépendances PHP ─────────────────────────────────────
 ENV COMPOSER_ALLOW_SUPERUSER=1 \
     COMPOSER_MEMORY_LIMIT=-1
-RUN composer install --no-dev --optimize-autoloader --no-scripts --no-autoloader
+RUN composer install \
+    --no-interaction \
+    --prefer-dist \
+    --optimize-autoloader \
+    --no-dev \
+    --no-scripts \
+    && composer clear-cache
 
-# Copier le reste des fichiers du projet
+# ─── 8. Copie du projet complet ──────────────────────────────────────────────
 COPY . .
 
-# Générer l'autoloader après avoir copié le code source
-RUN composer dump-autoload --optimize --no-dev
+# ─── 9. Génération autoloader final ──────────────────────────────────────────
+RUN composer dump-autoload --optimize --no-dev --no-interaction
 
-# Copier la configuration Nginx
+# ─── 10. Configuration Nginx ─────────────────────────────────────────────────
 COPY docker/nginx.conf /etc/nginx/sites-available/default
 
-# Ajuster les permissions
-RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
+# ─── 11. Permissions ─────────────────────────────────────────────────────────
+RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache \
+    && chmod -R 775 /var/www/html/storage /var/www/html/bootstrap/cache
 
-# Exposer le port de Render
+# ─── 12. Script de démarrage ─────────────────────────────────────────────────
 EXPOSE 80
 
-# Script de démarrage (corrigé avec printf pour éviter les problèmes de syntaxe shell)
 RUN printf '#!/bin/sh\n\
 php artisan storage:link --force\n\
 php artisan config:cache\n\
@@ -71,8 +76,6 @@ php artisan route:cache\n\
 php artisan view:cache\n\
 php artisan migrate --force\n\
 service nginx start\n\
-php-fpm\n' > /start.sh
-RUN chmod +x /start.sh
+exec php-fpm\n' > /start.sh && chmod +x /start.sh
 
-# Lancer Nginx et PHP-FPM
 CMD ["/start.sh"]
