@@ -13,7 +13,7 @@ class AnalyticsController
     {
         // Stats par mois pour les CV downloads
         $cvByMonth = DB::table('cv_downloads')
-            ->selectRaw("strftime('%Y-%m', created_at) as month, count(*) as total")
+            ->selectRaw("TO_CHAR(created_at, 'YYYY-MM') as month, count(*) as total")
             ->groupBy('month')
             ->orderBy('month', 'desc')
             ->limit(12)
@@ -22,7 +22,7 @@ class AnalyticsController
         // Stats par mois pour les partenariats
         $partnersByMonth = DB::table('partnerships')
             ->whereNull('deleted_at')
-            ->selectRaw("strftime('%Y-%m', created_at) as month, count(*) as total")
+            ->selectRaw("TO_CHAR(created_at, 'YYYY-MM') as month, count(*) as total")
             ->groupBy('month')
             ->orderBy('month', 'desc')
             ->limit(12)

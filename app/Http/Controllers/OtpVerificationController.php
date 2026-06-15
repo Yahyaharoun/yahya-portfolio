@@ -31,7 +31,12 @@ class OtpVerificationController extends Controller
 
         // Envoi de l'email avec la classe Mailable
         if (filter_var($identifier, FILTER_VALIDATE_EMAIL)) {
-            \Illuminate\Support\Facades\Mail::to($identifier)->send(new \App\Mail\OtpMail($code));
+            try {
+                \Illuminate\Support\Facades\Mail::to($identifier)->send(new \App\Mail\OtpMail($code));
+            } catch (\Exception $e) {
+                \Log::error("Erreur Envoi Email OTP: " . $e->getMessage());
+                return response()->json(['error' => "Erreur d'envoi d'email. Si vous utilisez Resend (gratuit), vous ne pouvez envoyer des emails qu'à votre propre adresse email vérifiée."], 500);
+            }
         } else {
             // Si c'est un numéro de téléphone, on utilise Twilio
             $smsService = new TwilioSmsService();
