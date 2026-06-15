@@ -6,7 +6,7 @@ import ConfirmModal from '../../../Components/ConfirmModal.vue'
 
 
 const props = defineProps<{
-  items: Array<{ id: number, company: string, website: string, message: string, logo_path: string, status: string }>
+  items: Array<{ id: number, company: string, website: string, message: string, logo_path: string, status: string, type: string, contact_email: string, contact_phone: string }>
 }>()
 
 const form = useForm({
@@ -135,8 +135,15 @@ const confirmAction = (message: string, onConfirm: () => void) => {
                   </div>
                 </td>
                 <td class="px-4 py-3">
-                  <div class="text-xs text-slate-500 truncate max-w-[200px]" :title="item.message">{{ item.message }}</div>
-                  <span class="text-[10px] px-2 py-0.5 rounded-full bg-slate-100 dark:bg-slate-100 text-slate-700 mt-1 inline-block">{{ item.status }}</span>
+                  <div class="text-xs text-slate-500 truncate max-w-[200px] mb-1" :title="item.message">{{ item.message }}</div>
+                  <div class="flex flex-wrap gap-1">
+                    <span class="text-[10px] px-2 py-0.5 rounded-full bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-600">{{ item.status === 'new' ? 'Nouveau' : (item.status === 'in_progress' ? 'En cours' : (item.status === 'treated' ? 'Traité' : 'Rejeté')) }}</span>
+                    <span v-if="!item.contact_email && !item.contact_phone" class="text-[10px] px-2 py-0.5 rounded-full bg-blue-100 text-blue-700 dark:bg-blue-900/40 dark:text-blue-300 border border-blue-200 dark:border-blue-800">Ajouté par moi</span>
+                    <span v-else class="text-[10px] px-2 py-0.5 rounded-full bg-amber-100 text-amber-700 dark:bg-amber-900/40 dark:text-amber-300 border border-amber-200 dark:border-amber-800">Proposé</span>
+                  </div>
+                  <div v-if="item.contact_email || item.contact_phone" class="text-[10px] text-slate-400 mt-1">
+                    Contact: {{ item.contact_email }} {{ item.contact_phone ? ' / ' + item.contact_phone : '' }}
+                  </div>
                 </td>
                 <td class="px-4 py-3 text-right flex justify-end gap-2 items-center h-full mt-2">
                   <button @click="edit(item)" class="text-blue-500 hover:underline">Éditer</button>
