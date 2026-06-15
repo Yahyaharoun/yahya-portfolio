@@ -38,6 +38,7 @@ EXPOSE 80
 
 # Script de démarrage
 RUN echo "#!/bin/sh\n" \
+    "php artisan storage:link\n" \
     "php artisan config:cache\n" \
     "php artisan route:cache\n" \
     "php artisan view:cache\n" \
