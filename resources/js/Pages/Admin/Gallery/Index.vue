@@ -108,29 +108,29 @@ const confirmAction = (message: string, onConfirm: () => void) => {
           </form>
         </div>
 
-        <div class="bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-700 overflow-x-auto text-slate-900 dark:text-slate-100">
-          <table class="w-full text-left text-sm">
-            <thead class="bg-slate-50 dark:bg-slate-800/50 text-slate-500">
+        <div class="bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-700 overflow-x-auto text-slate-900 dark:text-slate-100">
+          <table class="w-full text-left text-sm whitespace-nowrap md:whitespace-normal">
+            <thead class="bg-slate-50 dark:bg-slate-800/50 text-slate-500 dark:text-slate-400 border-b border-slate-200 dark:border-slate-700">
               <tr>
-                <th class="px-4 py-3 font-medium">Aperçu</th>
-                <th class="px-4 py-3 font-medium">Détails</th>
-                <th class="px-4 py-3 font-medium text-right">Actions</th>
+                <th class="px-4 py-3 font-semibold">Aperçu</th>
+                <th class="px-4 py-3 font-semibold hidden sm:table-cell">Détails</th>
+                <th class="px-4 py-3 font-semibold text-right">Actions</th>
               </tr>
             </thead>
-            <tbody class="divide-y divide-slate-100 dark:divide-slate-700/50">
-              <tr v-for="item in items" :key="item.id" class="hover:bg-slate-50 dark:hover:bg-slate-800/50">
+            <tbody class="divide-y divide-slate-200 dark:divide-slate-700/50">
+              <tr v-for="item in items" :key="item.id" class="hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors">
                 <td class="px-4 py-3">
                   <img v-if="item.type !== 'video' && item.filepath" :src="'/storage/' + item.filepath" class="h-12 w-12 object-cover rounded shadow-sm">
                   <video v-else-if="item.type === 'video' && item.filepath" :src="'/storage/' + item.filepath" class="h-12 w-12 object-contain bg-black rounded shadow-sm" controls></video>
-                  <div v-else class="h-12 w-12 rounded bg-slate-700 flex items-center justify-center text-xl">📷</div>
+                  <div v-else class="h-12 w-12 rounded bg-slate-100 dark:bg-slate-700 flex items-center justify-center text-xl">📷</div>
                 </td>
-                <td class="px-4 py-3">
-                  <div class="font-medium">{{ item.title }}</div>
-                  <div class="text-xs text-slate-500 truncate max-w-xs">{{ item.description }}</div>
+                <td class="px-4 py-3 hidden sm:table-cell">
+                  <div class="font-medium text-slate-900 dark:text-slate-100">{{ item.title }}</div>
+                  <div class="text-xs text-slate-500 dark:text-slate-400 mt-1 truncate max-w-xs">{{ item.description }}</div>
                 </td>
-                <td class="px-4 py-3 text-right flex justify-end gap-2 items-center h-full mt-3">
-                  <button @click="edit(item)" class="text-blue-500 hover:underline">Éditer</button>
-                  <button @click="deleteItem(item.id)" class="text-red-500 hover:underline">Supprimer</button>
+                <td class="px-4 py-3 text-right flex justify-end gap-3 items-center h-full mt-3">
+                  <button @click="edit(item)" class="text-violet-600 hover:text-violet-500 dark:text-violet-400 dark:hover:text-violet-300 font-medium text-sm transition-colors">Éditer</button>
+                  <button @click="deleteItem(item.id)" class="text-red-600 hover:text-red-500 dark:text-red-400 dark:hover:text-red-300 font-medium text-sm transition-colors">Supprimer</button>
                 </td>
               </tr>
               <tr v-if="items.length === 0">

@@ -304,13 +304,14 @@ onUnmounted(() => {
 
           <!-- Links -->
           <nav aria-label="Footer navigation">
-            <h2 class="text-xs font-semibold uppercase tracking-widest text-slate-500 mb-4">{{ t('footer.navigation') }}</h2>
-            <ul class="space-y-2">
+            <h2 class="text-xs font-bold uppercase tracking-widest text-slate-400 dark:text-slate-500 mb-5">{{ t('footer.navigation') }}</h2>
+            <ul class="space-y-3">
               <li v-for="link in navLinks.slice(0, 5)" :key="link.href">
                 <a
                   :href="link.href"
-                  class="text-sm text-slate-600 dark:text-slate-400 hover:text-violet-600 dark:hover:text-violet-400 transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-violet-500 rounded"
+                  class="group flex items-center text-sm font-medium text-slate-700 dark:text-slate-300 hover:text-violet-600 dark:hover:text-violet-400 transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-violet-500 rounded"
                 >
+                  <span class="w-1.5 h-1.5 rounded-full bg-slate-300 dark:bg-slate-700 mr-2 group-hover:bg-violet-500 transition-colors"></span>
                   {{ link.label }}
                 </a>
               </li>
@@ -319,10 +320,12 @@ onUnmounted(() => {
 
           <!-- Contact -->
           <div>
-            <h2 class="text-xs font-semibold uppercase tracking-widest text-slate-500 mb-4">{{ t('footer.contact') }}</h2>
-            <ul class="space-y-3">
-              <li class="flex items-center gap-2 text-sm text-slate-600 dark:text-slate-400">
-                <EnvelopeIcon class="w-4 h-4 text-violet-600 dark:text-violet-400 flex-shrink-0" aria-hidden="true" />
+            <h2 class="text-xs font-bold uppercase tracking-widest text-slate-400 dark:text-slate-500 mb-5">{{ t('footer.contact') }}</h2>
+            <ul class="space-y-4">
+              <li class="flex items-center gap-3 text-sm font-medium text-slate-700 dark:text-slate-300">
+                <div class="w-8 h-8 rounded-full bg-slate-200 dark:bg-slate-800 flex items-center justify-center flex-shrink-0">
+                  <EnvelopeIcon class="w-4 h-4 text-violet-600 dark:text-violet-400" aria-hidden="true" />
+                </div>
                 <a
                   :href="'mailto:' + t('contact.email')"
                   class="hover:text-violet-600 dark:hover:text-violet-400 transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-violet-500 rounded"
@@ -330,12 +333,16 @@ onUnmounted(() => {
                   {{ t('contact.email') }}
                 </a>
               </li>
-              <li class="flex items-center gap-2 text-sm text-slate-600 dark:text-slate-400">
-                <MapPinIcon class="w-4 h-4 text-violet-600 dark:text-violet-400 flex-shrink-0" aria-hidden="true" />
+              <li class="flex items-center gap-3 text-sm font-medium text-slate-700 dark:text-slate-300">
+                <div class="w-8 h-8 rounded-full bg-slate-200 dark:bg-slate-800 flex items-center justify-center flex-shrink-0">
+                  <MapPinIcon class="w-4 h-4 text-violet-600 dark:text-violet-400" aria-hidden="true" />
+                </div>
                 {{ t('contact.location') }}
               </li>
-              <li class="flex items-center gap-2 text-sm text-slate-600 dark:text-slate-400">
-                <span class="text-violet-600 dark:text-violet-400 flex-shrink-0">📞</span>
+              <li class="flex items-center gap-3 text-sm font-medium text-slate-700 dark:text-slate-300">
+                <div class="w-8 h-8 rounded-full bg-slate-200 dark:bg-slate-800 flex items-center justify-center flex-shrink-0">
+                  <span class="text-violet-600 dark:text-violet-400 text-xs">📞</span>
+                </div>
                 <a
                   :href="'tel:' + t('contact.phone').replace(/\s/g, '')"
                   class="hover:text-violet-600 dark:hover:text-violet-400 transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-violet-500 rounded"

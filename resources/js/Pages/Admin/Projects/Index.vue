@@ -113,34 +113,34 @@ const confirmAction = (message: string, onConfirm: () => void) => {
           </form>
         </div>
 
-        <div class="bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-700 overflow-x-auto text-slate-900 dark:text-slate-100">
-          <table class="w-full text-left text-sm">
-            <thead class="bg-slate-50 dark:bg-slate-800/50 text-slate-500">
+        <div class="bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-700 overflow-x-auto text-slate-900 dark:text-slate-100">
+          <table class="w-full text-left text-sm whitespace-nowrap md:whitespace-normal">
+            <thead class="bg-slate-50 dark:bg-slate-800/50 text-slate-500 dark:text-slate-400 border-b border-slate-200 dark:border-slate-700">
               <tr>
-                <th class="px-4 py-3 font-medium">Logo</th>
-                <th class="px-4 py-3 font-medium">Projet</th>
-                <th class="px-4 py-3 font-medium">Lien (si Terminé)</th>
-                <th class="px-4 py-3 font-medium text-right">Actions</th>
+                <th class="px-4 py-3 font-semibold">Logo</th>
+                <th class="px-4 py-3 font-semibold">Projet</th>
+                <th class="px-4 py-3 font-semibold hidden sm:table-cell">Lien (si Terminé)</th>
+                <th class="px-4 py-3 font-semibold text-right">Actions</th>
               </tr>
             </thead>
-            <tbody class="divide-y divide-slate-100 dark:divide-slate-700/50">
+            <tbody class="divide-y divide-slate-200 dark:divide-slate-700/50">
               <tr v-for="item in items" :key="item.id" class="hover:bg-slate-50 dark:hover:bg-slate-800/50">
                 <td class="px-4 py-3">
                   <img v-if="item.thumbnail" :src="'/storage/' + item.thumbnail" class="h-10 w-10 rounded object-cover">
                 </td>
                 <td class="px-4 py-3">
-                  <div class="font-medium">{{ item.title }}</div>
-                  <div class="text-xs" :class="item.status === 'realized' ? 'text-green-500' : 'text-amber-500'">
+                  <div class="font-medium text-slate-900 dark:text-slate-100">{{ item.title }}</div>
+                  <div class="text-xs mt-0.5" :class="item.status === 'realized' ? 'text-emerald-600 dark:text-emerald-400' : 'text-amber-600 dark:text-amber-400'">
                     {{ item.status === 'realized' ? 'Terminé' : 'En cours' }}
                   </div>
                 </td>
-                <td class="px-4 py-3">
-                  <a v-if="item.status === 'realized' && item.demo_url" :href="item.demo_url" target="_blank" class="text-blue-500 hover:underline">Voir lien</a>
-                  <span v-else class="text-slate-400 italic">Caché / Aucun</span>
+                <td class="px-4 py-3 hidden sm:table-cell">
+                  <a v-if="item.status === 'realized' && item.demo_url" :href="item.demo_url" target="_blank" class="text-violet-600 hover:text-violet-500 dark:text-violet-400 dark:hover:text-violet-300 transition-colors">Voir lien</a>
+                  <span v-else class="text-slate-500 dark:text-slate-400 italic text-xs">Caché / Aucun</span>
                 </td>
-                <td class="px-4 py-3 text-right flex justify-end gap-2 items-center h-full mt-2">
-                  <button @click="edit(item)" class="text-blue-500 hover:underline">Éditer</button>
-                  <button @click="deleteItem(item.id)" class="text-red-500 hover:underline">Supprimer</button>
+                <td class="px-4 py-3 text-right flex justify-end gap-3 items-center h-full mt-1.5">
+                  <button @click="edit(item)" class="text-violet-600 hover:text-violet-500 dark:text-violet-400 dark:hover:text-violet-300 font-medium text-sm transition-colors">Éditer</button>
+                  <button @click="deleteItem(item.id)" class="text-red-600 hover:text-red-500 dark:text-red-400 dark:hover:text-red-300 font-medium text-sm transition-colors">Supprimer</button>
                 </td>
               </tr>
               <tr v-if="items.length === 0">

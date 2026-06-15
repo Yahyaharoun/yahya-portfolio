@@ -143,32 +143,32 @@ const deleteItem = () => {
 
       <!-- List -->
       <div class="bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-700 overflow-x-auto text-slate-900 dark:text-slate-100">
-        <table class="w-full text-left text-sm">
-          <thead class="bg-slate-50 text-slate-500">
+        <table class="w-full text-left text-sm whitespace-nowrap md:whitespace-normal">
+          <thead class="bg-slate-50 dark:bg-slate-800/50 text-slate-500 dark:text-slate-400 border-b border-slate-200 dark:border-slate-700">
             <tr>
-              <th class="px-6 py-4 font-medium">Année</th>
-              <th class="px-6 py-4 font-medium">Diplôme</th>
-              <th class="px-6 py-4 font-medium">Établissement</th>
-              <th class="px-6 py-4 font-medium text-right">Actions</th>
+              <th class="px-4 py-3 md:px-6 md:py-4 font-semibold">Année</th>
+              <th class="px-4 py-3 md:px-6 md:py-4 font-semibold">Diplôme</th>
+              <th class="px-4 py-3 md:px-6 md:py-4 font-semibold hidden sm:table-cell">Établissement</th>
+              <th class="px-4 py-3 md:px-6 md:py-4 font-semibold text-right">Actions</th>
             </tr>
           </thead>
-          <tbody class="divide-y divide-slate-100">
-            <tr v-for="item in diplomas" :key="item.id" class="hover:bg-slate-50 transition-colors">
-              <td class="px-6 py-4 font-bold text-violet-600">{{ item.year }}</td>
-              <td class="px-6 py-4">
+          <tbody class="divide-y divide-slate-200 dark:divide-slate-700/50">
+            <tr v-for="item in diplomas" :key="item.id" class="hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors">
+              <td class="px-4 py-3 md:px-6 md:py-4 font-bold text-violet-600 dark:text-violet-400">{{ item.year }}</td>
+              <td class="px-4 py-3 md:px-6 md:py-4">
                 <div class="flex items-center gap-3">
                   <img v-if="item.image_path" :src="'/storage/' + item.image_path" class="w-12 h-12 rounded object-cover shadow-sm">
-                  <div v-else class="w-12 h-12 rounded bg-slate-100 flex items-center justify-center text-xl">🎓</div>
+                  <div v-else class="w-12 h-12 rounded bg-slate-100 dark:bg-slate-700 flex items-center justify-center text-xl">🎓</div>
                   <div>
-                    <div class="font-medium text-slate-900">{{ item.title }}</div>
-                    <div v-if="item.description" class="text-xs text-slate-500 mt-1 truncate max-w-xs">{{ item.description }}</div>
+                    <div class="font-medium text-slate-900 dark:text-slate-100">{{ item.title }}</div>
+                    <div v-if="item.description" class="text-xs text-slate-500 dark:text-slate-400 mt-1 truncate max-w-xs">{{ item.description }}</div>
                   </div>
                 </div>
               </td>
-              <td class="px-6 py-4 text-slate-600">{{ item.institution }}</td>
-              <td class="px-6 py-4 text-right space-x-3">
-                <button @click="editItem(item)" class="text-blue-500 hover:text-blue-700 font-medium transition-colors">Modifier</button>
-                <button @click="confirmDelete(item.id)" class="text-rose-500 hover:text-rose-700 font-medium transition-colors">Supprimer</button>
+              <td class="px-4 py-3 md:px-6 md:py-4 text-slate-600 dark:text-slate-400 hidden sm:table-cell">{{ item.institution }}</td>
+              <td class="px-4 py-3 md:px-6 md:py-4 text-right flex justify-end gap-3 items-center h-full mt-2 md:mt-4">
+                <button @click="editItem(item)" class="text-violet-600 hover:text-violet-700 dark:text-violet-400 dark:hover:text-violet-300 font-medium transition-colors">Modifier</button>
+                <button @click="confirmDelete(item.id)" class="text-rose-600 hover:text-rose-700 dark:text-rose-400 dark:hover:text-rose-300 font-medium transition-colors">Supprimer</button>
               </td>
             </tr>
             <tr v-if="diplomas.length === 0">

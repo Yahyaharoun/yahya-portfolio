@@ -61,21 +61,21 @@ const showDetails = (title: string, data: any, isPartnership: boolean = false) =
       <div>
         <h2 class="text-xl font-semibold text-slate-900 dark:text-slate-100 mb-4">Vue d'ensemble</h2>
         <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4">
-          <div class="bg-slate-800 p-6 rounded-2xl border border-slate-700 shadow-sm">
-            <h3 class="text-xs text-slate-400 uppercase tracking-widest mb-2">Visiteurs Uniques</h3>
-            <p class="text-3xl font-bold text-violet-400">{{ stats.visitors }}</p>
+          <div class="bg-white dark:bg-slate-800 p-6 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm">
+            <h3 class="text-xs text-slate-500 dark:text-slate-400 uppercase tracking-widest mb-2">Visiteurs Uniques</h3>
+            <p class="text-3xl font-bold text-violet-600 dark:text-violet-400">{{ stats.visitors }}</p>
           </div>
-          <div class="bg-slate-800 p-6 rounded-2xl border border-slate-700 shadow-sm">
-            <h3 class="text-xs text-slate-400 uppercase tracking-widest mb-2">Téléchargements CV</h3>
-            <p class="text-3xl font-bold text-cyan-400">{{ stats.cvDownloads }}</p>
+          <div class="bg-white dark:bg-slate-800 p-6 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm">
+            <h3 class="text-xs text-slate-500 dark:text-slate-400 uppercase tracking-widest mb-2">Téléchargements CV</h3>
+            <p class="text-3xl font-bold text-cyan-600 dark:text-cyan-400">{{ stats.cvDownloads }}</p>
           </div>
-          <div class="bg-slate-800 p-6 rounded-2xl border border-slate-700 shadow-sm">
-            <h3 class="text-xs text-slate-400 uppercase tracking-widest mb-2">Partenariats</h3>
-            <p class="text-3xl font-bold text-emerald-400">{{ stats.contracts }}</p>
+          <div class="bg-white dark:bg-slate-800 p-6 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm">
+            <h3 class="text-xs text-slate-500 dark:text-slate-400 uppercase tracking-widest mb-2">Partenariats</h3>
+            <p class="text-3xl font-bold text-emerald-600 dark:text-emerald-400">{{ stats.contracts }}</p>
           </div>
-          <div class="bg-slate-800 p-6 rounded-2xl border border-slate-700 shadow-sm">
-            <h3 class="text-xs text-slate-400 uppercase tracking-widest mb-2">Nouvelles demandes</h3>
-            <p class="text-3xl font-bold text-amber-400">{{ stats.contacts }}</p>
+          <div class="bg-white dark:bg-slate-800 p-6 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm">
+            <h3 class="text-xs text-slate-500 dark:text-slate-400 uppercase tracking-widest mb-2">Nouvelles demandes</h3>
+            <p class="text-3xl font-bold text-amber-600 dark:text-amber-400">{{ stats.contacts }}</p>
           </div>
         </div>
       </div>
@@ -83,32 +83,32 @@ const showDetails = (title: string, data: any, isPartnership: boolean = false) =
       <!-- LISTE DES TELECHARGEMENTS CV -->
       <div>
         <h2 class="text-xl font-semibold text-slate-900 dark:text-slate-100 mb-4">Demandes de CV récentes</h2>
-        <div class="bg-slate-800 rounded-2xl border border-slate-700 overflow-x-auto">
-          <table class="w-full text-left text-sm">
-            <thead class="bg-slate-800/50 text-slate-400 border-b border-slate-700">
+        <div class="bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 overflow-x-auto shadow-sm">
+          <table class="w-full text-left text-sm whitespace-nowrap md:whitespace-normal">
+            <thead class="bg-slate-50 dark:bg-slate-800/50 text-slate-500 dark:text-slate-400 border-b border-slate-200 dark:border-slate-700">
               <tr>
-                <th class="px-6 py-4 font-medium">Nom</th>
-                <th class="px-6 py-4 font-medium">Contact</th>
-                <th class="px-6 py-4 font-medium">Motif</th>
-                <th class="px-6 py-4 font-medium">Date</th>
-                <th class="px-6 py-4 font-medium text-right">Actions</th>
+                <th class="px-4 py-3 md:px-6 md:py-4 font-semibold">Nom</th>
+                <th class="px-4 py-3 md:px-6 md:py-4 font-semibold">Contact</th>
+                <th class="px-4 py-3 md:px-6 md:py-4 font-semibold hidden sm:table-cell">Motif</th>
+                <th class="px-4 py-3 md:px-6 md:py-4 font-semibold">Date</th>
+                <th class="px-4 py-3 md:px-6 md:py-4 font-semibold text-right">Actions</th>
               </tr>
             </thead>
-            <tbody class="divide-y divide-slate-700/50">
-              <tr v-for="req in cvRequests" :key="req.id" class="hover:bg-slate-700/30 transition-colors">
-                <td class="px-6 py-4 font-medium text-slate-900 dark:text-slate-100">{{ req.name }}</td>
-                <td class="px-6 py-4">
-                  <div class="text-slate-200">{{ req.email }}</div>
-                  <div class="text-xs text-slate-400">{{ req.phone }}</div>
+            <tbody class="divide-y divide-slate-200 dark:divide-slate-700/50">
+              <tr v-for="req in cvRequests" :key="req.id" class="hover:bg-slate-50 dark:hover:bg-slate-700/30 transition-colors">
+                <td class="px-4 py-3 md:px-6 md:py-4 font-medium text-slate-900 dark:text-slate-100">{{ req.name }}</td>
+                <td class="px-4 py-3 md:px-6 md:py-4">
+                  <div class="text-slate-700 dark:text-slate-200">{{ req.email }}</div>
+                  <div class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">{{ req.phone }}</div>
                 </td>
-                <td class="px-6 py-4 text-slate-400 italic">"{{ req.motive }}"</td>
-                <td class="px-6 py-4 text-slate-400 text-xs">{{ new Date(req.created_at).toLocaleDateString('fr-FR', { day: '2-digit', month: '2-digit', year: 'numeric' }) }}</td>
-                <td class="px-6 py-4 text-right">
-                  <button @click="showDetails('Détails de la demande', req, false)" class="text-violet-400 hover:text-violet-300 font-medium text-sm transition-colors">Détails</button>
+                <td class="px-4 py-3 md:px-6 md:py-4 text-slate-500 dark:text-slate-400 italic hidden sm:table-cell">"{{ req.motive }}"</td>
+                <td class="px-4 py-3 md:px-6 md:py-4 text-slate-500 dark:text-slate-400 text-xs">{{ new Date(req.created_at).toLocaleDateString('fr-FR', { day: '2-digit', month: '2-digit', year: 'numeric' }) }}</td>
+                <td class="px-4 py-3 md:px-6 md:py-4 text-right">
+                  <button @click="showDetails('Détails de la demande', req, false)" class="text-violet-600 dark:text-violet-400 hover:text-violet-700 dark:hover:text-violet-300 font-medium text-sm transition-colors bg-violet-50 dark:bg-violet-900/30 px-3 py-1.5 rounded-lg">Détails</button>
                 </td>
               </tr>
               <tr v-if="cvRequests.length === 0">
-                <td colspan="5" class="px-6 py-8 text-center text-slate-500">Aucun téléchargement pour le moment.</td>
+                <td colspan="5" class="px-6 py-8 text-center text-slate-500 dark:text-slate-400">Aucun téléchargement pour le moment.</td>
               </tr>
             </tbody>
           </table>
@@ -118,36 +118,36 @@ const showDetails = (title: string, data: any, isPartnership: boolean = false) =
       <!-- LISTE DES PARTENARIATS -->
       <div>
         <h2 class="text-xl font-semibold text-slate-900 dark:text-slate-100 mb-4">Propositions de Partenariats récentes</h2>
-        <div class="bg-slate-800 rounded-2xl border border-slate-700 overflow-x-auto">
-          <table class="w-full text-left text-sm">
-            <thead class="bg-slate-800/50 text-slate-400 border-b border-slate-700">
+        <div class="bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 overflow-x-auto shadow-sm">
+          <table class="w-full text-left text-sm whitespace-nowrap md:whitespace-normal">
+            <thead class="bg-slate-50 dark:bg-slate-800/50 text-slate-500 dark:text-slate-400 border-b border-slate-200 dark:border-slate-700">
               <tr>
-                <th class="px-6 py-4 font-medium">Entreprise</th>
-                <th class="px-6 py-4 font-medium">Contact</th>
-                <th class="px-6 py-4 font-medium">Type</th>
-                <th class="px-6 py-4 font-medium">Message</th>
-                <th class="px-6 py-4 font-medium">Date</th>
-                <th class="px-6 py-4 font-medium text-right">Actions</th>
+                <th class="px-4 py-3 md:px-6 md:py-4 font-semibold">Entreprise</th>
+                <th class="px-4 py-3 md:px-6 md:py-4 font-semibold">Contact</th>
+                <th class="px-4 py-3 md:px-6 md:py-4 font-semibold">Type</th>
+                <th class="px-4 py-3 md:px-6 md:py-4 font-semibold hidden sm:table-cell">Message</th>
+                <th class="px-4 py-3 md:px-6 md:py-4 font-semibold">Date</th>
+                <th class="px-4 py-3 md:px-6 md:py-4 font-semibold text-right">Actions</th>
               </tr>
             </thead>
-            <tbody class="divide-y divide-slate-700/50">
-              <tr v-for="part in partnerships" :key="part.id" class="hover:bg-slate-700/30 transition-colors">
-                <td class="px-6 py-4 font-medium text-slate-900 dark:text-slate-100">{{ part.company }}</td>
-                <td class="px-6 py-4">
-                  <div class="text-slate-200">{{ part.contact_email }}</div>
-                  <div class="text-xs text-slate-400">{{ part.contact_phone }}</div>
+            <tbody class="divide-y divide-slate-200 dark:divide-slate-700/50">
+              <tr v-for="part in partnerships" :key="part.id" class="hover:bg-slate-50 dark:hover:bg-slate-700/30 transition-colors">
+                <td class="px-4 py-3 md:px-6 md:py-4 font-medium text-slate-900 dark:text-slate-100">{{ part.company }}</td>
+                <td class="px-4 py-3 md:px-6 md:py-4">
+                  <div class="text-slate-700 dark:text-slate-200">{{ part.contact_email }}</div>
+                  <div class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">{{ part.contact_phone }}</div>
                 </td>
-                <td class="px-6 py-4">
-                  <span class="px-2 py-1 bg-violet-900/40 text-violet-300 rounded text-xs border border-violet-700/50">{{ part.type }}</span>
+                <td class="px-4 py-3 md:px-6 md:py-4">
+                  <span class="px-2 py-1 bg-violet-100 dark:bg-violet-900/40 text-violet-700 dark:text-violet-300 rounded text-xs border border-violet-200 dark:border-violet-700/50">{{ part.type }}</span>
                 </td>
-                <td class="px-6 py-4 text-slate-400 italic max-w-xs truncate" :title="part.message">"{{ part.message }}"</td>
-                <td class="px-6 py-4 text-slate-400 text-xs">{{ new Date(part.created_at).toLocaleDateString('fr-FR', { day: '2-digit', month: '2-digit', year: 'numeric' }) }}</td>
-                <td class="px-6 py-4 text-right">
-                  <button @click="showDetails('Détails de la proposition', part, true)" class="text-violet-400 hover:text-violet-300 font-medium text-sm transition-colors">Détails</button>
+                <td class="px-4 py-3 md:px-6 md:py-4 text-slate-500 dark:text-slate-400 italic max-w-[150px] md:max-w-xs truncate hidden sm:table-cell" :title="part.message">"{{ part.message }}"</td>
+                <td class="px-4 py-3 md:px-6 md:py-4 text-slate-500 dark:text-slate-400 text-xs">{{ new Date(part.created_at).toLocaleDateString('fr-FR', { day: '2-digit', month: '2-digit', year: 'numeric' }) }}</td>
+                <td class="px-4 py-3 md:px-6 md:py-4 text-right">
+                  <button @click="showDetails('Détails de la proposition', part, true)" class="text-violet-600 dark:text-violet-400 hover:text-violet-700 dark:hover:text-violet-300 font-medium text-sm transition-colors bg-violet-50 dark:bg-violet-900/30 px-3 py-1.5 rounded-lg">Détails</button>
                 </td>
               </tr>
               <tr v-if="partnerships.length === 0">
-                <td colspan="6" class="px-6 py-8 text-center text-slate-500">Aucune proposition pour le moment.</td>
+                <td colspan="6" class="px-6 py-8 text-center text-slate-500 dark:text-slate-400">Aucune proposition pour le moment.</td>
               </tr>
             </tbody>
           </table>

@@ -140,22 +140,22 @@ const confirmAction = (message: string, onConfirm: () => void) => {
           </form>
         </div>
 
-        <div class="lg:col-span-2 bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-700 overflow-x-auto text-slate-900 dark:text-slate-100">
-          <table class="w-full text-left text-sm">
-            <thead class="bg-slate-50 dark:bg-slate-800/50 text-slate-500">
+        <div class="lg:col-span-2 bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-700 overflow-x-auto text-slate-900 dark:text-slate-100">
+          <table class="w-full text-left text-sm whitespace-nowrap md:whitespace-normal">
+            <thead class="bg-slate-50 dark:bg-slate-800/50 text-slate-500 dark:text-slate-400 border-b border-slate-200 dark:border-slate-700">
               <tr>
-                <th class="px-4 py-3 font-medium">Nom</th>
-                <th class="px-4 py-3 font-medium">Slug</th>
-                <th class="px-4 py-3 font-medium text-right">Actions</th>
+                <th class="px-4 py-3 font-semibold">Nom</th>
+                <th class="px-4 py-3 font-semibold hidden sm:table-cell">Slug</th>
+                <th class="px-4 py-3 font-semibold text-right">Actions</th>
               </tr>
             </thead>
-            <tbody class="divide-y divide-slate-100 dark:divide-slate-700/50">
-              <tr v-for="cat in categories" :key="cat.id" class="hover:bg-slate-50 dark:hover:bg-slate-800/50">
-                <td class="px-4 py-3 font-medium">{{ cat.name }}</td>
-                <td class="px-4 py-3 text-slate-500">{{ cat.slug }}</td>
-                <td class="px-4 py-3 text-right flex justify-end gap-2">
-                  <button @click="editCat(cat)" class="text-blue-500 hover:underline">Éditer</button>
-                  <button @click="deleteCat(cat.id)" class="text-red-500 hover:underline">Supprimer</button>
+            <tbody class="divide-y divide-slate-200 dark:divide-slate-700/50">
+              <tr v-for="cat in categories" :key="cat.id" class="hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors">
+                <td class="px-4 py-3 font-medium text-slate-900 dark:text-slate-100">{{ cat.name }}</td>
+                <td class="px-4 py-3 text-slate-500 dark:text-slate-400 hidden sm:table-cell">{{ cat.slug }}</td>
+                <td class="px-4 py-3 text-right flex justify-end gap-3 items-center h-full">
+                  <button @click="editCat(cat)" class="text-violet-600 hover:text-violet-500 dark:text-violet-400 dark:hover:text-violet-300 font-medium text-sm transition-colors">Éditer</button>
+                  <button @click="deleteCat(cat.id)" class="text-red-600 hover:text-red-500 dark:text-red-400 dark:hover:text-red-300 font-medium text-sm transition-colors">Supprimer</button>
                 </td>
               </tr>
               <tr v-if="categories.length === 0">
@@ -220,34 +220,34 @@ const confirmAction = (message: string, onConfirm: () => void) => {
           </form>
         </div>
 
-        <div class="xl:col-span-2 bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-700 overflow-x-auto text-slate-900 dark:text-slate-100">
-          <table class="w-full text-left text-sm">
-            <thead class="bg-slate-50 dark:bg-slate-800/50 text-slate-500">
+        <div class="xl:col-span-2 bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-700 overflow-x-auto text-slate-900 dark:text-slate-100">
+          <table class="w-full text-left text-sm whitespace-nowrap md:whitespace-normal">
+            <thead class="bg-slate-50 dark:bg-slate-800/50 text-slate-500 dark:text-slate-400 border-b border-slate-200 dark:border-slate-700">
               <tr>
-                <th class="px-4 py-3 font-medium">Compétence</th>
-                <th class="px-4 py-3 font-medium">Catégorie</th>
-                <th class="px-4 py-3 font-medium">Niveau</th>
-                <th class="px-4 py-3 font-medium text-right">Actions</th>
+                <th class="px-4 py-3 font-semibold">Compétence</th>
+                <th class="px-4 py-3 font-semibold hidden sm:table-cell">Catégorie</th>
+                <th class="px-4 py-3 font-semibold">Niveau</th>
+                <th class="px-4 py-3 font-semibold text-right">Actions</th>
               </tr>
             </thead>
-            <tbody class="divide-y divide-slate-100 dark:divide-slate-700/50">
-              <tr v-for="item in skills" :key="item.id" class="hover:bg-slate-50 dark:hover:bg-slate-800/50">
-                <td class="px-4 py-3 font-medium flex items-center gap-2">
+            <tbody class="divide-y divide-slate-200 dark:divide-slate-700/50">
+              <tr v-for="item in skills" :key="item.id" class="hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors">
+                <td class="px-4 py-3 font-medium flex items-center gap-2 text-slate-900 dark:text-slate-100">
                   <span v-if="item.icon">{{ item.icon }}</span>
                   {{ item.name }}
                 </td>
-                <td class="px-4 py-3 text-slate-500">{{ item.category?.name || '---' }}</td>
+                <td class="px-4 py-3 text-slate-500 dark:text-slate-400 hidden sm:table-cell">{{ item.category?.name || '---' }}</td>
                 <td class="px-4 py-3">
                   <div class="flex items-center gap-2">
-                    <div class="w-full bg-slate-200 rounded-full h-2 dark:bg-slate-700 max-w-[80px]">
-                      <div class="bg-violet-600 h-2 rounded-full" :style="{ width: item.proficiency + '%' }"></div>
+                    <div class="w-full bg-slate-200 dark:bg-slate-700 rounded-full h-2 max-w-[80px]">
+                      <div class="bg-violet-600 dark:bg-violet-500 h-2 rounded-full" :style="{ width: item.proficiency + '%' }"></div>
                     </div>
-                    <span class="text-xs text-slate-500">{{ item.proficiency }}%</span>
+                    <span class="text-xs text-slate-500 dark:text-slate-400">{{ item.proficiency }}%</span>
                   </div>
                 </td>
-                <td class="px-4 py-3 text-right flex justify-end gap-2">
-                  <button @click="editSkill(item)" class="text-blue-500 hover:underline">Éditer</button>
-                  <button @click="deleteSkill(item.id)" class="text-red-500 hover:underline">Supprimer</button>
+                <td class="px-4 py-3 text-right flex justify-end gap-3 items-center h-full">
+                  <button @click="editSkill(item)" class="text-violet-600 hover:text-violet-500 dark:text-violet-400 dark:hover:text-violet-300 font-medium text-sm transition-colors">Éditer</button>
+                  <button @click="deleteSkill(item.id)" class="text-red-600 hover:text-red-500 dark:text-red-400 dark:hover:text-red-300 font-medium text-sm transition-colors">Supprimer</button>
                 </td>
               </tr>
               <tr v-if="skills.length === 0">

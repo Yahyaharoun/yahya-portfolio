@@ -115,39 +115,39 @@ const confirmAction = (message: string, onConfirm: () => void) => {
         </div>
 
         <div class="bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-700 overflow-x-auto text-slate-900 dark:text-slate-100">
-          <table class="w-full text-left text-sm">
-            <thead class="bg-slate-50 text-slate-500">
+          <table class="w-full text-left text-sm whitespace-nowrap md:whitespace-normal">
+            <thead class="bg-slate-50 dark:bg-slate-800/50 text-slate-500 dark:text-slate-400 border-b border-slate-200 dark:border-slate-700">
               <tr>
-                <th class="px-4 py-3 font-medium">Partenaire</th>
-                <th class="px-4 py-3 font-medium">Description</th>
-                <th class="px-4 py-3 font-medium text-right">Actions</th>
+                <th class="px-4 py-3 font-semibold">Partenaire</th>
+                <th class="px-4 py-3 font-semibold hidden sm:table-cell">Description</th>
+                <th class="px-4 py-3 font-semibold text-right">Actions</th>
               </tr>
             </thead>
-            <tbody class="divide-y divide-slate-100">
-              <tr v-for="item in items" :key="item.id" class="hover:bg-slate-50">
+            <tbody class="divide-y divide-slate-200 dark:divide-slate-700/50">
+              <tr v-for="item in items" :key="item.id" class="hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors">
                 <td class="px-4 py-3">
                   <div class="flex items-center gap-3">
                     <img v-if="item.logo_path" :src="'/storage/' + item.logo_path" class="h-10 w-10 object-cover rounded shadow-sm">
                     <div>
-                      <div class="font-medium">{{ item.company }}</div>
-                      <a v-if="item.website" :href="item.website" target="_blank" class="text-xs text-blue-500 hover:underline">Lien externe</a>
+                      <div class="font-medium text-slate-900 dark:text-slate-100">{{ item.company }}</div>
+                      <a v-if="item.website" :href="item.website" target="_blank" class="text-xs text-violet-600 hover:text-violet-500 dark:text-violet-400 dark:hover:text-violet-300 transition-colors">Lien externe</a>
                     </div>
                   </div>
                 </td>
-                <td class="px-4 py-3">
-                  <div class="text-xs text-slate-500 truncate max-w-[200px] mb-1" :title="item.message">{{ item.message }}</div>
-                  <div class="flex flex-wrap gap-1">
+                <td class="px-4 py-3 hidden sm:table-cell">
+                  <div class="text-xs text-slate-600 dark:text-slate-400 truncate max-w-[200px] mb-1.5" :title="item.message">{{ item.message }}</div>
+                  <div class="flex flex-wrap gap-1.5">
                     <span class="text-[10px] px-2 py-0.5 rounded-full bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-600">{{ item.status === 'new' ? 'Nouveau' : (item.status === 'in_progress' ? 'En cours' : (item.status === 'treated' ? 'Traité' : 'Rejeté')) }}</span>
-                    <span v-if="!item.contact_email && !item.contact_phone" class="text-[10px] px-2 py-0.5 rounded-full bg-blue-100 text-blue-700 dark:bg-blue-900/40 dark:text-blue-300 border border-blue-200 dark:border-blue-800">Ajouté par moi</span>
+                    <span v-if="!item.contact_email && !item.contact_phone" class="text-[10px] px-2 py-0.5 rounded-full bg-cyan-100 text-cyan-700 dark:bg-cyan-900/40 dark:text-cyan-300 border border-cyan-200 dark:border-cyan-800">Ajouté par moi</span>
                     <span v-else class="text-[10px] px-2 py-0.5 rounded-full bg-amber-100 text-amber-700 dark:bg-amber-900/40 dark:text-amber-300 border border-amber-200 dark:border-amber-800">Proposé</span>
                   </div>
-                  <div v-if="item.contact_email || item.contact_phone" class="text-[10px] text-slate-400 mt-1">
+                  <div v-if="item.contact_email || item.contact_phone" class="text-[10px] text-slate-500 dark:text-slate-400 mt-1.5">
                     Contact: {{ item.contact_email }} {{ item.contact_phone ? ' / ' + item.contact_phone : '' }}
                   </div>
                 </td>
-                <td class="px-4 py-3 text-right flex justify-end gap-2 items-center h-full mt-2">
-                  <button @click="edit(item)" class="text-blue-500 hover:underline">Éditer</button>
-                  <button @click="deleteItem(item.id)" class="text-red-500 hover:underline">Supprimer</button>
+                <td class="px-4 py-3 text-right flex justify-end gap-3 items-center h-full mt-2">
+                  <button @click="edit(item)" class="text-violet-600 hover:text-violet-500 dark:text-violet-400 dark:hover:text-violet-300 font-medium text-sm transition-colors">Éditer</button>
+                  <button @click="deleteItem(item.id)" class="text-red-600 hover:text-red-500 dark:text-red-400 dark:hover:text-red-300 font-medium text-sm transition-colors">Supprimer</button>
                 </td>
               </tr>
               <tr v-if="items.length === 0">
