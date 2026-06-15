@@ -8,7 +8,7 @@ use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Cookie;
 use App\Services\TwilioSmsService;
 
-class OtpVerificationController extends Controller
+class OtpVerificationController
 {
     /**
      * Simule l'envoi d'un OTP par Email ou SMS.
