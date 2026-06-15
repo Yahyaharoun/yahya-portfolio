@@ -11,8 +11,9 @@ class AnalyticsController
 {
     public function index()
     {
-        // Stats par mois pour les CV downloads
+        // Stats par mois pour les CV downloads (Filtré par IP locale)
         $cvByMonth = DB::table('cv_downloads')
+            ->whereNotIn('ip_address', ['127.0.0.1', '::1'])
             ->selectRaw("TO_CHAR(created_at, 'YYYY-MM') as month, count(*) as total")
             ->groupBy('month')
             ->orderBy('month', 'desc')
@@ -36,8 +37,9 @@ class AnalyticsController
             ->limit(20)
             ->get();
 
-        // Motifs de demande CV
+        // Motifs de demande CV (Filtré par IP locale)
         $cvMotives = DB::table('cv_downloads')
+            ->whereNotIn('ip_address', ['127.0.0.1', '::1'])
             ->selectRaw("motive, count(*) as total")
             ->groupBy('motive')
             ->orderByDesc('total')
@@ -49,7 +51,7 @@ class AnalyticsController
             'pageVisits' => $pageVisits,
             'cvMotives' => $cvMotives,
             'totals' => [
-                'cvDownloads' => CvDownload::count(),
+                'cvDownloads' => DB::table('cv_downloads')->whereNotIn('ip_address', ['127.0.0.1', '::1'])->count(),
                 'partnerships' => Partnership::count(),
                 'totalVisits' => DB::table('page_visits')->sum('visit_count'),
                 'uniqueVisitors' => DB::table('page_visits')->sum('unique_visitors'),

@@ -23,25 +23,35 @@ class OtpVerificationController extends Controller
 
         $identifier = $request->email ?? $request->phone;
         
-        // Générer un code à 6 chiffres
-        $code = str_pad(random_int(0, 999999), 6, '0', STR_PAD_LEFT);
+        try {
+            // Générer un code à 6 chiffres
+            $code = str_pad(random_int(0, 999999), 6, '0', STR_PAD_LEFT);
 
-        // Stocker en cache pour 10 minutes
-        Cache::put("otp_{$identifier}", $code, now()->addMinutes(10));
+            // Stocker en cache pour 10 minutes
+            Cache::put("otp_{$identifier}", $code, now()->addMinutes(10));
 
-        // Envoi de l'email avec la classe Mailable
-        if (filter_var($identifier, FILTER_VALIDATE_EMAIL)) {
-            try {
-                \Illuminate\Support\Facades\Mail::to($identifier)->send(new \App\Mail\OtpMail($code));
-            } catch (\Exception $e) {
-                \Log::error("Erreur Envoi Email OTP: " . $e->getMessage());
-                return response()->json(['error' => "Erreur d'envoi d'email. Si vous utilisez Resend (gratuit), vous ne pouvez envoyer des emails qu'à votre propre adresse email vérifiée."], 500);
+            // Envoi de l'email avec la classe Mailable
+            if (filter_var($identifier, FILTER_VALIDATE_EMAIL)) {
+                try {
+                    \Illuminate\Support\Facades\Mail::to($identifier)->send(new \App\Mail\OtpMail($code));
+                } catch (\Exception $e) {
+                    \Log::error("Erreur Envoi Email OTP: " . $e->getMessage());
+                    return response()->json(['error' => "Erreur d'envoi d'email. Vérifiez la configuration SMTP."], 500);
+                }
+            } else {
+                // Si c'est un numéro de téléphone, on utilise Twilio
+                try {
+                    $smsService = new TwilioSmsService();
+                    $smsService->sendOtp($identifier, $code);
+                    \Log::info("Code OTP SMS envoyé (ou tenté) via Twilio pour {$identifier}");
+                } catch (\Exception $e) {
+                    \Log::error("Erreur Envoi SMS OTP: " . $e->getMessage());
+                    return response()->json(['error' => "Erreur d'envoi SMS. Vérifiez la configuration Twilio."], 500);
+                }
             }
-        } else {
-            // Si c'est un numéro de téléphone, on utilise Twilio
-            $smsService = new TwilioSmsService();
-            $smsService->sendOtp($identifier, $code);
-            \Log::info("Code OTP SMS envoyé (ou tenté) via Twilio pour {$identifier}");
+        } catch (\Exception $e) {
+            \Log::error("Erreur globale OTP: " . $e->getMessage());
+            return response()->json(['error' => "Une erreur interne s'est produite lors de la génération du code."], 500);
         }
 
         return response()->json([

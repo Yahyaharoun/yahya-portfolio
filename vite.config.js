@@ -93,7 +93,7 @@ export default defineConfig({
                     },
                     // Stale-While-Revalidate for portfolio imagery, project screenshots, and media gallery assets
                     {
-                        urlPattern: /\.(?:png|jpg|jpeg|svg|gif|webp|ico)$/i,
+                        urlPattern: /\.(?:png|jpg|jpeg|svg|gif|webp|ico|mp3|wav)$/i,
                         handler: 'StaleWhileRevalidate',
                         options: {
                             cacheName: 'media-gallery-cache',

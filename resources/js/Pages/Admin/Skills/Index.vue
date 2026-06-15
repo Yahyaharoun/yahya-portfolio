@@ -109,7 +109,7 @@ const confirmAction = (message: string, onConfirm: () => void) => {
   <AuthenticatedLayout title="Gestion des Compétences">
     <main class="max-w-7xl mx-auto py-10 px-4 sm:px-6 lg:px-8">
       <div class="flex justify-between items-center mb-6">
-        <h2 class="text-2xl font-semibold">Gestion des Compétences</h2>
+        <h2 class="text-2xl font-semibold text-slate-900 dark:text-slate-100">Gestion des Compétences</h2>
         <div class="flex bg-slate-200 dark:bg-slate-800 p-1 rounded-lg">
           <button @click="activeTab = 'categories'" :class="['px-4 py-2 rounded-md text-sm font-medium transition-colors', activeTab === 'categories' ? 'bg-white dark:bg-slate-700 shadow-sm' : 'text-slate-500 hover:text-slate-700 dark:hover:text-slate-300']">Catégories</button>
           <button @click="activeTab = 'skills'" :class="['px-4 py-2 rounded-md text-sm font-medium transition-colors', activeTab === 'skills' ? 'bg-white dark:bg-slate-700 shadow-sm' : 'text-slate-500 hover:text-slate-700 dark:hover:text-slate-300']">Compétences</button>
@@ -119,7 +119,7 @@ const confirmAction = (message: string, onConfirm: () => void) => {
       <!-- ONGLET CATEGORIES -->
       <div v-if="activeTab === 'categories'" class="grid grid-cols-1 lg:grid-cols-3 gap-8">
         <div class="lg:col-span-1 bg-white dark:bg-slate-800 p-6 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-700 h-fit text-slate-900 dark:text-slate-100">
-          <h3 class="text-lg font-medium mb-4 text-slate-100">{{ editingCatId ? 'Modifier la catégorie' : 'Nouvelle catégorie' }}</h3>
+          <h3 class="text-lg font-medium mb-4 text-slate-900 dark:text-slate-100">{{ editingCatId ? 'Modifier la catégorie' : 'Nouvelle catégorie' }}</h3>
           <form @submit.prevent="submitCat" class="space-y-4">
             <div>
               <label class="block text-sm font-medium mb-1 text-slate-700 dark:text-slate-300">Nom de la catégorie</label>
@@ -169,7 +169,7 @@ const confirmAction = (message: string, onConfirm: () => void) => {
       <!-- ONGLET COMPETENCES -->
       <div v-if="activeTab === 'skills'" class="grid grid-cols-1 xl:grid-cols-3 gap-8">
         <div class="xl:col-span-1 bg-white dark:bg-slate-800 p-6 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-700 h-fit text-slate-900 dark:text-slate-100">
-          <h3 class="text-lg font-medium mb-4 text-slate-100">{{ editingSkillId ? 'Modifier la compétence' : 'Ajouter une compétence' }}</h3>
+          <h3 class="text-lg font-medium mb-4 text-slate-900 dark:text-slate-100">{{ editingSkillId ? 'Modifier la compétence' : 'Ajouter une compétence' }}</h3>
           
           <div v-if="categories.length === 0" class="p-4 bg-yellow-50 dark:bg-yellow-900/30 text-yellow-600 dark:text-yellow-400 rounded-lg mb-4 text-sm">
             ⚠️ Vous devez d'abord créer au moins une catégorie dans l'onglet "Catégories".

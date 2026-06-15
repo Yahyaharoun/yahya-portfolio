@@ -59,7 +59,7 @@ const showDetails = (title: string, data: any, isPartnership: boolean = false) =
 
       <!-- MODULE ANALYTICS GLOBAL -->
       <div>
-        <h2 class="text-xl font-semibold text-slate-100 mb-4">Vue d'ensemble</h2>
+        <h2 class="text-xl font-semibold text-slate-900 dark:text-slate-100 mb-4">Vue d'ensemble</h2>
         <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4">
           <div class="bg-slate-800 p-6 rounded-2xl border border-slate-700 shadow-sm">
             <h3 class="text-xs text-slate-400 uppercase tracking-widest mb-2">Visiteurs Uniques</h3>
@@ -82,7 +82,7 @@ const showDetails = (title: string, data: any, isPartnership: boolean = false) =
 
       <!-- LISTE DES TELECHARGEMENTS CV -->
       <div>
-        <h2 class="text-xl font-semibold text-slate-100 mb-4">Demandes de CV récentes</h2>
+        <h2 class="text-xl font-semibold text-slate-900 dark:text-slate-100 mb-4">Demandes de CV récentes</h2>
         <div class="bg-slate-800 rounded-2xl border border-slate-700 overflow-x-auto">
           <table class="w-full text-left text-sm">
             <thead class="bg-slate-800/50 text-slate-400 border-b border-slate-700">
@@ -96,7 +96,7 @@ const showDetails = (title: string, data: any, isPartnership: boolean = false) =
             </thead>
             <tbody class="divide-y divide-slate-700/50">
               <tr v-for="req in cvRequests" :key="req.id" class="hover:bg-slate-700/30 transition-colors">
-                <td class="px-6 py-4 font-medium text-slate-100">{{ req.name }}</td>
+                <td class="px-6 py-4 font-medium text-slate-900 dark:text-slate-100">{{ req.name }}</td>
                 <td class="px-6 py-4">
                   <div class="text-slate-200">{{ req.email }}</div>
                   <div class="text-xs text-slate-400">{{ req.phone }}</div>
@@ -117,7 +117,7 @@ const showDetails = (title: string, data: any, isPartnership: boolean = false) =
 
       <!-- LISTE DES PARTENARIATS -->
       <div>
-        <h2 class="text-xl font-semibold text-slate-100 mb-4">Propositions de Partenariats récentes</h2>
+        <h2 class="text-xl font-semibold text-slate-900 dark:text-slate-100 mb-4">Propositions de Partenariats récentes</h2>
         <div class="bg-slate-800 rounded-2xl border border-slate-700 overflow-x-auto">
           <table class="w-full text-left text-sm">
             <thead class="bg-slate-800/50 text-slate-400 border-b border-slate-700">
@@ -132,7 +132,7 @@ const showDetails = (title: string, data: any, isPartnership: boolean = false) =
             </thead>
             <tbody class="divide-y divide-slate-700/50">
               <tr v-for="part in partnerships" :key="part.id" class="hover:bg-slate-700/30 transition-colors">
-                <td class="px-6 py-4 font-medium text-slate-100">{{ part.company }}</td>
+                <td class="px-6 py-4 font-medium text-slate-900 dark:text-slate-100">{{ part.company }}</td>
                 <td class="px-6 py-4">
                   <div class="text-slate-200">{{ part.contact_email }}</div>
                   <div class="text-xs text-slate-400">{{ part.contact_phone }}</div>

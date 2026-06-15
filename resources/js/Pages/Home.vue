@@ -14,6 +14,8 @@ import CvModal from '@/Components/CvModal.vue'
 import { useI18n } from 'vue-i18n'
 import { VueTelInput } from 'vue-tel-input'
 import 'vue-tel-input/vue-tel-input.css'
+import axios from 'axios'
+import { playSuccessSound } from '../utils/audio'
 
 const { t } = useI18n()
 const cvModal = ref<InstanceType<typeof CvModal> | null>(null)
@@ -26,14 +28,81 @@ const form = useForm({
   message: ''
 })
 
-const submitPartnership = () => {
-  form.post('/partnerships', {
-    preserveScroll: true,
-    onSuccess: () => {
-      form.reset()
-      showAlert(t('partnership.success'))
+const showOtpModal = ref(false)
+const otpCode = ref('')
+const otpError = ref('')
+const isOtpLoading = ref(false)
+
+const submitPartnership = async () => {
+  // 1. Send OTP
+  isOtpLoading.value = true
+  try {
+    await axios.post('/api/otp/send', {
+      name: form.company,
+      phone: form.phone,
+      email: form.email,
+      motive: 'partnership'
+    })
+    showOtpModal.value = true
+    otpError.value = ''
+    otpCode.value = ''
+  } catch (error: any) {
+    if (error.response && error.response.data) {
+      if (error.response.data.error) {
+        showAlert(error.response.data.error)
+      } else if (error.response.data.errors) {
+        const firstErrorKey = Object.keys(error.response.data.errors)[0];
+        showAlert(error.response.data.errors[firstErrorKey][0]);
+      } else if (error.response.data.message) {
+        showAlert(error.response.data.message);
+      } else {
+        showAlert("Erreur lors de l'envoi du code de vérification.")
+      }
+    } else {
+      showAlert("Une erreur de connexion s'est produite.")
     }
-  })
+  } finally {
+    isOtpLoading.value = false
+  }
+}
+
+const verifyAndSubmitPartnership = async () => {
+  isOtpLoading.value = true
+  otpError.value = ''
+  try {
+    await axios.post('/api/otp/verify', {
+      identifier: form.email || form.phone,
+      code: otpCode.value
+    })
+    
+    // OTP Success, submit form
+    showOtpModal.value = false
+    form.post('/partnerships', {
+      preserveScroll: true,
+      onSuccess: () => {
+        form.reset()
+        playSuccessSound()
+        showAlert(t('partnership.success'))
+      }
+    })
+  } catch (error: any) {
+    if (error.response && error.response.data) {
+      if (error.response.data.error) {
+        otpError.value = error.response.data.error
+      } else if (error.response.data.errors) {
+        const firstErrorKey = Object.keys(error.response.data.errors)[0];
+        otpError.value = error.response.data.errors[firstErrorKey][0];
+      } else if (error.response.data.message) {
+        otpError.value = error.response.data.message;
+      } else {
+        otpError.value = "Code invalide."
+      }
+    } else {
+      otpError.value = "Erreur de connexion."
+    }
+  } finally {
+    isOtpLoading.value = false
+  }
 }
 
 interface Props {
@@ -149,7 +218,7 @@ const showAlert = (message: string) => {
         </p>
       </div>
 
-      <div v-if="props.projects && props.projects.length > 0" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <div v-if="props.projects && props.projects.length > 0" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
         <div 
           v-for="project in props.projects" 
           :key="project.id"
@@ -353,11 +422,11 @@ const showAlert = (message: string) => {
             <div>
               <p class="text-xs font-semibold uppercase tracking-widest text-slate-400 dark:text-slate-500 mb-4">{{ t('partnership.partners_title') }}</p>
               
-              <div v-if="props.partners && props.partners.length > 0" class="flex flex-wrap gap-6 items-center justify-center sm:justify-start">
+              <div v-if="props.partners && props.partners.length > 0" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 items-center">
                 <div 
                   v-for="partner in props.partners" 
                   :key="partner.id"
-                  class="flex items-center justify-center p-3 bg-white dark:bg-slate-800 rounded-xl shadow-sm border border-slate-100 dark:border-slate-700 cursor-pointer hover:border-violet-300 dark:hover:border-violet-500/50 transition-colors"
+                  class="flex items-center justify-center p-3 bg-white dark:bg-slate-800 rounded-xl shadow-sm border border-slate-100 dark:border-slate-700 cursor-pointer hover:border-violet-300 dark:hover:border-violet-500/50 transition-colors w-full h-full"
                   :title="partner.company"
                 >
                   <img 
@@ -369,7 +438,7 @@ const showAlert = (message: string) => {
               </div>
               
               <!-- Fallback : logos génériques si aucun partenaire en base -->
-              <div v-else class="flex flex-wrap gap-4 opacity-70 grayscale hover:grayscale-0 transition-all duration-500">
+              <div v-else class="grid grid-cols-2 sm:grid-cols-4 gap-4 opacity-70 grayscale hover:grayscale-0 transition-all duration-500">
                 <div class="flex items-center justify-center p-3 bg-white dark:bg-slate-800 rounded-lg shadow-sm border border-slate-100 dark:border-slate-700">
                   <svg class="h-6 text-slate-800 dark:text-white" viewBox="0 0 100 30" fill="currentColor"><path d="M10 5h15v5H15v15h-5V5zm25 0h15v5H35v15h-5V5zM60 5a10 10 0 110 20 10 10 0 010-20zm0 5a5 5 0 100 10 5 5 0 000-10z"/></svg>
                 </div>
@@ -392,13 +461,13 @@ const showAlert = (message: string) => {
               <div class="space-y-6">
                 <div>
                   <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">{{ t('partnership.fields.company') }}</label>
-                  <input type="text" v-model="form.company" :placeholder="t('partnership.fields.company_placeholder')" class="w-full px-4 py-3 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 focus:ring-2 focus:ring-violet-500 focus:outline-none dark:text-white transition-colors" required />
+                  <input type="text" v-model="form.company" :placeholder="t('partnership.fields.company_placeholder')" class="w-full px-4 py-3 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 focus:ring-2 focus:ring-violet-500 focus:outline-none placeholder-slate-400 dark:placeholder-slate-500 dark:text-white transition-colors" required />
                   <p v-if="form.errors.company" class="mt-1 text-sm text-red-500">{{ form.errors.company }}</p>
                 </div>
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
                   <div>
                     <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">{{ t('partnership.fields.email') }}</label>
-                    <input type="email" v-model="form.email" :placeholder="t('partnership.fields.email_placeholder')" class="w-full px-4 py-3 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 focus:ring-2 focus:ring-violet-500 focus:outline-none dark:text-white transition-colors" required />
+                    <input type="email" v-model="form.email" :placeholder="t('partnership.fields.email_placeholder')" class="w-full px-4 py-3 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 focus:ring-2 focus:ring-violet-500 focus:outline-none placeholder-slate-400 dark:placeholder-slate-500 dark:text-white transition-colors" required />
                     <p v-if="form.errors.email" class="mt-1 text-sm text-red-500">{{ form.errors.email }}</p>
                   </div>
                   <div>
@@ -423,21 +492,49 @@ const showAlert = (message: string) => {
 
               <div>
                 <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">{{ t('partnership.fields.message') }}</label>
-                <textarea v-model="form.message" rows="4" :placeholder="t('partnership.fields.message_placeholder')" class="w-full px-4 py-3 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 focus:ring-2 focus:ring-violet-500 focus:outline-none dark:text-white transition-colors resize-none" required></textarea>
+                <textarea v-model="form.message" rows="4" :placeholder="t('partnership.fields.message_placeholder')" class="w-full px-4 py-3 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 focus:ring-2 focus:ring-violet-500 focus:outline-none placeholder-slate-400 dark:placeholder-slate-500 dark:text-white transition-colors resize-none" required></textarea>
                 <p v-if="form.errors.message" class="mt-1 text-sm text-red-500">{{ form.errors.message }}</p>
               </div>
 
-              <button type="submit" :disabled="form.processing" class="w-full sm:w-auto inline-flex justify-center items-center gap-2 px-8 py-3.5 rounded-xl bg-gradient-to-r from-violet-600 to-cyan-600 text-white font-semibold shadow-lg shadow-violet-500/20 hover:from-violet-500 hover:to-cyan-500 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-violet-500 hover:-translate-y-0.5 disabled:opacity-50 disabled:cursor-not-allowed">
-                {{ t('partnership.actions.submit') }}
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
-                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-8.707l-3-3a1 1 0 00-1.414 1.414L10.586 9H7a1 1 0 100 2h3.586l-1.293 1.293a1 1 0 101.414 1.414l3-3a1 1 0 000-1.414z" clip-rule="evenodd" />
-                </svg>
+              <button type="submit" :disabled="form.processing || isOtpLoading" class="w-full sm:w-auto inline-flex justify-center items-center gap-2 px-8 py-3.5 rounded-xl bg-gradient-to-r from-violet-600 to-cyan-600 text-white font-semibold shadow-lg shadow-violet-500/20 hover:from-violet-500 hover:to-cyan-500 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-violet-500 hover:-translate-y-0.5 disabled:opacity-50 disabled:cursor-not-allowed">
+                <span v-if="isOtpLoading" class="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin"></span>
+                <template v-else>
+                  {{ t('partnership.actions.submit') }}
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-8.707l-3-3a1 1 0 00-1.414 1.414L10.586 9H7a1 1 0 100 2h3.586l-1.293 1.293a1 1 0 101.414 1.414l3-3a1 1 0 000-1.414z" clip-rule="evenodd" />
+                  </svg>
+                </template>
               </button>
             </form>
           </div>
         </div>
       </div>
     </section>
+
+    <!-- Modal OTP Partenariat -->
+    <div v-if="showOtpModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/80 backdrop-blur-sm">
+      <div class="bg-white dark:bg-slate-900 w-full max-w-md rounded-2xl shadow-2xl border border-slate-200 dark:border-slate-800 p-6 sm:p-8 relative">
+        <button @click="showOtpModal = false" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
+        </button>
+        <h3 class="text-2xl font-bold text-slate-900 dark:text-white mb-2">Vérification de sécurité</h3>
+        <p class="text-slate-500 dark:text-slate-400 text-sm mb-6">Un code a été envoyé à <strong>{{ form.email || form.phone }}</strong>. Entrez-le ci-dessous pour confirmer votre proposition.</p>
+        
+        <form @submit.prevent="verifyAndSubmitPartnership" class="space-y-4">
+          <div v-if="otpError" class="p-3 bg-red-50 text-red-600 text-sm rounded-lg border border-red-100 dark:bg-red-900/30 dark:border-red-800/50 dark:text-red-400">
+            {{ otpError }}
+          </div>
+          <div>
+            <label class="block text-sm font-medium mb-2 text-slate-700 dark:text-slate-300">Code à 6 chiffres</label>
+            <input v-model="otpCode" type="text" maxlength="6" placeholder="123456" required class="w-full px-4 py-3 text-center tracking-widest text-2xl font-bold rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 focus:ring-2 focus:ring-violet-500 focus:outline-none dark:text-white" />
+          </div>
+          <button type="submit" :disabled="isOtpLoading || otpCode.length !== 6" class="w-full bg-gradient-to-r from-emerald-600 to-teal-600 text-white font-semibold py-3 rounded-xl hover:from-emerald-500 hover:to-teal-500 transition-all disabled:opacity-50 flex justify-center items-center gap-2">
+            <span v-if="isOtpLoading" class="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin"></span>
+            Valider la proposition
+          </button>
+        </form>
+      </div>
+    </div>
 
     <!-- Modal CV -->
     <CvModal ref="cvModal" />

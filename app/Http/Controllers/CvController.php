@@ -66,31 +66,21 @@ class CvController
     public function processDownload(Request $request)
     {
         $validated = $request->validate([
-            'email' => 'required|email'
+            'name' => 'required|string|max:255',
+            'phone' => 'required|string|max:20',
+            'email' => 'required|email|max:255',
+            'motive' => 'required|string',
         ]);
 
-        // Vérifier si la session a été marquée comme validée pour cet email
-        if ($request->session()->get('cv_verified_email') !== $validated['email']) {
-            return back()->withErrors(['email' => 'Accès non autorisé. Veuillez vérifier votre adresse email d\'abord.']);
-        }
-
-        $key = 'cv_otp_' . md5($validated['email']);
-        $data = Cache::get($key);
-
-        if ($data && isset($data['user_data'])) {
-            $userData = $data['user_data'];
-            CvDownload::create([
-                'name' => $userData['name'],
-                'phone' => $userData['phone'],
-                'email' => $userData['email'],
-                'motive' => $userData['motive'],
-                'ip_address' => $request->ip(),
-                'user_agent' => $request->userAgent(),
-            ]);
-
-            // Nettoyer le cache
-            Cache::forget($key);
-        }
+        // Le middleware otp.validated a déjà validé l'accès.
+        CvDownload::create([
+            'name' => $validated['name'],
+            'phone' => $validated['phone'],
+            'email' => $validated['email'],
+            'motive' => $validated['motive'],
+            'ip_address' => $request->ip(),
+            'user_agent' => $request->userAgent(),
+        ]);
 
         // Données dynamiques
         $profil = [ 

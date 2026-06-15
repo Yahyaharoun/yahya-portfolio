@@ -70,12 +70,12 @@ const confirmAction = (message: string, onConfirm: () => void) => {
 
   <AuthenticatedLayout title="Gestion des Certifications">
     <main class="max-w-7xl mx-auto py-10 px-4 sm:px-6 lg:px-8">
-      <h2 class="text-2xl font-semibold mb-6 text-slate-100">Gestion des Certifications</h2>
+      <h2 class="text-2xl font-semibold mb-6 text-slate-900 dark:text-slate-100">Gestion des Certifications</h2>
 
       <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
         
         <div class="bg-white dark:bg-slate-800 p-6 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-700 h-fit text-slate-900 dark:text-slate-100">
-          <h3 class="text-lg font-medium mb-4 text-slate-100">{{ editingId ? 'Modifier' : 'Ajouter' }}</h3>
+          <h3 class="text-lg font-medium mb-4 text-slate-900 dark:text-slate-100">{{ editingId ? 'Modifier' : 'Ajouter' }}</h3>
           <form @submit.prevent="submit" class="space-y-4">
             <div>
               <label class="block text-sm font-medium mb-1 text-slate-700 dark:text-slate-300">Titre de la certification</label>

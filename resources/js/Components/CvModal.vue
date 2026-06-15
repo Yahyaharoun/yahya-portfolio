@@ -3,6 +3,7 @@ import { ref } from 'vue'
 import { useForm } from '@inertiajs/vue3'
 import { useI18n } from 'vue-i18n'
 import axios from 'axios'
+import { playSuccessSound } from '../utils/audio'
 
 const isOpen = ref(false)
 const { t } = useI18n()
@@ -48,10 +49,20 @@ async function requestVerification() {
     })
     step.value = 2
   } catch (error: any) {
-    if (error.response && error.response.data && error.response.data.error) {
-      requestError.value = error.response.data.error
+    if (error.response && error.response.data) {
+      if (error.response.data.error) {
+        requestError.value = error.response.data.error
+      } else if (error.response.data.errors) {
+        // Handle Laravel validation errors (422)
+        const firstErrorKey = Object.keys(error.response.data.errors)[0];
+        requestError.value = error.response.data.errors[firstErrorKey][0];
+      } else if (error.response.data.message) {
+        requestError.value = error.response.data.message;
+      } else {
+        requestError.value = "Une erreur s'est produite lors de la demande du code."
+      }
     } else {
-      requestError.value = "Une erreur s'est produite lors de la demande du code."
+      requestError.value = "Une erreur de connexion s'est produite."
     }
   } finally {
     isLoading.value = false
@@ -70,7 +81,12 @@ async function verifyAndDownload() {
     
     // Verification successful, proceed to download via Axios to handle the binary PDF
     try {
-      const downloadResponse = await axios.post('/download-cv', { email: form.email }, { responseType: 'blob' })
+      const downloadResponse = await axios.post('/download-cv', { 
+        name: form.name,
+        phone: form.phone,
+        email: form.email,
+        motive: form.motive
+      }, { responseType: 'blob' })
       const url = window.URL.createObjectURL(new Blob([downloadResponse.data]))
       const link = document.createElement('a')
       link.href = url
@@ -78,16 +94,26 @@ async function verifyAndDownload() {
       document.body.appendChild(link)
       link.click()
       link.parentNode.removeChild(link)
+      playSuccessSound()
       closeModal()
     } catch (downloadError) {
       console.error('Download failed', downloadError)
       otpError.value = 'Erreur lors du téléchargement du CV.'
     }
   } catch (error: any) {
-    if (error.response && error.response.data && error.response.data.error) {
-      otpError.value = error.response.data.error
+    if (error.response && error.response.data) {
+      if (error.response.data.error) {
+        otpError.value = error.response.data.error
+      } else if (error.response.data.errors) {
+        const firstErrorKey = Object.keys(error.response.data.errors)[0];
+        otpError.value = error.response.data.errors[firstErrorKey][0];
+      } else if (error.response.data.message) {
+        otpError.value = error.response.data.message;
+      } else {
+        otpError.value = "Code de vérification invalide."
+      }
     } else {
-      otpError.value = "Code de vérification invalide."
+      otpError.value = "Erreur de connexion au serveur."
     }
   } finally {
     isLoading.value = false
@@ -111,7 +137,7 @@ defineExpose({ openModal })
         <h3 class="text-2xl font-bold text-slate-900 dark:text-white mb-2">{{ t('cv_tunnel.title') }}</h3>
         
         <p v-if="step === 1" class="text-slate-500 dark:text-slate-400 text-sm mb-6">{{ t('cv_tunnel.subtitle') }}</p>
-        <p v-else class="text-slate-500 dark:text-slate-400 text-sm mb-6">Un code de vérification a été envoyé à <strong>{{ form.email }}</strong>. Veuillez le saisir ci-dessous pour lancer le téléchargement.</p>
+        <p v-else class="text-slate-500 dark:text-slate-400 text-sm mb-6">{{ t('cv_tunnel.verification_sent') }} <strong>{{ form.email }}</strong>. {{ t('cv_tunnel.verification_instructions') }}</p>
 
         <!-- Etape 1: Formulaire -->
         <form v-if="step === 1" @submit.prevent="requestVerification" class="space-y-4">
@@ -141,7 +167,7 @@ defineExpose({ openModal })
           
           <button type="submit" :disabled="isLoading" class="w-full bg-gradient-to-r from-violet-600 to-cyan-600 text-white font-semibold py-3 rounded-xl hover:from-violet-500 hover:to-cyan-500 transition-all disabled:opacity-50 flex justify-center items-center gap-2">
             <span v-if="isLoading" class="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin"></span>
-            Vérifier mes informations
+            {{ t('cv_tunnel.verify_info') }}
           </button>
         </form>
 
@@ -152,7 +178,7 @@ defineExpose({ openModal })
           </div>
           
           <div>
-            <label class="block text-sm font-medium mb-2 text-slate-700 dark:text-slate-300">Code à 6 chiffres</label>
+            <label class="block text-sm font-medium mb-2 text-slate-700 dark:text-slate-300">{{ t('cv_tunnel.code_label') }}</label>
             <input v-model="otpCode" type="text" maxlength="6" placeholder="123456" required class="w-full px-4 py-3 text-center tracking-widest text-2xl font-bold rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 focus:ring-2 focus:ring-violet-500 focus:outline-none dark:text-white" />
           </div>
 
@@ -163,7 +189,7 @@ defineExpose({ openModal })
           
           <div class="text-center mt-4">
             <button type="button" @click="step = 1" class="text-sm text-slate-500 hover:text-violet-600 dark:hover:text-violet-400 transition-colors">
-              Modifier mes informations
+              {{ t('cv_tunnel.edit_info') }}
             </button>
           </div>
         </form>

@@ -110,6 +110,11 @@
     "preparing": "Preparing your document…",
     "success": "Your download will begin shortly.",
     "fallback_link": "Click here if the download does not start.",
+    "verification_sent": "A verification code has been sent to",
+    "verification_instructions": "Please enter it below to start the download.",
+    "code_label": "6-digit code",
+    "verify_info": "Verify my information",
+    "edit_info": "Edit my information",
     "motives": {
       "placeholder": "Select a reason...",
       "recruitment": "Recruitment",

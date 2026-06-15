@@ -6,7 +6,7 @@
     "projects": "Projets",
     "certifications": "Certifications",
     "gallery": "Galerie",
-    "contact": "Contrat",
+    "contact": "Contact",
     "contact_sub": "Réservé pour les contrats, partenariats…",
     "get_in_touch": "Me contacter"
   },
@@ -110,6 +110,11 @@
     "preparing": "Préparation du document…",
     "success": "Votre téléchargement démarrera dans un instant.",
     "fallback_link": "Cliquer ici si le téléchargement ne démarre pas.",
+    "verification_sent": "Un code de vérification a été envoyé à",
+    "verification_instructions": "Veuillez le saisir ci-dessous pour lancer le téléchargement.",
+    "code_label": "Code à 6 chiffres",
+    "verify_info": "Vérifier mes informations",
+    "edit_info": "Modifier mes informations",
     "motives": {
       "placeholder": "Sélectionnez un motif...",
       "recruitment": "Recrutement",

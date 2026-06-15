@@ -118,7 +118,7 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <div class="min-h-screen bg-slate-50 dark:bg-[#09090f] text-slate-900 dark:text-slate-100 antialiased transition-colors duration-300">
+  <div class="min-h-screen bg-slate-50 dark:bg-[#09090f] text-slate-900 dark:text-slate-100 antialiased overflow-x-hidden transition-colors duration-300">
 
     <!-- ── Scroll progress bar ─────────────────────────────────────────── -->
     <div
@@ -205,12 +205,12 @@ onUnmounted(() => {
             <!-- Language toggle -->
             <button
               type="button"
-              class="inline-flex items-center gap-1.5 px-2 py-1.5 rounded-lg border border-slate-200 dark:border-slate-700 text-xs font-bold tracking-widest text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 hover:border-slate-300 dark:hover:border-slate-500 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-violet-500"
+              class="inline-flex items-center gap-1.5 px-2 py-1.5 rounded-lg border border-slate-200 dark:border-slate-700 text-xs font-bold tracking-widest text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 hover:border-slate-300 dark:hover:border-slate-500 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-violet-500 whitespace-nowrap"
               :aria-label="t('a11y.lang_switch')"
               @click="toggleLocale"
             >
               <span :class="locale === 'fr' ? 'text-violet-600 dark:text-violet-400' : 'text-slate-500'">FR</span>
-              <span class="text-slate-300 dark:text-slate-700">|</span>
+              <span class="text-slate-300 dark:text-slate-700">/</span>
               <span :class="locale === 'en' ? 'text-violet-600 dark:text-violet-400' : 'text-slate-500'">EN</span>
             </button>
 
