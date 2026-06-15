@@ -20,6 +20,10 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->alias([
             'otp.validated' => \App\Http\Middleware\EnsureOtpValidated::class,
         ]);
+        $middleware->validateCsrfTokens(except: [
+            '/api/*',
+            '/download-cv',
+        ]);
         $middleware->trustProxies(at: '*');
     })
     ->withExceptions(function (Exceptions $exceptions) {

@@ -16,10 +16,16 @@ class OtpVerificationController
      */
     public function send(Request $request)
     {
-        $request->validate([
+        $validator = \Illuminate\Support\Facades\Validator::make($request->all(), [
             'email' => 'required_without:phone|email|nullable',
             'phone' => 'required_without:email|string|nullable',
         ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'error' => $validator->errors()->first()
+            ], 422);
+        }
 
         $identifier = $request->email ?? $request->phone;
         
@@ -69,10 +75,16 @@ class OtpVerificationController
      */
     public function verify(Request $request)
     {
-        $request->validate([
+        $validator = \Illuminate\Support\Facades\Validator::make($request->all(), [
             'identifier' => 'required|string',
             'code' => 'required|string|size:6',
         ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'error' => $validator->errors()->first()
+            ], 422);
+        }
 
         $cachedCode = Cache::get("otp_{$request->identifier}");
 
