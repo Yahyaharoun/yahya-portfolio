@@ -3,7 +3,7 @@
 set -o errexit
 
 echo "Installing PHP dependencies..."
-composer install --no-dev --optimize-autoloader
+composer install --no-dev --optimize-autoloader --no-scripts
 
 echo "Installing Node dependencies..."
 npm ci
