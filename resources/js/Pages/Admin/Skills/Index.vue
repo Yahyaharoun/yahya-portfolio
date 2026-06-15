@@ -111,8 +111,8 @@ const confirmAction = (message: string, onConfirm: () => void) => {
       <div class="flex justify-between items-center mb-6">
         <h2 class="text-2xl font-semibold text-slate-900 dark:text-slate-100">Gestion des Compétences</h2>
         <div class="flex bg-slate-200 dark:bg-slate-800 p-1 rounded-lg">
-          <button @click="activeTab = 'categories'" :class="['px-4 py-2 rounded-md text-sm font-medium transition-colors', activeTab === 'categories' ? 'bg-white dark:bg-slate-700 shadow-sm' : 'text-slate-500 hover:text-slate-700 dark:hover:text-slate-300']">Catégories</button>
-          <button @click="activeTab = 'skills'" :class="['px-4 py-2 rounded-md text-sm font-medium transition-colors', activeTab === 'skills' ? 'bg-white dark:bg-slate-700 shadow-sm' : 'text-slate-500 hover:text-slate-700 dark:hover:text-slate-300']">Compétences</button>
+          <button @click="activeTab = 'categories'" :class="['px-4 py-2 rounded-md text-sm font-medium transition-colors', activeTab === 'categories' ? 'bg-white dark:bg-slate-700 text-slate-900 dark:text-white shadow-sm' : 'text-slate-500 hover:text-slate-700 dark:hover:text-slate-300']">Catégories</button>
+          <button @click="activeTab = 'skills'" :class="['px-4 py-2 rounded-md text-sm font-medium transition-colors', activeTab === 'skills' ? 'bg-white dark:bg-slate-700 text-slate-900 dark:text-white shadow-sm' : 'text-slate-500 hover:text-slate-700 dark:hover:text-slate-300']">Compétences</button>
         </div>
       </div>
 
@@ -123,17 +123,17 @@ const confirmAction = (message: string, onConfirm: () => void) => {
           <form @submit.prevent="submitCat" class="space-y-4">
             <div>
               <label class="block text-sm font-medium mb-1 text-slate-700 dark:text-slate-300">Nom de la catégorie</label>
-              <input v-model="catForm.name" type="text" class="w-full px-3 py-2 border rounded-lg dark:bg-slate-900 dark:border-slate-700 text-slate-900 dark:text-slate-100" required>
+              <input v-model="catForm.name" type="text" class="w-full px-3 py-2 border rounded-lg bg-slate-50 dark:bg-slate-900 border-slate-200 dark:border-slate-700 text-slate-900 dark:text-slate-100 focus:ring-2 focus:ring-violet-500 focus:outline-none" required>
             </div>
             <div>
               <label class="block text-sm font-medium mb-1 text-slate-700 dark:text-slate-300">Description</label>
-              <textarea v-model="catForm.description" rows="3" class="w-full px-3 py-2 border rounded-lg dark:bg-slate-900 dark:border-slate-700 text-slate-900 dark:text-slate-100"></textarea>
+              <textarea v-model="catForm.description" rows="3" class="w-full px-3 py-2 border rounded-lg bg-slate-50 dark:bg-slate-900 border-slate-200 dark:border-slate-700 text-slate-900 dark:text-slate-100 focus:ring-2 focus:ring-violet-500 focus:outline-none"></textarea>
             </div>
             <div class="flex gap-2">
               <button type="submit" class="px-4 py-2 bg-violet-600 text-white rounded-lg hover:bg-violet-700 transition" :disabled="catForm.processing">
                 {{ editingCatId ? 'Mettre à jour' : 'Enregistrer' }}
               </button>
-              <button v-if="editingCatId" type="button" @click="cancelEditCat" class="px-4 py-2 bg-slate-200 dark:bg-slate-700 rounded-lg hover:bg-slate-300 transition">
+              <button v-if="editingCatId" type="button" @click="cancelEditCat" class="px-4 py-2 bg-slate-200 dark:bg-slate-700 text-slate-900 dark:text-white rounded-lg hover:bg-slate-300 transition">
                 Annuler
               </button>
             </div>
@@ -178,22 +178,22 @@ const confirmAction = (message: string, onConfirm: () => void) => {
           <form v-else @submit.prevent="submitSkill" class="space-y-4">
             <div>
               <label class="block text-sm font-medium mb-1 text-slate-700 dark:text-slate-300">Catégorie</label>
-              <select v-model="skillForm.skill_category_id" class="w-full px-3 py-2 border rounded-lg dark:bg-slate-900 dark:border-slate-700 text-slate-900 dark:text-slate-100" required>
+              <select v-model="skillForm.skill_category_id" class="w-full px-3 py-2 border rounded-lg bg-slate-50 dark:bg-slate-900 border-slate-200 dark:border-slate-700 text-slate-900 dark:text-slate-100 focus:ring-2 focus:ring-violet-500 focus:outline-none" required>
                 <option v-for="cat in categories" :key="cat.id" :value="cat.id">{{ cat.name }}</option>
               </select>
             </div>
             <div>
               <label class="block text-sm font-medium mb-1 text-slate-700 dark:text-slate-300">Nom</label>
-              <input v-model="skillForm.name" type="text" class="w-full px-3 py-2 border rounded-lg dark:bg-slate-900 dark:border-slate-700 text-slate-900 dark:text-slate-100" required>
+              <input v-model="skillForm.name" type="text" class="w-full px-3 py-2 border rounded-lg bg-slate-50 dark:bg-slate-900 border-slate-200 dark:border-slate-700 text-slate-900 dark:text-slate-100 focus:ring-2 focus:ring-violet-500 focus:outline-none" required>
             </div>
             <div class="grid grid-cols-2 gap-4">
               <div>
                 <label class="block text-sm font-medium mb-1 text-slate-700 dark:text-slate-300">Maîtrise (%)</label>
-                <input v-model="skillForm.proficiency" type="number" min="0" max="100" class="w-full px-3 py-2 border rounded-lg dark:bg-slate-900 dark:border-slate-700 text-slate-900 dark:text-slate-100" required>
+                <input v-model="skillForm.proficiency" type="number" min="0" max="100" class="w-full px-3 py-2 border rounded-lg bg-slate-50 dark:bg-slate-900 border-slate-200 dark:border-slate-700 text-slate-900 dark:text-slate-100 focus:ring-2 focus:ring-violet-500 focus:outline-none" required>
               </div>
               <div>
                 <label class="block text-sm font-medium mb-1 text-slate-700 dark:text-slate-300">Niveau</label>
-                <select v-model="skillForm.level" class="w-full px-3 py-2 border rounded-lg dark:bg-slate-900 dark:border-slate-700 text-slate-900 dark:text-slate-100" required>
+                <select v-model="skillForm.level" class="w-full px-3 py-2 border rounded-lg bg-slate-50 dark:bg-slate-900 border-slate-200 dark:border-slate-700 text-slate-900 dark:text-slate-100 focus:ring-2 focus:ring-violet-500 focus:outline-none" required>
                   <option value="beginner">Débutant</option>
                   <option value="intermediate">Intermédiaire</option>
                   <option value="advanced">Avancé</option>
@@ -203,17 +203,17 @@ const confirmAction = (message: string, onConfirm: () => void) => {
             </div>
             <div>
               <label class="block text-sm font-medium mb-1 text-slate-700 dark:text-slate-300">Emoji (Icone, ex: 🐘, 🎨)</label>
-              <input v-model="skillForm.icon" type="text" maxlength="10" class="w-full px-3 py-2 border rounded-lg dark:bg-slate-900 dark:border-slate-700 text-slate-900 dark:text-slate-100">
+              <input v-model="skillForm.icon" type="text" maxlength="10" class="w-full px-3 py-2 border rounded-lg bg-slate-50 dark:bg-slate-900 border-slate-200 dark:border-slate-700 text-slate-900 dark:text-slate-100 focus:ring-2 focus:ring-violet-500 focus:outline-none">
             </div>
             <div>
               <label class="block text-sm font-medium mb-1 text-slate-700 dark:text-slate-300">Tags (séparés par des virgules)</label>
-              <input v-model="skillForm.tags" type="text" placeholder="REST, Vue, etc..." class="w-full px-3 py-2 border rounded-lg dark:bg-slate-900 dark:border-slate-700 text-slate-900 dark:text-slate-100">
+              <input v-model="skillForm.tags" type="text" placeholder="REST, Vue, etc..." class="w-full px-3 py-2 border rounded-lg bg-slate-50 dark:bg-slate-900 border-slate-200 dark:border-slate-700 text-slate-900 dark:text-slate-100 focus:ring-2 focus:ring-violet-500 focus:outline-none">
             </div>
             <div class="flex gap-2">
               <button type="submit" class="px-4 py-2 bg-violet-600 text-white rounded-lg hover:bg-violet-700 transition" :disabled="skillForm.processing">
                 {{ editingSkillId ? 'Mettre à jour' : 'Enregistrer' }}
               </button>
-              <button v-if="editingSkillId" type="button" @click="cancelEditSkill" class="px-4 py-2 bg-slate-200 dark:bg-slate-700 rounded-lg hover:bg-slate-300 transition">
+              <button v-if="editingSkillId" type="button" @click="cancelEditSkill" class="px-4 py-2 bg-slate-200 dark:bg-slate-700 text-slate-900 dark:text-white rounded-lg hover:bg-slate-300 transition">
                 Annuler
               </button>
             </div>
