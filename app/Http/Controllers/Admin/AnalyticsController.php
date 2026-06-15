@@ -11,9 +11,8 @@ class AnalyticsController
 {
     public function index()
     {
-        // Stats par mois pour les CV downloads (Filtré par IP locale)
+        // Stats par mois pour les CV downloads
         $cvByMonth = DB::table('cv_downloads')
-            ->whereNotIn('ip_address', ['127.0.0.1', '::1'])
             ->selectRaw("TO_CHAR(created_at, 'YYYY-MM') as month, count(*) as total")
             ->groupBy('month')
             ->orderBy('month', 'desc')
@@ -29,17 +28,25 @@ class AnalyticsController
             ->limit(12)
             ->get();
 
-        // Visites par page
+        // Visites par page (filtrage des assets et pages techniques)
         $pageVisits = DB::table('page_visits')
+            ->whereNot('path', 'like', 'storage/%')
+            ->whereNot('path', 'like', '%.html')
+            ->whereNot('path', 'like', '%.js')
+            ->whereNot('path', 'like', '%.css')
+            ->whereNot('path', 'like', '%.mp4')
+            ->whereNot('path', 'like', '%.png')
+            ->whereNot('path', 'like', '%.jpg')
+            ->where('path', '!=', 'ad')
+            ->where('path', '!=', 'admin') // optionally filter admin root
             ->select('path', DB::raw('SUM(visit_count) as total_visits'), DB::raw('SUM(unique_visitors) as unique_visitors'))
             ->groupBy('path')
             ->orderByDesc('total_visits')
-            ->limit(20)
+            ->limit(10)
             ->get();
 
-        // Motifs de demande CV (Filtré par IP locale)
+        // Motifs de demande CV
         $cvMotives = DB::table('cv_downloads')
-            ->whereNotIn('ip_address', ['127.0.0.1', '::1'])
             ->selectRaw("motive, count(*) as total")
             ->groupBy('motive')
             ->orderByDesc('total')
@@ -51,10 +58,20 @@ class AnalyticsController
             'pageVisits' => $pageVisits,
             'cvMotives' => $cvMotives,
             'totals' => [
-                'cvDownloads' => DB::table('cv_downloads')->whereNotIn('ip_address', ['127.0.0.1', '::1'])->count(),
+                'cvDownloads' => DB::table('cv_downloads')->count(),
                 'partnerships' => Partnership::count(),
-                'totalVisits' => DB::table('page_visits')->sum('visit_count'),
-                'uniqueVisitors' => DB::table('page_visits')->sum('unique_visitors'),
+                'totalVisits' => DB::table('page_visits')
+                    ->whereNot('path', 'like', 'storage/%')
+                    ->whereNot('path', 'like', '%.html')
+                    ->whereNot('path', 'like', '%.js')
+                    ->whereNot('path', 'like', '%.css')
+                    ->sum('visit_count'),
+                'uniqueVisitors' => DB::table('page_visits')
+                    ->whereNot('path', 'like', 'storage/%')
+                    ->whereNot('path', 'like', '%.html')
+                    ->whereNot('path', 'like', '%.js')
+                    ->whereNot('path', 'like', '%.css')
+                    ->sum('unique_visitors'),
             ]
         ]);
     }

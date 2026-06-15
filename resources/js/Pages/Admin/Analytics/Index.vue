@@ -22,6 +22,12 @@ const motifLabel: Record<string, string> = {
   other: '📌 Autre',
 }
 
+const getMotifLabel = (motive: string) => {
+  if (!motive) return '📌 Inconnu'
+  const key = motive.toLowerCase()
+  return motifLabel[key] ?? `📌 ${motive}`
+}
+
 const formatMonth = (m: string) => {
   if (!m) return '—'
   const [y, mo] = m.split('-')
@@ -31,6 +37,7 @@ const formatMonth = (m: string) => {
 
 const maxVisits = (arr: PageVisit[]) => arr.reduce((m, v) => Math.max(m, v.total_visits), 1)
 const maxMonth = (arr: MonthStat[]) => arr.reduce((m, v) => Math.max(m, v.total), 1)
+const maxMotives = (arr: MotiveStat[]) => arr.reduce((m, v) => Math.max(m, v.total), 1)
 </script>
 
 <template>
@@ -110,9 +117,14 @@ const maxMonth = (arr: MonthStat[]) => arr.reduce((m, v) => Math.max(m, v.total)
         <div class="bg-slate-800 rounded-2xl border border-slate-700 p-5">
           <h3 class="text-sm font-semibold text-slate-300 mb-4 uppercase tracking-widest">Motifs de demande CV</h3>
           <div class="space-y-3">
-            <div v-for="item in cvMotives" :key="item.motive" class="flex items-center justify-between">
-              <span class="text-sm text-slate-300">{{ motifLabel[item.motive] ?? item.motive }}</span>
-              <span class="px-3 py-1 rounded-full bg-amber-900/40 text-amber-300 text-xs font-bold border border-amber-700/40">{{ item.total }}</span>
+            <div v-for="item in cvMotives" :key="item.motive" class="flex flex-col gap-1">
+              <div class="flex items-center justify-between">
+                <span class="text-sm font-medium text-slate-300">{{ getMotifLabel(item.motive) }}</span>
+                <span class="text-xs font-bold text-amber-400">{{ item.total }}</span>
+              </div>
+              <div class="w-full bg-slate-700 rounded-full h-1.5 overflow-hidden">
+                <div class="h-full bg-amber-500 rounded-full" :style="{ width: (item.total / maxMotives(cvMotives) * 100) + '%' }"></div>
+              </div>
             </div>
             <p v-if="cvMotives.length === 0" class="text-slate-500 text-xs text-center py-4">Aucune donnée</p>
           </div>
