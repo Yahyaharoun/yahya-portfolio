@@ -173,9 +173,9 @@ async function installPwa() {
             <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-violet-500 to-cyan-500 flex items-center justify-center text-white font-bold text-sm flex-shrink-0 shadow-lg shadow-violet-500/25 group-hover:shadow-violet-500/50 transition-shadow">
               YH
             </div>
-            <div class="block">
-              <p class="text-sm font-bold text-slate-900 dark:text-slate-100 leading-none tracking-tight">Yahya Haroun</p>
-              <p class="text-[10px] sm:text-xs text-slate-500 dark:text-slate-400 mt-0.5 font-medium">Tech & Business</p>
+            <div class="flex flex-col justify-center">
+              <p class="text-xs sm:text-sm font-bold text-slate-900 dark:text-slate-100 leading-none tracking-tight whitespace-nowrap">Yahya Haroun</p>
+              <p class="text-[9px] sm:text-xs text-slate-500 dark:text-slate-400 mt-0.5 font-medium whitespace-nowrap">Tech & Business</p>
             </div>
           </Link>
 
