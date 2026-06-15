@@ -40,11 +40,10 @@ WITH CHECK (true);
 -- 3. Visitors Table (Analytics)
 ALTER TABLE visitors ENABLE ROW LEVEL SECURITY;
 
-CREATE POLICY "Allow anonymous inserts and selects on visitors"
+CREATE POLICY "Allow anonymous inserts on visitors"
 ON visitors
-FOR ALL 
+FOR INSERT 
 TO anon
-USING (true)
 WITH CHECK (true);
 
 CREATE POLICY "Allow full access for authenticated users on visitors"
@@ -57,9 +56,15 @@ WITH CHECK (true);
 -- 4. Page Visits Table (Analytics)
 ALTER TABLE page_visits ENABLE ROW LEVEL SECURITY;
 
-CREATE POLICY "Allow anonymous inserts, updates, and selects on page_visits"
+CREATE POLICY "Allow anonymous inserts on page_visits"
 ON page_visits
-FOR ALL 
+FOR INSERT 
+TO anon
+WITH CHECK (true);
+
+CREATE POLICY "Allow anonymous updates on page_visits"
+ON page_visits
+FOR UPDATE 
 TO anon
 USING (true)
 WITH CHECK (true);

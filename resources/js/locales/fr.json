@@ -175,7 +175,8 @@
     "title": "Mode Hors Ligne",
     "body": "Vous consultez des données en cache. La connexion a été interrompue.",
     "cache_notice": "Navigation sur les routes sauvegardées localement",
-    "queue_notice": "Les formulaires seront synchronisés à la reconnexion"
+    "queue_notice": "Les formulaires seront synchronisés à la reconnexion",
+    "sync_success": "Vos requêtes hors-ligne ont été envoyées avec succès !"
   },
   "a11y": {
     "close_menu": "Fermer le menu",

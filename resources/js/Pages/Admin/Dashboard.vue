@@ -83,7 +83,7 @@ const showDetails = (title: string, data: any, isPartnership: boolean = false) =
       <!-- LISTE DES TELECHARGEMENTS CV -->
       <div>
         <h2 class="text-xl font-semibold text-slate-100 mb-4">Demandes de CV récentes</h2>
-        <div class="bg-slate-800 rounded-2xl border border-slate-700 overflow-hidden">
+        <div class="bg-slate-800 rounded-2xl border border-slate-700 overflow-x-auto">
           <table class="w-full text-left text-sm">
             <thead class="bg-slate-800/50 text-slate-400 border-b border-slate-700">
               <tr>
@@ -118,7 +118,7 @@ const showDetails = (title: string, data: any, isPartnership: boolean = false) =
       <!-- LISTE DES PARTENARIATS -->
       <div>
         <h2 class="text-xl font-semibold text-slate-100 mb-4">Propositions de Partenariats récentes</h2>
-        <div class="bg-slate-800 rounded-2xl border border-slate-700 overflow-hidden">
+        <div class="bg-slate-800 rounded-2xl border border-slate-700 overflow-x-auto">
           <table class="w-full text-left text-sm">
             <thead class="bg-slate-800/50 text-slate-400 border-b border-slate-700">
               <tr>

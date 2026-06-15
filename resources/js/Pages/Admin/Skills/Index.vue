@@ -140,7 +140,7 @@ const confirmAction = (message: string, onConfirm: () => void) => {
           </form>
         </div>
 
-        <div class="lg:col-span-2 bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-700 overflow-hidden text-slate-900 dark:text-slate-100">
+        <div class="lg:col-span-2 bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-700 overflow-x-auto text-slate-900 dark:text-slate-100">
           <table class="w-full text-left text-sm">
             <thead class="bg-slate-50 dark:bg-slate-800/50 text-slate-500">
               <tr>
@@ -220,7 +220,7 @@ const confirmAction = (message: string, onConfirm: () => void) => {
           </form>
         </div>
 
-        <div class="xl:col-span-2 bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-700 overflow-hidden text-slate-900 dark:text-slate-100">
+        <div class="xl:col-span-2 bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-700 overflow-x-auto text-slate-900 dark:text-slate-100">
           <table class="w-full text-left text-sm">
             <thead class="bg-slate-50 dark:bg-slate-800/50 text-slate-500">
               <tr>

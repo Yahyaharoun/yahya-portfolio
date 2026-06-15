@@ -22,3 +22,11 @@ createInertiaApp({
     },
     progress: { color: '#7c3aed' },
 })
+
+// PWA Offline/Online Sync Toast
+if (typeof window !== 'undefined') {
+    window.addEventListener('online', () => {
+        // Trigger a custom event that Vue components (like toasts) can listen to
+        window.dispatchEvent(new CustomEvent('pwa-sync-success'))
+    })
+}

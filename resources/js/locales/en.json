@@ -175,7 +175,8 @@
     "title": "Offline Mode Active",
     "body": "Displaying cached, read-only snapshots. Your connection was interrupted.",
     "cache_notice": "Navigating locally cached routes",
-    "queue_notice": "Forms will sync when connection is restored"
+    "queue_notice": "Forms will sync when connection is restored",
+    "sync_success": "Your offline requests were sent successfully!"
   },
   "a11y": {
     "close_menu": "Close menu",

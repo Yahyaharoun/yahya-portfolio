@@ -12,6 +12,8 @@ return Application::configure(basePath: dirname(__DIR__))
     )
     ->withMiddleware(function (Middleware $middleware) {
         $middleware->web(append: [
+            \App\Http\Middleware\SecurityHeaders::class,
+            \App\Http\Middleware\SanitizeInput::class,
             \App\Http\Middleware\TrackVisitor::class,
             \App\Http\Middleware\HandleInertiaRequests::class,
         ]);

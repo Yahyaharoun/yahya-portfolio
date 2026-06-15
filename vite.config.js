@@ -121,6 +121,20 @@ export default defineConfig({
                                 statuses: [0, 200]
                             }
                         }
+                    },
+                    // Background Sync for Offline Form Submissions
+                    {
+                        urlPattern: /\/(?:partnerships|api\/otp\/.*)$/i,
+                        handler: 'NetworkOnly',
+                        method: 'POST',
+                        options: {
+                            backgroundSync: {
+                                name: 'offline-forms-queue',
+                                options: {
+                                    maxRetentionTime: 24 * 60 // 24 hours
+                                }
+                            }
+                        }
                     }
                 ]
             }

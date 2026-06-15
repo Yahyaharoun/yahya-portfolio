@@ -113,7 +113,7 @@ const confirmAction = (message: string, onConfirm: () => void) => {
           </form>
         </div>
 
-        <div class="bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-700 overflow-hidden text-slate-900 dark:text-slate-100">
+        <div class="bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-700 overflow-x-auto text-slate-900 dark:text-slate-100">
           <table class="w-full text-left text-sm">
             <thead class="bg-slate-50 text-slate-500">
               <tr>
