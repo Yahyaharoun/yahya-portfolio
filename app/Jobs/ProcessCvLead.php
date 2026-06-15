@@ -69,8 +69,7 @@ class ProcessCvLead implements ShouldQueue
         } catch (\Throwable $e) {
             // Log the error; the job can be retried automatically.
             Log::error('Failed to process CV lead', ['error' => $e->getMessage(), 'payload' => $this->toArray()]);
-            // Optionally rethrow to trigger retry based on queue config.
-            throw $e;
+            // Do not rethrow in order to avoid crashing the sync queue and preventing CV download.
         }
     }
 
