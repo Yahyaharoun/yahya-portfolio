@@ -121,7 +121,7 @@ const confirmAction = (message: string, onConfirm: () => void) => {
               <tr v-for="item in items" :key="item.id" class="hover:bg-slate-50 dark:hover:bg-slate-800/50">
                 <td class="px-4 py-3">
                   <img v-if="item.type !== 'video' && item.filepath" :src="'/storage/' + item.filepath" class="h-12 w-12 object-cover rounded shadow-sm">
-                  <video v-else-if="item.type === 'video' && item.filepath" :src="'/storage/' + item.filepath" class="h-12 w-12 object-cover rounded shadow-sm" controls></video>
+                  <video v-else-if="item.type === 'video' && item.filepath" :src="'/storage/' + item.filepath" class="h-12 w-12 object-contain bg-black rounded shadow-sm" controls></video>
                   <div v-else class="h-12 w-12 rounded bg-slate-700 flex items-center justify-center text-xl">📷</div>
                 </td>
                 <td class="px-4 py-3">

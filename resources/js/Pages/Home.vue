@@ -328,7 +328,7 @@ const showAlert = (message: string) => {
             <template v-if="media.type === 'video'">
               <video 
                 :src="'/storage/' + media.filepath" 
-                class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                class="w-full h-full object-contain bg-black transition-transform duration-500 group-hover:scale-105"
                 controls
               ></video>
             </template>
