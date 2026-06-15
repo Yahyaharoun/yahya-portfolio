@@ -110,12 +110,31 @@ onMounted(() => {
   document.addEventListener('keydown', handleKeydown)
   // Stamp the initial lang attr on <html>
   document.documentElement.setAttribute('lang', locale.value)
+  
+  // PWA Install Prompt
+  window.addEventListener('beforeinstallprompt', (e) => {
+    e.preventDefault()
+    deferredPrompt.value = e
+  })
 })
 
 onUnmounted(() => {
   window.removeEventListener('scroll', handleScroll)
   document.removeEventListener('keydown', handleKeydown)
 })
+
+// ── PWA Install Logic ─────────────────────────────────────────────────────────
+const deferredPrompt = ref<any>(null)
+
+async function installPwa() {
+  if (deferredPrompt.value) {
+    deferredPrompt.value.prompt()
+    const { outcome } = await deferredPrompt.value.userChoice
+    if (outcome === 'accepted') {
+      deferredPrompt.value = null
+    }
+  }
+}
 </script>
 
 <template>
@@ -154,9 +173,9 @@ onUnmounted(() => {
             <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-violet-500 to-cyan-500 flex items-center justify-center text-white font-bold text-sm flex-shrink-0 shadow-lg shadow-violet-500/25 group-hover:shadow-violet-500/50 transition-shadow">
               YH
             </div>
-            <div class="hidden sm:block">
+            <div class="block">
               <p class="text-sm font-bold text-slate-900 dark:text-slate-100 leading-none tracking-tight">Yahya Haroun</p>
-              <p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5 font-medium">Tech & Business</p>
+              <p class="text-[10px] sm:text-xs text-slate-500 dark:text-slate-400 mt-0.5 font-medium">Tech & Business</p>
             </div>
           </Link>
 
@@ -184,7 +203,19 @@ onUnmounted(() => {
           </nav>
 
           <!-- CTA + locale toggle + theme + hamburger -->
-          <div class="flex items-center gap-2">
+          <div class="flex items-center gap-1.5 sm:gap-2">
+            <!-- Install PWA button -->
+            <button
+              v-if="deferredPrompt"
+              type="button"
+              class="inline-flex items-center gap-1.5 px-2 sm:px-3 py-1.5 rounded-lg bg-violet-100 dark:bg-violet-900/40 text-xs font-bold text-violet-700 dark:text-violet-300 hover:bg-violet-200 dark:hover:bg-violet-800/60 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-violet-500 whitespace-nowrap"
+              @click="installPwa"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" /></svg>
+              <span class="hidden sm:inline">Installer l'App</span>
+              <span class="sm:hidden">Installer</span>
+            </button>
+
             <a
               href="/#contact"
               class="hidden sm:inline-flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-semibold bg-gradient-to-r from-violet-600 to-cyan-600 text-white hover:from-violet-500 hover:to-cyan-500 transition-all shadow-lg shadow-violet-500/20 hover:shadow-violet-500/40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-violet-500"
