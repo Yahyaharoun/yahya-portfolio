@@ -29,6 +29,9 @@ class OtpVerificationController
 
         $identifier = $request->email ?? $request->phone;
         
+        $sent = false;
+        $apiErrors = [];
+
         try {
             // Générer un code à 6 chiffres
             $code = str_pad(random_int(0, 999999), 6, '0', STR_PAD_LEFT);
@@ -36,35 +39,56 @@ class OtpVerificationController
             // Stocker en cache pour 10 minutes
             Cache::put("otp_{$identifier}", $code, now()->addMinutes(10));
 
-            // Envoi de l'email avec la classe Mailable
-            if (filter_var($identifier, FILTER_VALIDATE_EMAIL)) {
+            // 1. Tenter l'envoi par Email si fourni
+            if (!empty($request->email) && filter_var($request->email, FILTER_VALIDATE_EMAIL)) {
                 try {
-                    \Illuminate\Support\Facades\Http::timeout(5)->withToken(env('MAIL_PASSWORD', 're_fXTKHLz5_2xijFyMHEv9Pa8XrB16kPzZY'))
+                    $response = \Illuminate\Support\Facades\Http::timeout(5)->withToken(env('MAIL_PASSWORD', 're_fXTKHLz5_2xijFyMHEv9Pa8XrB16kPzZY'))
                         ->post('https://api.resend.com/emails', [
                             'from' => 'Yahya Haroun <onboarding@resend.dev>',
-                            'to' => [$identifier],
+                            'to' => [$request->email],
                             'subject' => 'Votre code de vérification',
                             'html' => '<p>Votre code de sécurité est : <strong>' . $code . '</strong>. Il expire dans 10 minutes.</p>'
                         ]);
+                    
+                    if ($response->successful()) {
+                        $sent = true;
+                    } else {
+                        $apiErrors[] = "Email Resend: " . $response->json('message', 'Erreur API');
+                        \Illuminate\Support\Facades\Log::error("Resend API Error: " . $response->body());
+                    }
                 } catch (\Exception $e) {
-                    \Log::error("Erreur Envoi Email OTP: " . $e->getMessage());
-                    // Fallback pour la démo si SMTP n'est pas configuré
+                    $apiErrors[] = "Email Resend Exception";
+                    \Illuminate\Support\Facades\Log::error("Erreur Envoi Email OTP: " . $e->getMessage());
                 }
-            } else {
+            }
+
+            // 2. Tenter l'envoi par SMS si l'email a échoué ou n'est pas fourni
+            if (!$sent && !empty($request->phone)) {
                 try {
                     $smsService = new TwilioSmsService();
-                    $smsService->sendOtp($identifier, $code);
+                    if ($smsService->sendOtp($request->phone, $code)) {
+                        $sent = true;
+                    } else {
+                        $apiErrors[] = "SMS Twilio: Numéro non vérifié ou erreur de configuration.";
+                    }
                 } catch (\Exception $e) {
-                    \Log::error("Erreur Envoi SMS OTP: " . $e->getMessage());
-                    // Fallback pour la démo si Twilio n'est pas configuré
+                    $apiErrors[] = "SMS Twilio Exception";
+                    \Illuminate\Support\Facades\Log::error("Erreur Envoi SMS OTP: " . $e->getMessage());
                 }
             }
         } catch (\Exception $e) {
-            \Log::error("Erreur globale OTP: " . $e->getMessage());
+            \Illuminate\Support\Facades\Log::error("Erreur globale OTP: " . $e->getMessage());
+            return response()->json(['error' => "Erreur interne du serveur."], 500);
+        }
+
+        if (!$sent) {
+            return response()->json([
+                'error' => "Échec de l'envoi : " . implode(' | ', $apiErrors) . " (Sur un compte gratuit Resend/Twilio, vous ne pouvez envoyer qu'à vos propres numéros/emails vérifiés. Utilisez 000000 pour passer.)"
+            ], 400);
         }
 
         return response()->json([
-            'message' => 'Code envoyé avec succès. (En mode démo sans SMTP, utilisez 000000)',
+            'message' => 'Code envoyé avec succès. (En mode démo sans API, utilisez 000000)',
             'identifier' => $identifier
         ]);
     }
