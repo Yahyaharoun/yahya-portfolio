@@ -60,7 +60,8 @@ const submit = () => {
       onSuccess: () => cancelEdit()
     })
   } else {
-    form.post('/admin/diplomas', {
+    form.transform((data) => data)
+        .post('/admin/diplomas', {
       preserveScroll: true,
       onSuccess: () => {
         form.reset()

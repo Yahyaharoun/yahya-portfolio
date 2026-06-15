@@ -52,7 +52,8 @@ const submit = () => {
       onSuccess: () => cancelEdit()
     })
   } else {
-    form.post('/admin/timeline', {
+    form.transform((data) => data)
+        .post('/admin/timeline', {
       onSuccess: () => cancelEdit()
     })
   }

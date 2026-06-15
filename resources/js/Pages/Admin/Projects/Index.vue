@@ -48,7 +48,8 @@ const submit = () => {
       onSuccess: () => cancelEdit()
     })
   } else {
-    form.post('/admin/projects', {
+    form.transform((data) => data)
+        .post('/admin/projects', {
       onSuccess: () => cancelEdit()
     })
   }
