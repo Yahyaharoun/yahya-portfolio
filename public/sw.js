@@ -53,12 +53,24 @@ self.addEventListener('push', function (e) {
 
     if (e.data) {
         var msg = e.data.json();
-        e.waitUntil(self.registration.showNotification(msg.title, {
-            body: msg.body,
-            icon: msg.icon || '/favicon.ico',
-            actions: msg.actions,
-            data: msg.data
-        }));
+        e.waitUntil(
+            self.registration.showNotification(msg.title, {
+                body: msg.body,
+                icon: msg.icon || '/icons/icon-192x192.png',
+                vibrate: [300, 100, 400, 100, 400, 100, 300], // Signal pattern
+                requireInteraction: true, // Toujours actif jusqu'à interaction
+                silent: false, // Force le son système
+                actions: msg.actions,
+                data: msg.data
+            }).then(() => {
+                // Notifier les clients ouverts de jouer un son (si applicable)
+                return self.clients.matchAll({ type: 'window' }).then(clients => {
+                    clients.forEach(client => {
+                        client.postMessage({ type: 'PLAY_SOUND' });
+                    });
+                });
+            })
+        );
     }
 });
 

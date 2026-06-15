@@ -29,4 +29,19 @@ if (typeof window !== 'undefined') {
         // Trigger a custom event that Vue components (like toasts) can listen to
         window.dispatchEvent(new CustomEvent('pwa-sync-success'))
     })
+
+    // Listen for Push Notification messages from Service Worker
+    if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.addEventListener('message', async (event) => {
+            if (event.data && event.data.type === 'PLAY_SOUND') {
+                try {
+                    // Try to play the notification sound
+                    const { playSuccessSound } = await import('./utils/audio');
+                    playSuccessSound();
+                } catch (e) {
+                    console.error('Failed to play push notification sound:', e);
+                }
+            }
+        });
+    }
 }
