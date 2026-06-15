@@ -105,7 +105,12 @@ async function verifyAndDownload() {
         phone: form.phone,
         email: form.email,
         motive: form.motive
-      }, { responseType: 'blob' })
+      }, { 
+        responseType: 'blob',
+        headers: {
+          Authorization: `Bearer ${response.data.token}`
+        }
+      })
       const url = window.URL.createObjectURL(new Blob([downloadResponse.data]))
       const link = document.createElement('a')
       link.href = url
