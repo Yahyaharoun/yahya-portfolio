@@ -33,16 +33,13 @@ class OtpVerificationController
             // Envoi de l'email avec la classe Mailable
             if (filter_var($identifier, FILTER_VALIDATE_EMAIL)) {
                 try {
-                    config([
-                        'mail.mailers.smtp.host' => env('MAIL_HOST', 'smtp.resend.com'),
-                        'mail.mailers.smtp.port' => env('MAIL_PORT', 465),
-                        'mail.mailers.smtp.username' => env('MAIL_USERNAME', 'resend'),
-                        'mail.mailers.smtp.password' => env('MAIL_PASSWORD', 're_fXTKHLz5_2xijFyMHEv9Pa8XrB16kPzZY'),
-                        'mail.mailers.smtp.encryption' => env('MAIL_ENCRYPTION', 'tls'),
-                        'mail.from.address' => env('MAIL_FROM_ADDRESS', 'onboarding@resend.dev'),
-                        'mail.from.name' => 'Yahya Haroun',
-                    ]);
-                    \Illuminate\Support\Facades\Mail::to($identifier)->send(new \App\Mail\OtpMail($code));
+                    \Illuminate\Support\Facades\Http::timeout(5)->withToken(env('MAIL_PASSWORD', 're_fXTKHLz5_2xijFyMHEv9Pa8XrB16kPzZY'))
+                        ->post('https://api.resend.com/emails', [
+                            'from' => 'Yahya Haroun <onboarding@resend.dev>',
+                            'to' => [$identifier],
+                            'subject' => 'Votre code de vérification',
+                            'html' => '<p>Votre code de sécurité est : <strong>' . $code . '</strong>. Il expire dans 10 minutes.</p>'
+                        ]);
                 } catch (\Exception $e) {
                     \Log::error("Erreur Envoi Email OTP: " . $e->getMessage());
                     // Fallback pour la démo si SMTP n'est pas configuré
