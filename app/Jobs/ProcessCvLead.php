@@ -32,11 +32,11 @@ class ProcessCvLead implements ShouldQueue
      */
     public function __construct(array $payload)
     {
-        $this->fullName = $payload['fullName'];
-        $this->phone = $payload['phone'];
-        $this->email = $payload['email'];
-        $this->organization = $payload['organization'];
-        $this->motive = $payload['motive'];
+        $this->fullName = $payload['fullName'] ?? $payload['name'] ?? 'Inconnu';
+        $this->phone = $payload['phone'] ?? '';
+        $this->email = $payload['email'] ?? '';
+        $this->organization = $payload['organization'] ?? 'N/A';
+        $this->motive = $payload['motive'] ?? '';
     }
 
     /**
