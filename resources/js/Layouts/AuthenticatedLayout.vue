@@ -61,6 +61,7 @@ const navItems = computed<NavItem[]>(() => [
   { label: 'Dashboard',      href: '/admin/dashboard',     icon: HomeIcon,           iconActive: HomeSolid      },
   { label: 'Projects',       href: '/admin/projects',      icon: BriefcaseIcon,      iconActive: BriefcaseSolid },
   { label: 'Skills',         href: '/admin/skills',        icon: AcademicCapIcon,    iconActive: AcademicSolid  },
+  { label: 'Parcours',       href: '/admin/parcours',      icon: BriefcaseIcon,      iconActive: BriefcaseSolid },
   { label: 'Certifications', href: '/admin/certifications',icon: AcademicCapIcon,    iconActive: AcademicSolid  },
   { label: 'Diplômes',       href: '/admin/diplomas',      icon: BookOpenIcon,       iconActive: BookOpenSolid  },
   { label: 'Media Gallery',  href: '/admin/gallery',       icon: PhotoIcon,          iconActive: PhotoSolid     },

@@ -5,11 +5,20 @@ use Inertia\Inertia;
 
 // ── Page principale (SPA) ─────────────────────────────────────────────────────
 Route::get('/', function () {
-    // Les items du parcours viennent de la DB
-    $timelineItems = \DB::table('timeline_items')
-        ->orderBy('date_start', 'desc')
-        ->get()
-        ->toArray() ?? [];
+    // Les items du parcours viennent de la DB 'parcours' (nouvelle version)
+    $timelineItems = \App\Models\Parcours::latest()->get()->map(function($p) {
+        return [
+            'id' => $p->id,
+            'type' => 'experience', // Default required by frontend component
+            'title' => $p->nom,
+            'organization' => $p->nom_proprietaire,
+            'location' => $p->localisation,
+            'date_start' => now()->toDateString(), // Fallback
+            'description' => $p->description ?? '',
+            'link' => $p->lien,
+            'image_path' => $p->image,
+        ];
+    })->toArray() ?? [];
 
     $certifications = \App\Models\Certification::orderBy('issued_at', 'desc')->get();
     
@@ -66,6 +75,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/admin/skills/categories/{category}', [\App\Http\Controllers\Admin\SkillController::class, 'destroyCategory']);
     Route::resource('/admin/skills', \App\Http\Controllers\Admin\SkillController::class);
     Route::resource('/admin/timeline', \App\Http\Controllers\Admin\TimelineController::class);
+    Route::resource('/admin/parcours', \App\Http\Controllers\Admin\ParcoursController::class);
     Route::resource('/admin/projects', \App\Http\Controllers\Admin\ProjectController::class);
     Route::resource('/admin/certifications', \App\Http\Controllers\Admin\CertificationController::class);
     Route::resource('/admin/gallery', \App\Http\Controllers\Admin\GalleryController::class);
