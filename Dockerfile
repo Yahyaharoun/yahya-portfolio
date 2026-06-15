@@ -33,7 +33,7 @@ COPY . .
 # Installer les dépendances PHP
 ENV COMPOSER_ALLOW_SUPERUSER=1 \
     COMPOSER_MEMORY_LIMIT=-1
-RUN composer install --no-dev --optimize-autoloader --no-scripts
+RUN composer install --no-dev --optimize-autoloader --no-scripts --ignore-platform-reqs
 
 # Copier la configuration Nginx
 COPY docker/nginx.conf /etc/nginx/sites-available/default
