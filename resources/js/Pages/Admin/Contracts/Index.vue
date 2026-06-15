@@ -74,28 +74,28 @@ const confirmAction = (message: string, onConfirm: () => void) => {
 
       <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
         
-        <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 h-fit text-slate-900">
+        <div class="bg-white dark:bg-slate-800 p-6 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-700 h-fit text-slate-900 dark:text-slate-100">
           <h3 class="text-lg font-medium mb-4 text-slate-900">{{ editingId ? 'Modifier' : 'Ajouter un contrat' }}</h3>
           <form @submit.prevent="submit" class="space-y-4">
             <div>
               <label class="block text-sm font-medium mb-1 text-slate-700">Entreprise Partenaire</label>
-              <input v-model="form.company" type="text" class="w-full px-3 py-2 border border-slate-300 rounded-lg bg-slate-50 text-slate-900 shadow-inner focus:ring-2 focus:ring-violet-500 focus:border-violet-500 focus:bg-white transition-colors" required>
+              <input v-model="form.company" type="text" class="w-full px-3 py-2 border border-slate-300 dark:border-slate-600 rounded-lg bg-slate-50 dark:bg-slate-700 text-slate-900 dark:text-slate-100 shadow-inner focus:ring-2 focus:ring-violet-500 focus:border-violet-500 focus:bg-white dark:focus:bg-slate-800 transition-colors" required>
             </div>
             <div>
               <label class="block text-sm font-medium mb-1 text-slate-700">Lien Web / Profil (optionnel)</label>
-              <input v-model="form.website" type="url" class="w-full px-3 py-2 border border-slate-300 rounded-lg bg-slate-50 text-slate-900 shadow-inner focus:ring-2 focus:ring-violet-500 focus:border-violet-500 focus:bg-white transition-colors">
+              <input v-model="form.website" type="url" class="w-full px-3 py-2 border border-slate-300 dark:border-slate-600 rounded-lg bg-slate-50 dark:bg-slate-700 text-slate-900 dark:text-slate-100 shadow-inner focus:ring-2 focus:ring-violet-500 focus:border-violet-500 focus:bg-white dark:focus:bg-slate-800 transition-colors">
             </div>
             <div>
               <label class="block text-sm font-medium mb-1 text-slate-700">Logo de l'entreprise</label>
-              <input type="file" ref="fileInput" @change="handleFile" accept="image/*" class="w-full px-3 py-2 border border-slate-300 rounded-lg bg-slate-50 text-slate-900 shadow-inner focus:ring-2 focus:ring-violet-500 focus:border-violet-500 focus:bg-white transition-colors">
+              <input type="file" ref="fileInput" @change="handleFile" accept="image/*" class="w-full px-3 py-2 border border-slate-300 dark:border-slate-600 rounded-lg bg-slate-50 dark:bg-slate-700 text-slate-900 dark:text-slate-100 shadow-inner focus:ring-2 focus:ring-violet-500 focus:border-violet-500 focus:bg-white dark:focus:bg-slate-800 transition-colors">
             </div>
             <div>
               <label class="block text-sm font-medium mb-1 text-slate-700">Description / Message</label>
-              <textarea v-model="form.message" rows="4" class="w-full px-3 py-2 border border-slate-300 rounded-lg bg-slate-50 text-slate-900 shadow-inner focus:ring-2 focus:ring-violet-500 focus:border-violet-500 focus:bg-white transition-colors" required></textarea>
+              <textarea v-model="form.message" rows="4" class="w-full px-3 py-2 border border-slate-300 dark:border-slate-600 rounded-lg bg-slate-50 dark:bg-slate-700 text-slate-900 dark:text-slate-100 shadow-inner focus:ring-2 focus:ring-violet-500 focus:border-violet-500 focus:bg-white dark:focus:bg-slate-800 transition-colors" required></textarea>
             </div>
             <div v-if="editingId">
               <label class="block text-sm font-medium mb-1 text-slate-700">Statut</label>
-              <select v-model="form.status" class="w-full px-3 py-2 border border-slate-300 rounded-lg bg-slate-50 text-slate-900 shadow-inner focus:ring-2 focus:ring-violet-500 focus:border-violet-500 focus:bg-white transition-colors" required>
+              <select v-model="form.status" class="w-full px-3 py-2 border border-slate-300 dark:border-slate-600 rounded-lg bg-slate-50 dark:bg-slate-700 text-slate-900 dark:text-slate-100 shadow-inner focus:ring-2 focus:ring-violet-500 focus:border-violet-500 focus:bg-white dark:focus:bg-slate-800 transition-colors" required>
                 <option value="new">Nouveau</option>
                 <option value="in_progress">En cours</option>
                 <option value="treated">Traité</option>
@@ -113,7 +113,7 @@ const confirmAction = (message: string, onConfirm: () => void) => {
           </form>
         </div>
 
-        <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden text-slate-900">
+        <div class="bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-700 overflow-hidden text-slate-900 dark:text-slate-100">
           <table class="w-full text-left text-sm">
             <thead class="bg-slate-50 text-slate-500">
               <tr>

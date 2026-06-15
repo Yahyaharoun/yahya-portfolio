@@ -94,7 +94,7 @@ const deleteItem = () => {
     <div class="max-w-7xl mx-auto space-y-6">
       
       <!-- Form -->
-      <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 text-slate-900">
+      <div class="bg-white dark:bg-slate-800 p-6 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-slate-100">
         <h2 class="text-lg font-bold text-slate-900 mb-4">
           {{ editingId ? 'Modifier le diplôme' : 'Ajouter un diplôme' }}
         </h2>
@@ -103,11 +103,11 @@ const deleteItem = () => {
           <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
               <label class="block text-sm font-medium text-slate-700 mb-1">Intitulé du diplôme</label>
-              <input v-model="form.title" type="text" class="w-full px-3 py-2 border border-slate-300 rounded-lg bg-slate-50 text-slate-900 shadow-inner focus:ring-2 focus:ring-violet-500 focus:border-violet-500 focus:bg-white transition-colors" required>
+              <input v-model="form.title" type="text" class="w-full px-3 py-2 border border-slate-300 dark:border-slate-600 rounded-lg bg-slate-50 dark:bg-slate-700 text-slate-900 dark:text-slate-100 shadow-inner focus:ring-2 focus:ring-violet-500 focus:border-violet-500 focus:bg-white dark:focus:bg-slate-800 transition-colors" required>
             </div>
             <div>
               <label class="block text-sm font-medium text-slate-700 mb-1">Établissement / École</label>
-              <input v-model="form.institution" type="text" class="w-full px-3 py-2 border border-slate-300 rounded-lg bg-slate-50 text-slate-900 shadow-inner focus:ring-2 focus:ring-violet-500 focus:border-violet-500 focus:bg-white transition-colors" required>
+              <input v-model="form.institution" type="text" class="w-full px-3 py-2 border border-slate-300 dark:border-slate-600 rounded-lg bg-slate-50 dark:bg-slate-700 text-slate-900 dark:text-slate-100 shadow-inner focus:ring-2 focus:ring-violet-500 focus:border-violet-500 focus:bg-white dark:focus:bg-slate-800 transition-colors" required>
             </div>
           </div>
           
@@ -119,14 +119,14 @@ const deleteItem = () => {
 
           <div>
             <label class="block text-sm font-medium text-slate-700 mb-1">Visuel / Image du Diplôme (Optionnel)</label>
-            <input type="file" ref="fileInput" @change="handleFile" accept="image/*" class="w-full px-3 py-2 border border-slate-300 rounded-lg bg-slate-50 text-slate-900 shadow-inner focus:ring-2 focus:ring-violet-500 focus:border-violet-500 focus:bg-white transition-colors">
+            <input type="file" ref="fileInput" @change="handleFile" accept="image/*" class="w-full px-3 py-2 border border-slate-300 dark:border-slate-600 rounded-lg bg-slate-50 dark:bg-slate-700 text-slate-900 dark:text-slate-100 shadow-inner focus:ring-2 focus:ring-violet-500 focus:border-violet-500 focus:bg-white dark:focus:bg-slate-800 transition-colors">
             <p v-if="form.errors.image" class="mt-1 text-sm text-red-500">{{ form.errors.image }}</p>
           </div>
 
           <div>
             <label class="block text-sm font-medium text-slate-700 mb-1">Description (Optionnelle)</label>
 
-            <textarea v-model="form.description" rows="3" class="w-full px-3 py-2 border border-slate-300 rounded-lg bg-slate-50 text-slate-900 shadow-inner focus:ring-2 focus:ring-violet-500 focus:border-violet-500 focus:bg-white transition-colors"></textarea>
+            <textarea v-model="form.description" rows="3" class="w-full px-3 py-2 border border-slate-300 dark:border-slate-600 rounded-lg bg-slate-50 dark:bg-slate-700 text-slate-900 dark:text-slate-100 shadow-inner focus:ring-2 focus:ring-violet-500 focus:border-violet-500 focus:bg-white dark:focus:bg-slate-800 transition-colors"></textarea>
           </div>
 
           <div class="flex items-center gap-3">
@@ -141,7 +141,7 @@ const deleteItem = () => {
       </div>
 
       <!-- List -->
-      <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden text-slate-900">
+      <div class="bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-700 overflow-hidden text-slate-900 dark:text-slate-100">
         <table class="w-full text-left text-sm">
           <thead class="bg-slate-50 text-slate-500">
             <tr>
