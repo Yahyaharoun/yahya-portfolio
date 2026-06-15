@@ -12,7 +12,6 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     libxml2-dev \
     libzip-dev \
     libpq-dev \
-    libgmp-dev \
     libsodium-dev \
     supervisor \
     && rm -rf /var/lib/apt/lists/*
@@ -25,7 +24,6 @@ RUN docker-php-ext-install \
     zip \
     gd \
     bcmath \
-    xml \
     exif \
     pcntl \
     sodium
@@ -33,49 +31,22 @@ RUN docker-php-ext-install \
 # ─── 3. Limites PHP (upload vidéo) ───────────────────────────────────────────
 COPY php.ini /usr/local/etc/php/conf.d/uploads.ini
 
-# ─── 4. Composer ─────────────────────────────────────────────────────────────
-COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
-
-# ─── 5. Répertoire de travail ────────────────────────────────────────────────
+# ─── 4. Répertoire de travail ────────────────────────────────────────────────
 WORKDIR /var/www/html
 
-# ─── 6. Copie composer.json en premier (cache Docker optimal) ────────────────
-COPY composer.json composer.lock ./
-
-# ─── 7. Installation des dépendances PHP ─────────────────────────────────────
-ENV COMPOSER_ALLOW_SUPERUSER=1 \
-    COMPOSER_MEMORY_LIMIT=-1
-RUN composer install \
-    --no-interaction \
-    --prefer-dist \
-    --optimize-autoloader \
-    --no-dev \
-    --no-scripts \
-    && composer clear-cache
-
-# ─── 8. Copie du projet complet ──────────────────────────────────────────────
+# ─── 5. Copie du projet complet (vendor inclus dans git) ─────────────────────
 COPY . .
 
-# ─── 9. Génération autoloader final ──────────────────────────────────────────
-RUN composer dump-autoload --optimize --no-dev --no-interaction
-
-# ─── 10. Configuration Nginx ─────────────────────────────────────────────────
+# ─── 6. Configuration Nginx ──────────────────────────────────────────────────
 COPY docker/nginx.conf /etc/nginx/sites-available/default
 
-# ─── 11. Permissions ─────────────────────────────────────────────────────────
+# ─── 7. Permissions ──────────────────────────────────────────────────────────
 RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache \
     && chmod -R 775 /var/www/html/storage /var/www/html/bootstrap/cache
 
-# ─── 12. Script de démarrage ─────────────────────────────────────────────────
+# ─── 8. Port et démarrage ────────────────────────────────────────────────────
 EXPOSE 80
 
-RUN printf '#!/bin/sh\n\
-php artisan storage:link --force\n\
-php artisan config:cache\n\
-php artisan route:cache\n\
-php artisan view:cache\n\
-php artisan migrate --force\n\
-service nginx start\n\
-exec php-fpm\n' > /start.sh && chmod +x /start.sh
+RUN printf '#!/bin/sh\nphp artisan storage:link --force\nphp artisan config:cache\nphp artisan route:cache\nphp artisan view:cache\nphp artisan migrate --force\nservice nginx start\nexec php-fpm\n' > /start.sh && chmod +x /start.sh
 
 CMD ["/start.sh"]
