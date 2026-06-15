@@ -97,8 +97,9 @@ const confirmAction = (message: string, onConfirm: () => void) => {
               <p v-if="form.errors.description" class="mt-1 text-sm text-red-500">{{ form.errors.description }}</p>
             </div>
             <div class="flex gap-2">
-              <button type="submit" class="px-4 py-2 bg-violet-600 text-white rounded-lg hover:bg-violet-700 transition" :disabled="form.processing">
-                {{ editingId ? 'Mettre à jour' : 'Enregistrer' }}
+              <button type="submit" class="px-4 py-2 bg-violet-600 text-white rounded-lg hover:bg-violet-700 transition relative overflow-hidden" :disabled="form.processing">
+                <div v-if="form.progress" class="absolute inset-0 bg-violet-500 opacity-20" :style="{ width: form.progress.percentage + '%' }"></div>
+                <span class="relative z-10">{{ form.processing ? (form.progress ? `Envoi en cours (${form.progress.percentage}%)` : 'Traitement...') : (editingId ? 'Mettre à jour' : 'Enregistrer') }}</span>
               </button>
               <button v-if="editingId" type="button" @click="cancelEdit" class="px-4 py-2 bg-slate-200 dark:bg-slate-700 rounded-lg hover:bg-slate-300 transition">
                 Annuler
@@ -120,7 +121,7 @@ const confirmAction = (message: string, onConfirm: () => void) => {
               <tr v-for="item in items" :key="item.id" class="hover:bg-slate-50 dark:hover:bg-slate-800/50">
                 <td class="px-4 py-3">
                   <img v-if="item.type !== 'video' && item.filepath" :src="'/storage/' + item.filepath" class="h-12 w-12 object-cover rounded shadow-sm">
-                  <video v-else-if="item.type === 'video' && item.filepath" :src="'/storage/' + item.filepath" class="h-12 w-12 object-cover rounded shadow-sm"></video>
+                  <video v-else-if="item.type === 'video' && item.filepath" :src="'/storage/' + item.filepath" class="h-12 w-12 object-cover rounded shadow-sm" controls></video>
                   <div v-else class="h-12 w-12 rounded bg-slate-700 flex items-center justify-center text-xl">📷</div>
                 </td>
                 <td class="px-4 py-3">
