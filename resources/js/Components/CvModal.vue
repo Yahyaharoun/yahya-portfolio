@@ -184,7 +184,7 @@ defineExpose({ openModal })
 
           <button type="submit" :disabled="isLoading || otpCode.length !== 6" class="w-full bg-gradient-to-r from-emerald-600 to-teal-600 text-white font-semibold py-3 rounded-xl hover:from-emerald-500 hover:to-teal-500 transition-all disabled:opacity-50 flex justify-center items-center gap-2">
             <span v-if="isLoading" class="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin"></span>
-            Valider et Télécharger
+            {{ t('cv_tunnel.submit_btn') }}
           </button>
           
           <div class="text-center mt-4">

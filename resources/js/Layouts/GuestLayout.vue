@@ -205,13 +205,13 @@ onUnmounted(() => {
             <!-- Language toggle -->
             <button
               type="button"
-              class="inline-flex items-center gap-1.5 px-2 py-1.5 rounded-lg border border-slate-200 dark:border-slate-700 text-xs font-bold tracking-widest text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 hover:border-slate-300 dark:hover:border-slate-500 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-violet-500 whitespace-nowrap"
+              class="inline-flex items-center gap-1.5 px-2 py-1.5 rounded-lg border border-slate-200 dark:border-slate-700 text-xs font-bold text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 hover:border-slate-300 dark:hover:border-slate-500 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-violet-500 whitespace-nowrap"
               :aria-label="t('a11y.lang_switch')"
               @click="toggleLocale"
             >
-              <span :class="locale === 'fr' ? 'text-violet-600 dark:text-violet-400' : 'text-slate-500'">FR</span>
-              <span class="text-slate-300 dark:text-slate-700">/</span>
-              <span :class="locale === 'en' ? 'text-violet-600 dark:text-violet-400' : 'text-slate-500'">EN</span>
+              <span :class="locale === 'fr' ? 'text-violet-600 dark:text-violet-400 font-bold' : 'text-slate-500 font-medium'">FR</span>
+              <span class="text-slate-300 dark:text-slate-700 mx-0.5">/</span>
+              <span :class="locale === 'en' ? 'text-violet-600 dark:text-violet-400 font-bold' : 'text-slate-500 font-medium'">EN</span>
             </button>
 
             <!-- Mobile hamburger -->
