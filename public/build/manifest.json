@@ -1,21 +1,21 @@
 {
-  "_AuthenticatedLayout-C-u0zYDV.js": {
-    "file": "assets/AuthenticatedLayout-C-u0zYDV.js",
+  "_AuthenticatedLayout-B4aNra2K.js": {
+    "file": "assets/AuthenticatedLayout-B4aNra2K.js",
     "name": "AuthenticatedLayout",
     "imports": [
       "resources/js/app.ts",
-      "_BriefcaseIcon-IDYSsmii.js"
+      "_BriefcaseIcon-Zp4PYByA.js"
     ]
   },
-  "_BriefcaseIcon-IDYSsmii.js": {
-    "file": "assets/BriefcaseIcon-IDYSsmii.js",
+  "_BriefcaseIcon-Zp4PYByA.js": {
+    "file": "assets/BriefcaseIcon-Zp4PYByA.js",
     "name": "BriefcaseIcon",
     "imports": [
       "resources/js/app.ts"
     ]
   },
-  "_ConfirmModal-CuKRY8hh.js": {
-    "file": "assets/ConfirmModal-CuKRY8hh.js",
+  "_ConfirmModal-Db2FnYZ3.js": {
+    "file": "assets/ConfirmModal-Db2FnYZ3.js",
     "name": "ConfirmModal",
     "imports": [
       "resources/js/app.ts"
@@ -28,7 +28,7 @@
     "isDynamicEntry": true
   },
   "resources/css/app.css": {
-    "file": "assets/app-Cj0g7W50.css",
+    "file": "assets/app-BMK6RIR2.css",
     "name": "app",
     "names": [
       "app.css"
@@ -37,82 +37,82 @@
     "isEntry": true
   },
   "resources/js/Pages/Admin/Analytics/Index.vue": {
-    "file": "assets/Index-B3iQ-z0m.js",
+    "file": "assets/Index-DYQ5Gd2q.js",
     "name": "Index",
     "src": "resources/js/Pages/Admin/Analytics/Index.vue",
     "isDynamicEntry": true,
     "imports": [
       "resources/js/app.ts",
-      "_AuthenticatedLayout-C-u0zYDV.js"
+      "_AuthenticatedLayout-B4aNra2K.js"
     ]
   },
   "resources/js/Pages/Admin/Certifications/Index.vue": {
-    "file": "assets/Index-D7dM-Cjr.js",
+    "file": "assets/Index-Cs8PlFSI.js",
     "name": "Index",
     "src": "resources/js/Pages/Admin/Certifications/Index.vue",
     "isDynamicEntry": true,
     "imports": [
       "resources/js/app.ts",
-      "_AuthenticatedLayout-C-u0zYDV.js",
-      "_ConfirmModal-CuKRY8hh.js"
+      "_AuthenticatedLayout-B4aNra2K.js",
+      "_ConfirmModal-Db2FnYZ3.js"
     ]
   },
   "resources/js/Pages/Admin/Contracts/Index.vue": {
-    "file": "assets/Index-7T-gK7Wd.js",
+    "file": "assets/Index-CjYuLU5p.js",
     "name": "Index",
     "src": "resources/js/Pages/Admin/Contracts/Index.vue",
     "isDynamicEntry": true,
     "imports": [
       "resources/js/app.ts",
-      "_AuthenticatedLayout-C-u0zYDV.js",
-      "_ConfirmModal-CuKRY8hh.js"
+      "_AuthenticatedLayout-B4aNra2K.js",
+      "_ConfirmModal-Db2FnYZ3.js"
     ]
   },
   "resources/js/Pages/Admin/CvDownloads/Index.vue": {
-    "file": "assets/Index-7kKZ00CE.js",
+    "file": "assets/Index-Css8rnKM.js",
     "name": "Index",
     "src": "resources/js/Pages/Admin/CvDownloads/Index.vue",
     "isDynamicEntry": true,
     "imports": [
       "resources/js/app.ts",
-      "_AuthenticatedLayout-C-u0zYDV.js",
-      "_ConfirmModal-CuKRY8hh.js"
+      "_AuthenticatedLayout-B4aNra2K.js",
+      "_ConfirmModal-Db2FnYZ3.js"
     ]
   },
   "resources/js/Pages/Admin/Dashboard.vue": {
-    "file": "assets/Dashboard-C7L5NNCp.js",
+    "file": "assets/Dashboard-CTE59s_6.js",
     "name": "Dashboard",
     "src": "resources/js/Pages/Admin/Dashboard.vue",
     "isDynamicEntry": true,
     "imports": [
       "resources/js/app.ts",
-      "_AuthenticatedLayout-C-u0zYDV.js"
+      "_AuthenticatedLayout-B4aNra2K.js"
     ]
   },
   "resources/js/Pages/Admin/Diplomas/Index.vue": {
-    "file": "assets/Index-Cg6zdQW6.js",
+    "file": "assets/Index-CuupiZ3z.js",
     "name": "Index",
     "src": "resources/js/Pages/Admin/Diplomas/Index.vue",
     "isDynamicEntry": true,
     "imports": [
       "resources/js/app.ts",
-      "_AuthenticatedLayout-C-u0zYDV.js",
-      "_ConfirmModal-CuKRY8hh.js"
+      "_AuthenticatedLayout-B4aNra2K.js",
+      "_ConfirmModal-Db2FnYZ3.js"
     ]
   },
   "resources/js/Pages/Admin/Gallery/Index.vue": {
-    "file": "assets/Index-COboi-M7.js",
+    "file": "assets/Index-D-SdTZuO.js",
     "name": "Index",
     "src": "resources/js/Pages/Admin/Gallery/Index.vue",
     "isDynamicEntry": true,
     "imports": [
       "resources/js/app.ts",
-      "_AuthenticatedLayout-C-u0zYDV.js",
-      "_ConfirmModal-CuKRY8hh.js"
+      "_AuthenticatedLayout-B4aNra2K.js",
+      "_ConfirmModal-Db2FnYZ3.js"
     ]
   },
   "resources/js/Pages/Admin/Login.vue": {
-    "file": "assets/Login-0MVopd3U.js",
+    "file": "assets/Login-BKxOx0Jt.js",
     "name": "Login",
     "src": "resources/js/Pages/Admin/Login.vue",
     "isDynamicEntry": true,
@@ -121,53 +121,53 @@
     ]
   },
   "resources/js/Pages/Admin/Projects/Index.vue": {
-    "file": "assets/Index-BBVUvm__.js",
+    "file": "assets/Index-SZgvOP1T.js",
     "name": "Index",
     "src": "resources/js/Pages/Admin/Projects/Index.vue",
     "isDynamicEntry": true,
     "imports": [
       "resources/js/app.ts",
-      "_AuthenticatedLayout-C-u0zYDV.js",
-      "_ConfirmModal-CuKRY8hh.js"
+      "_AuthenticatedLayout-B4aNra2K.js",
+      "_ConfirmModal-Db2FnYZ3.js"
     ]
   },
   "resources/js/Pages/Admin/Skills/Index.vue": {
-    "file": "assets/Index-tEQs_zSd.js",
+    "file": "assets/Index-EGY3qfpL.js",
     "name": "Index",
     "src": "resources/js/Pages/Admin/Skills/Index.vue",
     "isDynamicEntry": true,
     "imports": [
       "resources/js/app.ts",
-      "_AuthenticatedLayout-C-u0zYDV.js",
-      "_ConfirmModal-CuKRY8hh.js"
+      "_AuthenticatedLayout-B4aNra2K.js",
+      "_ConfirmModal-Db2FnYZ3.js"
     ]
   },
   "resources/js/Pages/Admin/Timeline/Index.vue": {
-    "file": "assets/Index-BoaOY1an.js",
+    "file": "assets/Index-uCfemjym.js",
     "name": "Index",
     "src": "resources/js/Pages/Admin/Timeline/Index.vue",
     "isDynamicEntry": true,
     "imports": [
       "resources/js/app.ts",
-      "_AuthenticatedLayout-C-u0zYDV.js",
-      "_ConfirmModal-CuKRY8hh.js"
+      "_AuthenticatedLayout-B4aNra2K.js",
+      "_ConfirmModal-Db2FnYZ3.js"
     ]
   },
   "resources/js/Pages/Home.vue": {
-    "file": "assets/Home-CntZ9oIe.js",
+    "file": "assets/Home-xFhky87T.js",
     "name": "Home",
     "src": "resources/js/Pages/Home.vue",
     "isDynamicEntry": true,
     "imports": [
       "resources/js/app.ts",
-      "_BriefcaseIcon-IDYSsmii.js"
+      "_BriefcaseIcon-Zp4PYByA.js"
     ],
     "css": [
       "assets/Home-B9BM3iHA.css"
     ]
   },
   "resources/js/app.ts": {
-    "file": "assets/app-BfGxOOhn.js",
+    "file": "assets/app-BJF-VYam.js",
     "name": "app",
     "src": "resources/js/app.ts",
     "isEntry": true,

@@ -18,6 +18,9 @@ RUN apt-get update && apt-get install -y \
 # Installer les extensions PHP (dont pgsql pour Supabase)
 RUN docker-php-ext-install pdo pdo_pgsql pgsql exif pcntl bcmath gd zip
 
+# Configurer les limites PHP pour l'upload de vidéos
+RUN echo "upload_max_filesize = 100M\npost_max_size = 105M\nmemory_limit = 256M" > /usr/local/etc/php/conf.d/uploads.ini
+
 # Installer Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
