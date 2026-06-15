@@ -53,11 +53,13 @@ Route::post('/logout', [\App\Http\Controllers\AuthController::class, 'logout'])-
 Route::post('/api/otp/send', [\App\Http\Controllers\OtpVerificationController::class, 'send']);
 Route::post('/api/otp/verify', [\App\Http\Controllers\OtpVerificationController::class, 'verify']);
 
-// Routes protégées par OTP Passwordless (CV et Partenariats)
+// Routes protégées par OTP Passwordless (CV)
 Route::middleware('otp.validated')->group(function () {
     Route::post('/download-cv', [\App\Http\Controllers\CvController::class, 'processDownload'])->name('cv.process');
-    Route::post('/partnerships', [\App\Http\Controllers\PartnershipController::class, 'store'])->name('partnerships.store');
 });
+
+// Routes publiques
+Route::post('/partnerships', [\App\Http\Controllers\PartnershipController::class, 'store'])->name('partnerships.store');
 
 Route::middleware('auth')->group(function () {
     Route::get('/admin/dashboard', [\App\Http\Controllers\Admin\DashboardController::class, 'index'])->name('dashboard');
