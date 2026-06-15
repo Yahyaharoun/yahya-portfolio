@@ -22,7 +22,7 @@ class GalleryController
             'title' => 'nullable|string|max:255',
             'description' => 'required|string',
             'url' => 'nullable|url|max:400',
-            'media' => 'required|file|mimes:jpeg,png,jpg,gif,mp4,webm,mov,avi|max:102400', // Allow up to 100MB
+            'media' => 'required|file|mimes:jpeg,png,jpg,gif,mp4,webm,mov,avi|max:512000', // Allow up to 500MB
         ]);
 
         $data = [
@@ -49,7 +49,7 @@ class GalleryController
             'title' => 'nullable|string|max:255',
             'description' => 'required|string',
             'url' => 'nullable|url|max:400',
-            'media' => 'nullable|file|mimes:jpeg,png,jpg,gif,mp4,webm,mov,avi|max:102400',
+            'media' => 'nullable|file|mimes:jpeg,png,jpg,gif,mp4,webm,mov,avi|max:512000',
         ]);
 
         $data = [
