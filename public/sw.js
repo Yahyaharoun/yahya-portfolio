@@ -1,5 +1,5 @@
-const CACHE_NAME = 'yahya-portfolio-v1';
-const DYNAMIC_CACHE_NAME = 'yahya-portfolio-dynamic-v1';
+const CACHE_NAME = 'yahya-portfolio-v2';
+const DYNAMIC_CACHE_NAME = 'yahya-portfolio-dynamic-v2';
 
 // App Shell assets to cache on install
 const APP_SHELL = [
