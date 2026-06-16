@@ -21,7 +21,7 @@
     "scroll_hint": "Défiler pour explorer"
   },
   "sections": {
-    "experience": "Parcours Professionnel",
+    "experience": "Parcours professionnel & Académique",
     "skills": "Matrice des Compétences",
     "certifications": "Certifications & Diplômes",
     "projects": "Projets",
@@ -44,6 +44,7 @@
     "stat_categories": "Domaines"
   },
   "timeline": {
+    "subtitle": "Ecole & Centre de Formation",
     "present": "Présent",
     "empty": "Aucun parcours à afficher pour le moment.",
     "type": {

@@ -1,1 +1,0 @@
-import{B as e}from"./app-Cc6gCnjA.js";var t=e({playSuccessSound:()=>n}),n=()=>{try{new Audio(`/sounds/success.mp3`).play().catch(e=>{console.warn(`Audio playback failed or was blocked by browser:`,e)})}catch(e){console.error(`Audio API not supported or failed`,e)}};export{n,t};

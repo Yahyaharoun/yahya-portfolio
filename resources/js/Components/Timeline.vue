@@ -1,6 +1,9 @@
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue'
 import { BriefcaseIcon, AcademicCapIcon, MapPinIcon, CalendarIcon } from '@heroicons/vue/24/outline'
+import { useI18n } from 'vue-i18n'
+
+const { t } = useI18n()
 
 // ── Types ─────────────────────────────────────────────────────────────────────
 
@@ -121,7 +124,7 @@ function formatDateRange(start?: string, end?: string, current?: boolean): strin
     <!-- Section header -->
     <div class="text-center mb-16 px-4">
       <p class="text-xs font-semibold uppercase tracking-widest text-violet-400 mb-3">
-        Expérience & Formation
+        {{ t('timeline.subtitle') }}
       </p>
       <h2
         id="timeline-heading"

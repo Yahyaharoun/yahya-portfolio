@@ -21,7 +21,7 @@
     "scroll_hint": "Scroll to explore"
   },
   "sections": {
-    "experience": "Professional Journey",
+    "experience": "Professional & Academic Journey",
     "skills": "Skills Matrix",
     "certifications": "Certifications & Diplomas",
     "projects": "Projects",
@@ -44,6 +44,7 @@
     "stat_categories": "Domains"
   },
   "timeline": {
+    "subtitle": "School & Training Center",
     "present": "Present",
     "empty": "No journey entries to display yet.",
     "type": {
