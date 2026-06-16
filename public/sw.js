@@ -1,5 +1,5 @@
-const CACHE_NAME = 'yahya-portfolio-v2';
-const DYNAMIC_CACHE_NAME = 'yahya-portfolio-dynamic-v2';
+const CACHE_NAME = 'yahya-portfolio-v3';
+const DYNAMIC_CACHE_NAME = 'yahya-portfolio-dynamic-v3';
 
 // App Shell assets to cache on install
 const APP_SHELL = [
@@ -55,7 +55,8 @@ self.addEventListener('fetch', event => {
     url.pathname === '/login' ||
     url.pathname === '/logout' ||
     url.pathname === '/sanctum/csrf-cookie' ||
-    event.request.method !== 'GET'; // POST/PUT/DELETE should always go to network
+    event.request.method !== 'GET' ||
+    event.request.mode === 'navigate'; // HTML pages (like /) should be Network-First to get new JS bundles
 
   if (isDynamicData) {
     event.respondWith(
@@ -85,7 +86,7 @@ self.addEventListener('fetch', event => {
     return;
   }
 
-  // 2. STATIC ASSETS (HTML, JS, CSS, Images)
+  // 2. STATIC ASSETS (JS, CSS, Images)
   // STRATEGY: Cache-First, fallback to Network
   event.respondWith(
     caches.match(event.request).then(cachedResponse => {
@@ -102,11 +103,6 @@ self.addEventListener('fetch', event => {
           });
         }
         return networkResponse;
-      }).catch(() => {
-        // Fallback for navigation requests if offline
-        if (event.request.mode === 'navigate') {
-          return caches.match('/offline.html');
-        }
       });
     })
   );
