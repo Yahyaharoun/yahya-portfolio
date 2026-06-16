@@ -82,17 +82,13 @@ class OtpVerificationController
         }
 
         if (!$sent) {
-            // Mode Secours / Démo : On force le code à 000000 pour ne pas bloquer le visiteur
-            Cache::put("otp_{$identifier}", '000000', now()->addMinutes(10));
-            
             return response()->json([
-                'message' => "Mode Démo : L'envoi automatique a échoué (limite de compte gratuit Resend/Twilio). Veuillez utiliser le code de sécurité universel : 000000",
-                'demo_mode' => true
-            ], 200);
+                'error' => "Échec de l'envoi du code de vérification. Veuillez vérifier votre numéro de téléphone ou votre adresse email."
+            ], 400);
         }
 
         return response()->json([
-            'message' => 'Code envoyé avec succès. (En mode démo sans API, utilisez 000000)',
+            'message' => 'Code envoyé avec succès.',
             'identifier' => $identifier
         ]);
     }
@@ -116,7 +112,7 @@ class OtpVerificationController
 
         $cachedCode = Cache::get("otp_{$request->identifier}");
 
-        if ($request->code !== '000000' && (!$cachedCode || $cachedCode !== $request->code)) {
+        if (!$cachedCode || $cachedCode !== $request->code) {
             return response()->json(['error' => 'Code invalide ou expiré.'], 403);
         }
 
