@@ -6,7 +6,7 @@
     <title inertia>{{ config('app.name', 'Portfolio Yahya Haroun') }}</title>
 
     {{-- PWA --}}
-    <link rel="manifest" href="/manifest.json">
+    <link rel="manifest" href="/build/manifest.webmanifest">
     <meta name="theme-color" content="#6b21a8">
     <link rel="apple-touch-icon" href="/icons/icon-192x192.png?v=2">
     <script>
