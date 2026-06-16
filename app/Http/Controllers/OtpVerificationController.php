@@ -39,8 +39,23 @@ class OtpVerificationController
             // Stocker en cache pour 10 minutes
             Cache::put("otp_{$identifier}", $code, now()->addMinutes(10));
 
-            // 1. Tenter l'envoi par Email si fourni
-            if (!empty($request->email) && filter_var($request->email, FILTER_VALIDATE_EMAIL)) {
+            // 1. Tenter l'envoi par SMS en priorité
+            if (!empty($request->phone)) {
+                try {
+                    $smsService = new TwilioSmsService();
+                    if ($smsService->sendOtp($request->phone, $code)) {
+                        $sent = true;
+                    } else {
+                        $apiErrors[] = "SMS Twilio: Numéro non vérifié ou erreur de configuration.";
+                    }
+                } catch (\Exception $e) {
+                    $apiErrors[] = "SMS Twilio Exception";
+                    \Illuminate\Support\Facades\Log::error("Erreur Envoi SMS OTP: " . $e->getMessage());
+                }
+            }
+
+            // 2. Tenter l'envoi par Email si le SMS a échoué ou n'est pas fourni
+            if (!$sent && !empty($request->email) && filter_var($request->email, FILTER_VALIDATE_EMAIL)) {
                 try {
                     $response = \Illuminate\Support\Facades\Http::timeout(5)->withToken(env('MAIL_PASSWORD'))
                         ->post('https://api.resend.com/emails', [
@@ -59,21 +74,6 @@ class OtpVerificationController
                 } catch (\Exception $e) {
                     $apiErrors[] = "Email Resend Exception";
                     \Illuminate\Support\Facades\Log::error("Erreur Envoi Email OTP: " . $e->getMessage());
-                }
-            }
-
-            // 2. Tenter l'envoi par SMS si l'email a échoué ou n'est pas fourni
-            if (!$sent && !empty($request->phone)) {
-                try {
-                    $smsService = new TwilioSmsService();
-                    if ($smsService->sendOtp($request->phone, $code)) {
-                        $sent = true;
-                    } else {
-                        $apiErrors[] = "SMS Twilio: Numéro non vérifié ou erreur de configuration.";
-                    }
-                } catch (\Exception $e) {
-                    $apiErrors[] = "SMS Twilio Exception";
-                    \Illuminate\Support\Facades\Log::error("Erreur Envoi SMS OTP: " . $e->getMessage());
                 }
             }
         } catch (\Exception $e) {
