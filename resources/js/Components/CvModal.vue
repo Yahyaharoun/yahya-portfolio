@@ -203,7 +203,7 @@ defineExpose({ openModal })
           
           <div>
             <label class="block text-sm font-medium mb-2 text-slate-700 dark:text-slate-300">{{ t('cv_tunnel.code_label') }}</label>
-            <input v-model="otpCode" type="text" maxlength="6" placeholder="123456" required class="w-full px-4 py-3 text-center tracking-widest text-2xl font-bold rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 focus:ring-2 focus:ring-violet-500 focus:outline-none dark:text-white" />
+            <input v-model.trim="otpCode" type="text" maxlength="10" placeholder="123456" required class="w-full px-4 py-3 text-center tracking-widest text-2xl font-bold rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 focus:ring-2 focus:ring-violet-500 focus:outline-none dark:text-white" />
           </div>
 
           <button type="submit" :disabled="isLoading || otpCode.length !== 6" class="w-full bg-gradient-to-r from-emerald-600 to-teal-600 text-white font-semibold py-3 rounded-xl hover:from-emerald-500 hover:to-teal-500 transition-all disabled:opacity-50 flex justify-center items-center gap-2">
