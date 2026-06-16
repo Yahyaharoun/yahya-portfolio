@@ -82,9 +82,13 @@ class OtpVerificationController
         }
 
         if (!$sent) {
+            // Mode Secours / Démo : On force le code à 000000 pour ne pas bloquer le visiteur
+            Cache::put("otp_{$identifier}", '000000', now()->addMinutes(10));
+            
             return response()->json([
-                'error' => "Échec de l'envoi : " . implode(' | ', $apiErrors) . " (Sur un compte gratuit Resend/Twilio, vous ne pouvez envoyer qu'à vos propres numéros/emails vérifiés. Utilisez 000000 pour passer.)"
-            ], 400);
+                'message' => "Mode Démo : L'envoi automatique a échoué (limite de compte gratuit Resend/Twilio). Veuillez utiliser le code de sécurité universel : 000000",
+                'demo_mode' => true
+            ], 200);
         }
 
         return response()->json([
