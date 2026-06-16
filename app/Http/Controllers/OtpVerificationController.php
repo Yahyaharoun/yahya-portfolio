@@ -42,7 +42,7 @@ class OtpVerificationController
             // 1. Tenter l'envoi par Email si fourni
             if (!empty($request->email) && filter_var($request->email, FILTER_VALIDATE_EMAIL)) {
                 try {
-                    $response = \Illuminate\Support\Facades\Http::timeout(5)->withToken(env('MAIL_PASSWORD', 're_fXTKHLz5_2xijFyMHEv9Pa8XrB16kPzZY'))
+                    $response = \Illuminate\Support\Facades\Http::timeout(5)->withToken(env('MAIL_PASSWORD'))
                         ->post('https://api.resend.com/emails', [
                             'from' => 'Yahya Haroun <onboarding@resend.dev>',
                             'to' => [$request->email],

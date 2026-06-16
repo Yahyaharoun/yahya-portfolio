@@ -12,9 +12,9 @@ class TwilioSmsService
 
     public function __construct()
     {
-        $sid = env('TWILIO_SID', 'ACed47b49e578c60d753ff3ed98b116c76');
-        $token = env('TWILIO_AUTH_TOKEN', '2de15d24afb0138012d7e5629d541a33');
-        $this->fromNumber = env('TWILIO_PHONE_NUMBER', '+16167396953');
+        $sid = env('TWILIO_SID');
+        $token = env('TWILIO_AUTH_TOKEN');
+        $this->fromNumber = env('TWILIO_PHONE_NUMBER');
 
         if ($sid && $token) {
             $this->client = new Client($sid, $token);
