@@ -97,6 +97,13 @@ class CvController
                   ->setPaper('a4', 'portrait')
                   ->setOptions(['isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true]);
         
-        return $pdf->download('CV_' . strtoupper(str_replace(' ', '_', $admin ? $admin->name : 'YAHYA_HAROUN')) . '.pdf');
+        return response()->streamDownload(function () use ($pdf) {
+            echo $pdf->output();
+        }, 'CV_' . strtoupper(str_replace(' ', '_', $admin ? $admin->name : 'YAHYA_HAROUN')) . '.pdf', [
+            'Cache-Control' => 'no-cache, no-store, must-revalidate',
+            'Pragma' => 'no-cache',
+            'Expires' => '0',
+            'Content-Type' => 'application/pdf'
+        ]);
     }
 }
