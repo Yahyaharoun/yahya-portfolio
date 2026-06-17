@@ -19,6 +19,23 @@
             box-sizing: border-box;
         }
 
+        @page {
+            margin: 30px 40px 50px 40px; /* Ajout d'une marge en bas pour le footer */
+        }
+
+        footer {
+            position: fixed; 
+            bottom: -30px; 
+            left: 0px; 
+            right: 0px;
+            height: 20px; 
+            text-align: center; 
+            font-size: 8pt; 
+            color: #9ca3af; 
+            border-top: 1px solid #e5e7eb; 
+            padding-top: 5px;
+        }
+
         /* Utilities */
         .text-accent { color: #6b46c1; /* Violet discret */ }
         .text-muted { color: #6b7280; /* gray-500 */ }
@@ -80,21 +97,26 @@
     </style>
 </head>
 <body>
+    <!-- FOOTER -->
+    <footer>
+        CV de {{ $admin ? strtoupper($admin->name) : 'YAHYA HAROUN' }} - Généré automatiquement
+    </footer>
+
     <!-- HEADER -->
     <div class="header">
         <div class="name">Yahya Haroun</div>
-        <div class="job-title">Ingénieur Logiciel & Solutions Cloud</div>
+        <div class="job-title">Développeur Fullstack & Entrepreneur</div>
         <div class="contact-info">
-            <span>✉️ <a href="mailto:yahyaharoun.657@gmail.com">yahyaharoun.657@gmail.com</a></span>
+            <span>Email : <a href="mailto:yahyaharoun.657@gmail.com">yahyaharoun.657@gmail.com</a></span>
             <span class="contact-separator">|</span>
-            <span>📞 +237 690722465</span>
+            <span>Tél : +237 690722465</span>
             <span class="contact-separator">|</span>
-            <span>📍 Cameroun</span>
+            <span>Localisation : Cameroun</span>
             <br>
             <span class="mt-2" style="display:inline-block;">
-                🔗 <a href="https://www.linkedin.com/in/yahya-haroun-87a446344">LinkedIn</a>
+                <a href="https://www.linkedin.com/in/yahya-haroun-87a446344">LinkedIn</a>
                 <span class="contact-separator">|</span>
-                💻 <a href="https://github.com/Yahyaharoun">GitHub</a>
+                <a href="https://github.com/Yahyaharoun">GitHub</a>
             </span>
         </div>
     </div>
@@ -102,7 +124,7 @@
     <!-- PROFIL -->
     <div class="section-title">Profil</div>
     <div class="profile-text avoid-break mb-4">
-        Passionné par l'innovation technologique, je conçois et développe des applications web robustes, scalables et orientées utilisateur. Fort d'une expertise couvrant le développement Full-Stack (Laravel, Vue.js), l'architecture logicielle et l'intégration continue, je m'engage à fournir des solutions techniques modernes (PWA, API, Cloud) répondant aux plus hauts standards de qualité.
+        Passionné par l'innovation technologique, je conçois et développe des applications web robustes, scalables et orientées utilisateur. Fort d'une expertise couvrant le développement Full-Stack (Laravel, Vue.js), les solutions d'intelligence artificielle, l'architecture logicielle et l'intégration continue, je m'engage à fournir des solutions techniques modernes (PWA, API, Cloud) répondant aux plus hauts standards de qualité.
     </div>
 
     <!-- COMPÉTENCES -->
@@ -152,7 +174,6 @@
         <div class="avoid-break mb-2">
             <div class="item-header">
                 <div class="item-title">{{ $diploma->title }}</div>
-                <div class="item-date">{{ $diploma->year }}</div>
             </div>
             <div class="item-subtitle">{{ $diploma->institution }} <span class="item-location">- {{ $diploma->location ?? 'Cameroun' }}</span></div>
         </div>
