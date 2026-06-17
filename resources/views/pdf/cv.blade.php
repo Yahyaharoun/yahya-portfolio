@@ -124,7 +124,7 @@
     <!-- PROFIL -->
     <div class="section-title">Profil</div>
     <div class="profile-text avoid-break mb-4">
-        Passionné de technologie, je m’intéresse au développement web, aux Progressive Web Apps (PWA), à l’intelligence artificielle et à la création d’entreprises innovantes. Animé par une forte capacité d’apprentissage, un esprit d’initiative et une vision orientée business, je transforme des idées en solutions numériques concrètes. Mon ambition est de devenir ingénieur en intelligence artificielle tout en développant des projets technologiques à impact, capables de contribuer à la transformation numérique des entreprises et au développement économique de mon environnement.
+        Etudiant, entrepreneur. Passionné de technologie, je m’intéresse au développement web, aux Progressive Web Apps (PWA), à l’intelligence artificielle et à la création d’entreprises innovantes. Animé par une forte capacité d’apprentissage, un esprit d’initiative et une vision orientée business, je transforme des idées en solutions numériques concrètes. Mon ambition est de devenir ingénieur en intelligence artificielle tout en développant des projets technologiques à impact, capables de contribuer à la transformation numérique des entreprises et au développement économique de mon environnement.
     </div>
 
     <!-- COMPÉTENCES -->
